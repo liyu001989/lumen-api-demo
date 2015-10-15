@@ -84,10 +84,13 @@ $app->singleton(
 // 注册dingo API
 $app->register(Dingo\Api\Provider\LumenServiceProvider::class);
 // jwt
-//$app->register(GenTux\Jwt\Support\LumenServiceProvider::class);
 $app->register('Tymon\JWTAuth\Providers\JWTAuthServiceProvider');
 // $app->register(App\Providers\AppServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
+
+//app['Dingo\Api\Http\RateLimit\Handler']->extend(function ($app) {
+    //return new Dingo\Api\Http\RateLimit\Throttle\Authenticated;
+//});
 
 /*
 |--------------------------------------------------------------------------

@@ -25,6 +25,14 @@ lumen 关闭了好多功能，所以要先修改一下才能使用
 		    });
 		});
 
+### 使用问题
+1. 如何使用不同版本的api
+
+再header中增加Accept
+
+Accept: application`API_STANDARDS_TREE`.`API_SUBTYPE`.`VERSION`+json
+
+	例如：Accept: application/prs.nagehao.v2+json
 
 ## 使用jwt
 教程 [http://laravelista.com/json-web-token-authentication-for-lumen/
@@ -37,3 +45,5 @@ lumen 关闭了好多功能，所以要先修改一下才能使用
 [https://github.com/generationtux/jwt-artisan](https://github.com/generationtux/jwt-artisan) 这个库支持了lumen, 已尝试，可以用。不过看关注和代码，所以还是研究一下`tymondesigns/jwt-auth`这个吧
 
 还在调试......
+
+
