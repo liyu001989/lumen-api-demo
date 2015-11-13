@@ -24,11 +24,6 @@ $app->group(['namespace' => 'App\Http\Controllers\Front'], function () use ($app
         $users = $dispatcher->version('v2')->get('users');
         return view('index', ['users'=>$users]);
     });
-
-    $app->get('users', [
-        'as'   => 'front.wechat.login',
-        'uses' => 'WechatController@login'
-    ]);
 });
 
 

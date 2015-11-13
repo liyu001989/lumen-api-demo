@@ -86,12 +86,9 @@ $app->register(Dingo\Api\Provider\LumenServiceProvider::class);
 // jwt
 $app->register('Tymon\JWTAuth\Providers\JWTAuthServiceProvider');
 // $app->register(App\Providers\AppServiceProvider::class);
-// $app->register(App\Providers\EventServiceProvider::class);
+$app->register(App\Providers\EventServiceProvider::class);
 
-//app['Dingo\Api\Http\RateLimit\Handler']->extend(function ($app) {
-    //return new Dingo\Api\Http\RateLimit\Throttle\Authenticated;
-//});
-//
+
 // rate limit
 app('Dingo\Api\Http\RateLimit\Handler')->extend(function ($app) {
     return new Dingo\Api\Http\RateLimit\Throttle\Authenticated;
