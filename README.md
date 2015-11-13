@@ -2,8 +2,12 @@
 
 一个用lumen写api的例子
 
-- 使用[dingo/api](https://github.com/dingo/api)
-- 使用[jwt(json-web-token)](https://github.com/tymondesigns/jwt-auth)
+## 相关文档
+- 使用 [dingo/api](https://github.com/dingo/api)
+- 用户验证使用 [jwt(json-web-token)](https://github.com/tymondesigns/jwt-auth)
+- orm transformer [fractal](http://fractal.thephpleague.com/)
+- 文档使用 [apidocjs](http://apidocjs.com/)
+- api规范参考 [jsonapi.org](http://jsonapi.org/format/)
 
 ##使用dingo API
 教程 [http://vea.re/blog/150905-api-with-dingo-and-lumen-part-1](http://vea.re/blog/150905-api-with-dingo-and-lumen-part-1)
@@ -41,9 +45,9 @@ Accept: application`API_STANDARDS_TREE`.`API_SUBTYPE`.`VERSION`+json
 
 这个库`tymondesigns/jwt-auth`图片的大标题写着 for laravel & lumen
 但是！！还没有支持lumen，所以要按照上面的教程一步一步做很多工作。
+作者说很快会跟新lumen的文档
 
-[https://github.com/generationtux/jwt-artisan](https://github.com/generationtux/jwt-artisan) 这个库支持了lumen, 已尝试，可以用。不过看关注和代码，所以还是研究一下`tymondesigns/jwt-auth`这个吧
+[https://github.com/generationtux/jwt-artisan](https://github.com/generationtux/jwt-artisan) 这个库支持了lumen, 已尝试，可以用, 我还是决定用tymondesigns的这个。
 
-还在调试......
-
-
+## 坑
+- [https://github.com/dingo/api/issues/672](https://github.com/dingo/api/issues/672)  `transformer include`

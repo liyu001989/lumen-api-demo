@@ -66,9 +66,9 @@ $app->singleton(
 //     // Laravel\Lumen\Http\Middleware\VerifyCsrfToken::class,
 // ]);
 
-// $app->routeMiddleware([
-
-// ]);
+$app->routeMiddleware([
+    'jwt.auth' => Tymon\JWTAuth\Middleware\GetUserFromToken::class,
+]);
 
 /*
 |--------------------------------------------------------------------------
@@ -91,6 +91,16 @@ $app->register('Tymon\JWTAuth\Providers\JWTAuthServiceProvider');
 //app['Dingo\Api\Http\RateLimit\Handler']->extend(function ($app) {
     //return new Dingo\Api\Http\RateLimit\Throttle\Authenticated;
 //});
+//
+// rate limit
+app('Dingo\Api\Http\RateLimit\Handler')->extend(function ($app) {
+    return new Dingo\Api\Http\RateLimit\Throttle\Authenticated;
+});
+
+// 设置transformer的include
+app('Dingo\Api\Transformer\Factory')->setAdapter(function ($app) {
+    return new Dingo\Api\Transformer\Adapter\Fractal(new League\Fractal\Manager, 'include', ',');
+});
 
 /*
 |--------------------------------------------------------------------------
