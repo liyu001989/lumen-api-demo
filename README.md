@@ -2,12 +2,18 @@
 
 一个用lumen写api的例子
 
+测试地址 [lumen.lyyw.info/api](http://lumen.lyyw.info/api)
+
+测试文档 [doc](http://lumen.lyyw.info/doc)
+
+
 ## 相关文档
 - 使用 [dingo/api](https://github.com/dingo/api)
 - 用户验证使用 [jwt(json-web-token)](https://github.com/tymondesigns/jwt-auth)
 - orm transformer [fractal](http://fractal.thephpleague.com/)
 - 文档使用 [apidocjs](http://apidocjs.com/)
 - api规范参考 [jsonapi.org](http://jsonapi.org/format/)
+- rest测试工具 [postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en)
 
 ##使用dingo API
 教程 [http://vea.re/blog/150905-api-with-dingo-and-lumen-part-1](http://vea.re/blog/150905-api-with-dingo-and-lumen-part-1)
