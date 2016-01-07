@@ -17,15 +17,6 @@ class BaseController extends Controller
         // 请求
     protected $request;
 
-    protected function me()
-    {
-        if ($token = \JWTAuth::getToken()) {
-            return  \JWTAuth::parseToken()->toUser();
-        }
-
-        return false;
-    }
-
     // 返回错误的请求
     protected function errorBadRequest($message='')
     {

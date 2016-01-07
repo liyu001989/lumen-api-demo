@@ -57,3 +57,4 @@ Accept: application`API_STANDARDS_TREE`.`API_SUBTYPE`.`VERSION`+json
 
 ## 坑
 - [https://github.com/dingo/api/issues/672](https://github.com/dingo/api/issues/672)  `transformer include`
+- 如果.env中有空格会报错log not found

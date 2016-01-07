@@ -94,7 +94,7 @@ class UserController extends BaseController
      */
     public function show()
     {
-        return $this->response->item($this->me(), new UserTransformer);
+        return $this->response->item($this->user(), new UserTransformer);
     }
 
     /**

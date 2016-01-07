@@ -99,6 +99,10 @@ app('Dingo\Api\Transformer\Factory')->setAdapter(function ($app) {
     return new Dingo\Api\Transformer\Adapter\Fractal(new League\Fractal\Manager, 'include', ',');
 });
 
+app('Dingo\Api\Auth\Auth')->extend('jwt', function ($app) {
+   return new Dingo\Api\Auth\Provider\JWT($app['Tymon\JWTAuth\JWTAuth']);
+});
+
 /*
 |--------------------------------------------------------------------------
 | Load The Application Routes
