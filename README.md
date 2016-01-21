@@ -1,6 +1,6 @@
 # lumen-api-demo
 
-一个用lumen写api的例子
+一个用lumen5.1写api的例子
 
 测试地址 [lumen.lyyw.info/api](http://lumen.lyyw.info/api)
 
@@ -42,7 +42,7 @@ lumen 关闭了好多功能，所以要先修改一下才能使用
 
 Accept: application`API_STANDARDS_TREE`.`API_SUBTYPE`.`VERSION`+json
 
-	例如：Accept: application/prs.nagehao.v2+json
+	例如：Accept: application/prs.lumen.v2+json
 
 ## 使用jwt
 教程 [http://laravelista.com/json-web-token-authentication-for-lumen/
@@ -55,6 +55,12 @@ Accept: application`API_STANDARDS_TREE`.`API_SUBTYPE`.`VERSION`+json
 
 [https://github.com/generationtux/jwt-artisan](https://github.com/generationtux/jwt-artisan) 这个库支持了lumen, 已尝试，可以用, 我还是决定用tymondesigns的这个。
 
+
+## usage
+1. 复制.env.example 为.env
+2. 配置以下数据库信息
+3. php artisan migrate
+
 ## 坑
 - [https://github.com/dingo/api/issues/672](https://github.com/dingo/api/issues/672)  `transformer include`
-- 如果.env中有空格会报错log not found
+- 如果.env的某个值中有空格会报错log not found

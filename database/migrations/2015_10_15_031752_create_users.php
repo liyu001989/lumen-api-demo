@@ -17,8 +17,11 @@ class CreateUsers extends Migration
             $table->string('email')->unique();
             $table->string('name');
             $table->string('password');
+            $table->string('avatar', 255);
             $table->timestamps();
             $table->softDeletes();
+
+            $table->index('email');
         });
     }
 
