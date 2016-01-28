@@ -32,7 +32,7 @@ $api = app('Dingo\Api\Routing\Router');
 // v1版本的API
 // 不需要验证jwt-token
 // 头里面需要加    Accept:application/vnd.lumen.v2+json
-$api->version('v2', ['namespace' => 'App\Http\Controllers\Api\V2'], function ($api) {
+$api->version('v1', ['namespace' => 'App\Http\Controllers\Api\V1'], function ($api) {
     # Auth
     // 登录
     $api->post('auth/login', [
@@ -88,6 +88,6 @@ $api->version('v2', ['namespace' => 'App\Http\Controllers\Api\V2'], function ($a
 
 // v1版本的API
 // 头里面需要加    Accept:application/vnd.lumen.v1+json
-$api->version('v1', function ($api) {
-    $api->resource('foos', 'App\Http\Controllers\Api\V1\FooController');
+$api->version('v2', function ($api) {
+    $api->resource('foos', 'App\Http\Controllers\Api\V2\FooController');
 });

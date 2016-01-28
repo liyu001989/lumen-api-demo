@@ -57,9 +57,11 @@ Accept: application`API_STANDARDS_TREE`.`API_SUBTYPE`.`VERSION`+json
 
 
 ## usage
-1. 复制.env.example 为.env
-2. 配置以下数据库信息
-3. php artisan migrate
+- composer install
+- 复制.env.example 为.env
+- 配置数据库信息
+- php artisan migrate
+- v2 版本的api 只是个例子，可以删除了
 
 ## 坑
 - [https://github.com/dingo/api/issues/672](https://github.com/dingo/api/issues/672)  `transformer include`

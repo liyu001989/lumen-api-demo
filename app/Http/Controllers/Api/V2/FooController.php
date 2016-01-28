@@ -3,7 +3,7 @@
 /**
  * 用户控制器
  */
-namespace App\Http\Controllers\Api\V1;
+namespace App\Http\Controllers\Api\V2;
 
 use App\Http\Controllers\Api\BaseController;
 

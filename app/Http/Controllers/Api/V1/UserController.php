@@ -3,7 +3,7 @@
 /**
  * 当前用户控制器
  */
-namespace App\Http\Controllers\Api\V2;
+namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Api\BaseController;
 use App\Transformer\UserTransformer;
@@ -12,7 +12,7 @@ use App\Models\User;
 class UserController extends BaseController
 {
     /**
-     * @api {put} /user/password 修改密码
+     * @api {post} /user/password 修改密码
      * @apiDescription 修改密码
      * @apiGroup user
      * @apiPermission JWT

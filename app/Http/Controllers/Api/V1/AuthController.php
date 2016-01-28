@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\V2;
+namespace App\Http\Controllers\Api\V1;
 
 use Illuminate\Http\Exception\HttpResponseException;
 use Tymon\JWTAuth\Exceptions\JWTException;
