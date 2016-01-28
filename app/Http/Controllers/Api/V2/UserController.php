@@ -39,7 +39,7 @@ class UserController extends BaseController
      */
     public function editPassword()
     {
-        $user = $this->me();
+        $user = $this->user();
 
         $validator = \Validator::make($this->request->all(), [
             'old_password'          => 'required',
@@ -117,7 +117,7 @@ class UserController extends BaseController
      */
     public function update()
     {
-        $user = $this->me();
+        $user = $this->user();
 
         $user->fill($this->request->input());
 
