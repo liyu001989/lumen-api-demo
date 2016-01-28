@@ -2,7 +2,11 @@
 
 require_once __DIR__.'/../vendor/autoload.php';
 
-Dotenv::load(__DIR__.'/../');
+try {
+    (new Dotenv\Dotenv(__DIR__.'/../'))->load();
+} catch (Dotenv\Exception\InvalidPathException $e) {
+    //
+}
 
 /*
 |--------------------------------------------------------------------------
@@ -19,12 +23,9 @@ $app = new Laravel\Lumen\Application(
     realpath(__DIR__.'/../')
 );
 
-$app->withFacades();
-$app->configure('jwt');
-class_alias('Tymon\JWTAuth\Facades\JWTAuth', 'JWTAuth');
-class_alias('Tymon\JWTAuth\Facades\JWTFactory', 'JWTFactory');
+// $app->withFacades();
 
-$app->withEloquent();
+// $app->withEloquent();
 
 /*
 |--------------------------------------------------------------------------
@@ -59,16 +60,12 @@ $app->singleton(
 */
 
 // $app->middleware([
-//     // Illuminate\Cookie\Middleware\EncryptCookies::class,
-//     // Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
-//     // Illuminate\Session\Middleware\StartSession::class,
-//     // Illuminate\View\Middleware\ShareErrorsFromSession::class,
-//     // Laravel\Lumen\Http\Middleware\VerifyCsrfToken::class,
+//    App\Http\Middleware\ExampleMiddleware::class
 // ]);
 
-$app->routeMiddleware([
-    'jwt.auth' => Tymon\JWTAuth\Middleware\GetUserFromToken::class,
-]);
+// $app->routeMiddleware([
+//     'auth' => App\Http\Middleware\Authenticate::class,
+// ]);
 
 /*
 |--------------------------------------------------------------------------
@@ -81,27 +78,11 @@ $app->routeMiddleware([
 |
 */
 
-// 注册dingo API
+// dingoapi
 $app->register(Dingo\Api\Provider\LumenServiceProvider::class);
-// jwt
-$app->register('Tymon\JWTAuth\Providers\JWTAuthServiceProvider');
 // $app->register(App\Providers\AppServiceProvider::class);
-$app->register(App\Providers\EventServiceProvider::class);
-
-
-// rate limit
-app('Dingo\Api\Http\RateLimit\Handler')->extend(function ($app) {
-    return new Dingo\Api\Http\RateLimit\Throttle\Authenticated;
-});
-
-// 设置transformer的include
-app('Dingo\Api\Transformer\Factory')->setAdapter(function ($app) {
-    return new Dingo\Api\Transformer\Adapter\Fractal(new League\Fractal\Manager, 'include', ',');
-});
-
-app('Dingo\Api\Auth\Auth')->extend('jwt', function ($app) {
-   return new Dingo\Api\Auth\Provider\JWT($app['Tymon\JWTAuth\JWTAuth']);
-});
+// $app->register(App\Providers\AuthServiceProvider::class);
+// $app->register(App\Providers\EventServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------

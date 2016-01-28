@@ -1,68 +1,19 @@
 # lumen-api-demo
 
-一个用lumen5.1写api的例子
+lumen 5.2 出来了, 不升级心理不舒服
 
-测试地址 [lumen.lyyw.info/api](http://lumen.lyyw.info/api)
+## lumen 5.1 升级 5.2
 
-测试文档 [doc](http://lumen.lyyw.info/doc)
+- 先修改compose.json 中的依赖
+    
+        "laravel/lumen-framework": "5.2.*",
+        "vlucas/phpdotenv": "~2.2" // 这是个坑啊
 
+        直接将5.2的composer.json拿来替换了
 
-## 相关文档
-- 使用 [dingo/api](https://github.com/dingo/api)
-- 用户验证使用 [jwt(json-web-token)](https://github.com/tymondesigns/jwt-auth)
-- orm transformer [fractal](http://fractal.thephpleague.com/)
-- 文档使用 [apidocjs](http://apidocjs.com/)
-- api规范参考 [jsonapi.org](http://jsonapi.org/format/)
-- rest测试工具 [postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en)
-
-##使用dingo API
-教程 [http://vea.re/blog/150905-api-with-dingo-and-lumen-part-1](http://vea.re/blog/150905-api-with-dingo-and-lumen-part-1)
-
-lumen 关闭了好多功能，所以要先修改一下才能使用
-
-大概步骤是:
-
-1. 修改bootstrap/app.php，打开 `Dotenv::load(__DIR__.'/../')`,这样就可以加载.env文件了
-2. 打开 `$app->withEloquent()`，因为要使用orm
-3. 注册dingo的服务 `$app->register(Dingo\Api\Provider\LumenServiceProvider::class)`,添加到80行左右那个位置。
-4. 然后就可以按照dingo的文档使用了
-
-		$api = app('Dingo\Api\Routing\Router');
-
-		$api->version('v1', function($api){
-		    $api->get('collections/{collection}', function(){
-		        return 'test';
-		    });
-		});
-
-### 使用问题
-1. 如何使用不同版本的api
-
-再header中增加Accept
-
-Accept: application`API_STANDARDS_TREE`.`API_SUBTYPE`.`VERSION`+json
-
-	例如：Accept: application/prs.lumen.v2+json
-
-## 使用jwt
-教程 [http://laravelista.com/json-web-token-authentication-for-lumen/
-](http://laravelista.com/json-web-token-authentication-for-lumen/
-)
-
-这个库`tymondesigns/jwt-auth`图片的大标题写着 for laravel & lumen
-但是！！还没有支持lumen，所以要按照上面的教程一步一步做很多工作。
-作者说很快会跟新lumen的文档
-
-[https://github.com/generationtux/jwt-artisan](https://github.com/generationtux/jwt-artisan) 这个库支持了lumen, 已尝试，可以用, 我还是决定用tymondesigns的这个。
+- 修改bootstrap/app.php，照着改
+- Illuminate\Contracts\Foundation\Application 改为了Laravel\Lumen\Application，所以修改一下app\providers\EventServiceProvider.php
 
 
-## usage
-- composer install
-- 复制.env.example 为.env
-- 配置数据库信息
-- php artisan migrate
-- v2 版本的api 只是个例子，可以删除了
-
-## 坑
-- [https://github.com/dingo/api/issues/672](https://github.com/dingo/api/issues/672)  `transformer include`
-- 如果.env的某个值中有空格会报错log not found
+## 未完
+dingoapi还不能用，先研究研究

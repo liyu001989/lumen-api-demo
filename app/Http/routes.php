@@ -12,82 +12,82 @@
 */
 
 $app->get('/', function () use ($app) {
-    return $app->welcome();
+    return $app->version();
 });
 
-$app->group(['namespace' => 'App\Http\Controllers\Front'], function () use ($app) {
+//$app->group(['namespace' => 'App\Http\Controllers\Front'], function () use ($app) {
 
-    // web端可以调用自己的api，而且返回的是对象
-    $dispatcher = app('Dingo\Api\Dispatcher');
+    //// web端可以调用自己的api，而且返回的是对象
+    //$dispatcher = app('Dingo\Api\Dispatcher');
 
-    $app->get('foobar', function() use ($dispatcher) {
-        $users = $dispatcher->version('v2')->get('users');
-        return view('index', ['users'=>$users]);
-    });
-});
-
-
-$api = app('Dingo\Api\Routing\Router');
-
-// v1版本的API
-// 不需要验证jwt-token
-// 头里面需要加    Accept:application/vnd.lumen.v2+json
-$api->version('v1', ['namespace' => 'App\Http\Controllers\Api\V1'], function ($api) {
-    # Auth
-    // 登录
-    $api->post('auth/login', [
-        'as'   => 'auth.login',
-        'uses' => 'AuthController@login'
-    ]);
-    // 注册
-    $api->post('auth/signup', [
-        'as'   => 'auth.signup',
-        'uses' => 'AuthController@signup'
-    ]);
-
-    # User
-    // 用户列表
-    $api->get('users', [
-        'as'   => 'users.index',
-        'uses' => 'UsersController@Index'
-    ]);
-    // 用户信息
-    $api->get('users/{id}', [
-        'as'   => 'users.show',
-        'uses' => 'UsersController@show'
-    ]);
-
-    // 需要jwt验证后才能使用的API
-    $api->group(['middleware' => 'jwt.auth'], function ($api) {
-        # Auth
-        // 刷新token
-        $api->post('auth/refreshToken', [
-            'as'   => 'auth.refreshToken',
-            'uses' => 'AuthController@refreshToken'
-        ]);
-
-        #User
-        // 获得个人信息
-        $api->get('/user', [
-            'as'   => 'user.show',
-            'uses' => 'UserController@show'
-        ]);
-        // 更新个人信息
-        $api->put('/user', [
-            'as'   => 'user.update',
-            'uses' => 'UserController@update'
-        ]);
-        // 修改密码
-        $api->post('/user/password', [
-            'as'   => 'user.password.update',
-            'uses' => 'UserController@editPassword'
-        ]);
-    });
-});
+    //$app->get('foobar', function() use ($dispatcher) {
+        //$users = $dispatcher->version('v2')->get('users');
+        //return view('index', ['users'=>$users]);
+    //});
+//});
 
 
-// v1版本的API
-// 头里面需要加    Accept:application/vnd.lumen.v1+json
-$api->version('v2', function ($api) {
-    $api->resource('foos', 'App\Http\Controllers\Api\V2\FooController');
-});
+//$api = app('Dingo\Api\Routing\Router');
+
+//// v1版本的API
+//// 不需要验证jwt-token
+//// 头里面需要加    Accept:application/vnd.lumen.v2+json
+//$api->version('v1', ['namespace' => 'App\Http\Controllers\Api\V1'], function ($api) {
+    //# Auth
+    //// 登录
+    //$api->post('auth/login', [
+        //'as'   => 'auth.login',
+        //'uses' => 'AuthController@login'
+    //]);
+    //// 注册
+    //$api->post('auth/signup', [
+        //'as'   => 'auth.signup',
+        //'uses' => 'AuthController@signup'
+    //]);
+
+    //# User
+    //// 用户列表
+    //$api->get('users', [
+        //'as'   => 'users.index',
+        //'uses' => 'UsersController@Index'
+    //]);
+    //// 用户信息
+    //$api->get('users/{id}', [
+        //'as'   => 'users.show',
+        //'uses' => 'UsersController@show'
+    //]);
+
+    //// 需要jwt验证后才能使用的API
+    //$api->group(['middleware' => 'jwt.auth'], function ($api) {
+        //# Auth
+        //// 刷新token
+        //$api->post('auth/refreshToken', [
+            //'as'   => 'auth.refreshToken',
+            //'uses' => 'AuthController@refreshToken'
+        //]);
+
+        //#User
+        //// 获得个人信息
+        //$api->get('/user', [
+            //'as'   => 'user.show',
+            //'uses' => 'UserController@show'
+        //]);
+        //// 更新个人信息
+        //$api->put('/user', [
+            //'as'   => 'user.update',
+            //'uses' => 'UserController@update'
+        //]);
+        //// 修改密码
+        //$api->post('/user/password', [
+            //'as'   => 'user.password.update',
+            //'uses' => 'UserController@editPassword'
+        //]);
+    //});
+//});
+
+
+//// v1版本的API
+//// 头里面需要加    Accept:application/vnd.lumen.v1+json
+//$api->version('v2', function ($api) {
+    //$api->resource('foos', 'App\Http\Controllers\Api\V2\FooController');
+//});
