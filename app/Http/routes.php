@@ -46,7 +46,7 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api\V1'], function ($a
     ]);
 
     // 需要jwt验证后才能使用的API
-    $api->group(['middleware' => 'jwt.auth'], function ($api) {
+    $api->group(['middleware' => 'api.auth'], function ($api) {
         # Auth
         // 刷新token
         $api->post('auth/refreshToken', [

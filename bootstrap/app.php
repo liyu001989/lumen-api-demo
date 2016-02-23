@@ -23,7 +23,12 @@ $app = new Laravel\Lumen\Application(
     realpath(__DIR__.'/../')
 );
 
-//$app->withFacades();
+$app->withFacades();
+// facades
+class_alias('Tymon\JWTAuth\Facades\JWTAuth', 'JWTAuth');
+
+//config
+$app->configure('jwt');
 
 $app->withEloquent();
 
@@ -85,6 +90,13 @@ $app->register(App\Providers\AuthServiceProvider::class);
 
 // dingo/api
 $app->register(Dingo\Api\Provider\LumenServiceProvider::class);
+
+//jwt
+$app->register(Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class);
+
+app('Dingo\Api\Auth\Auth')->extend('jwt', function ($app) {
+   return new Dingo\Api\Auth\Provider\JWT($app['Tymon\JWTAuth\JWTAuth']);
+});
 
 /*
 |--------------------------------------------------------------------------

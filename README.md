@@ -37,6 +37,7 @@ lumen5.1看[这里](https://github.com/liyu001989/lumen-api-demo/tree/5.1) (基�
 
 ## TODO
 - 研究一下5.2 的认证
+- 登录有问题，5.2的auth需要研究一下
 
 ## 坑
 - [https://github.com/dingo/api/issues/672](https://github.com/dingo/api/issues/672)  `transformer include`

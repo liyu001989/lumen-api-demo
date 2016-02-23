@@ -40,7 +40,7 @@ class AuthController extends BaseController
 
         if ( ! $token = \JWTAuth::attempt($credentials)) {
             $validator->after(function ($validator) {
-                $validator->errors()->add('error_msg', '用户名或密码错误');
+                $validator->errors()->add('messages', '用户名或密码错误');
             });
         }
 
