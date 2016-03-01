@@ -38,15 +38,22 @@ class AuthController extends BaseController
 
         $credentials = $this->request->only('email', 'password');
 
-        if ( ! $token = \JWTAuth::attempt($credentials)) {
-            $validator->after(function ($validator) {
+        // 手动验证一下用户
+        $user = User::where('email', $this->request->get('email'))->first();
+
+        $validator->after(function ($validator) use ($user) {
+
+            if (!$user || !password_verify($this->request->get('password'), $user->password)) {
                 $validator->errors()->add('messages', '用户名或密码错误');
-            });
-        }
+                return;
+            }
+        });
 
         if ($validator->fails()) {
             return $this->errorBadRequest($validator->messages());
         }
+
+        $token = \JWTAuth::fromUser($user);
 
         return $this->response->array(['token' => $token]);
     }
