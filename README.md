@@ -26,6 +26,9 @@ lumen5.1看[这里](https://github.com/liyu001989/lumen-api-demo/tree/5.1) (基�
 - api规范参考 [jsonapi.org](http://jsonapi.org/format/)
 - rest测试工具 [postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en)
 
+## jwt 用法
+
+lumen 5.2取消了session，没有了auth的实例，所以使用jwt的时候需要配置一下，注意config/auth.php中的配置，而且user的model需要实现Tymon\JWTAuth\Contracts\JWTSubject;
 
 ## usage
 - composer install
@@ -36,8 +39,7 @@ lumen5.1看[这里](https://github.com/liyu001989/lumen-api-demo/tree/5.1) (基�
 
 
 ## TODO
-- 研究一下5.2 的认证
-- 登录有问题，5.2的auth需要研究一下
+- 写几个api
 
 ## 坑
 - [https://github.com/dingo/api/issues/672](https://github.com/dingo/api/issues/672)  `transformer include`
