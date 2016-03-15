@@ -6,7 +6,7 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Api\BaseController;
-use App\Transformer\UserTransformer;
+use App\Transformers\UserTransformer;
 use App\Models\User;
 
 class UserController extends BaseController
@@ -94,7 +94,7 @@ class UserController extends BaseController
      */
     public function show()
     {
-        return $this->response->item($this->user(), new UserTransformer);
+        return $this->response->item($this->user(), new UserTransformer());
     }
 
     /**
@@ -123,6 +123,6 @@ class UserController extends BaseController
 
         $user->save();
 
-        return $this->response->item($user, new UserTransformer);
+        return $this->response->item($user, new UserTransformer());
     }
 }

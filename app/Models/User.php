@@ -4,8 +4,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Auth\Authenticatable;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends BaseModel implements AuthenticatableContract
+class User extends BaseModel implements AuthenticatableContract, JWTSubject
 {
     // 软删除和用户验证attempt
     use SoftDeletes, Authenticatable;
@@ -15,4 +16,12 @@ class User extends BaseModel implements AuthenticatableContract
 
     // 可填充的字段
     protected $fillable = ['name'];
+
+    public function getJWTIdentifier() {
+        return $this->id;
+    }
+
+    public function getJWTCustomClaims() {
+        return [];
+    }
 }

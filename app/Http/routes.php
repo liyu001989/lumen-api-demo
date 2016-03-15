@@ -33,6 +33,12 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api\V1'], function ($a
         'uses' => 'AuthController@signup'
     ]);
 
+    // 刷新token
+    $api->post('auth/token/refresh', [
+        'as'   => 'auth.refresh',
+        'uses' => 'AuthController@refreshToken'
+    ]);
+
     # User
     // 用户列表
     $api->get('users', [
@@ -56,17 +62,17 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api\V1'], function ($a
 
         #User
         // 获得个人信息
-        $api->get('/user', [
+        $api->get('user', [
             'as'   => 'user.show',
             'uses' => 'UserController@show'
         ]);
         // 更新个人信息
-        $api->put('/user', [
+        $api->put('user', [
             'as'   => 'user.update',
             'uses' => 'UserController@update'
         ]);
         // 修改密码
-        $api->post('/user/password', [
+        $api->post('user/password', [
             'as'   => 'user.password.update',
             'uses' => 'UserController@editPassword'
         ]);

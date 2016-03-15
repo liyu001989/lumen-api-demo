@@ -41,19 +41,15 @@ class AuthController extends BaseController
         // 手动验证一下用户
         $user = User::where('email', $this->request->get('email'))->first();
 
-        $validator->after(function ($validator) use ($user) {
-
-            if (!$user || !password_verify($this->request->get('password'), $user->password)) {
-                $validator->errors()->add('messages', '用户名或密码错误');
-                return;
-            }
-        });
+        if (!$token = \Auth::attempt($credentials)) {
+            $validator->after(function ($validator) {
+                $validator->errors()->add('message', trans('validation.custom.login_error'));
+            });
+        }
 
         if ($validator->fails()) {
             return $this->errorBadRequest($validator->messages());
         }
-
-        $token = \JWTAuth::fromUser($user);
 
         return $this->response->array(['token' => $token]);
     }
@@ -78,7 +74,7 @@ class AuthController extends BaseController
      */
     public function refreshToken()
     {
-        $newToken = \JWTAuth::parseToken()->refresh();
+        $newToken = \auth::parseToken()->refresh();
         return $this->response->array(['token' => $newToken]);
     }
 
@@ -122,11 +118,11 @@ class AuthController extends BaseController
 
         $user = new User;
         $user->email = $email;
-        $user->password = bcrypt($password);
+        $user->password = app('hash')->make($password);
         $user->save();
 
         // 用户注册事件
-        $token = \JWTAuth::fromUser($user);
+        $token = \Auth::fromUser($user);
         return $this->response->array(['token' => $token]);
     }
 }
