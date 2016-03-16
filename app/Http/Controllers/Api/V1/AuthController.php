@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use Illuminate\Http\Exception\HttpResponseException;
-use Tymon\JWTAuth\Exceptions\JWTException;
 use App\Http\Controllers\Api\BaseController;
 use App\Models\User;
 
@@ -32,7 +30,7 @@ class AuthController extends BaseController
     public function login()
     {
         $validator = \Validator::make($this->request->all(), [
-            'email'    => 'required|email',
+            'email' => 'required|email',
             'password' => 'required',
         ]);
 
@@ -43,7 +41,7 @@ class AuthController extends BaseController
 
         if (!$token = \Auth::attempt($credentials)) {
             $validator->after(function ($validator) {
-                $validator->errors()->add('message', trans('validation.custom.login_error'));
+                $validator->errors()->add('password', '用户名或密码错误');
             });
         }
 
@@ -75,6 +73,7 @@ class AuthController extends BaseController
     public function refreshToken()
     {
         $newToken = \auth::parseToken()->refresh();
+
         return $this->response->array(['token' => $newToken]);
     }
 
@@ -103,8 +102,8 @@ class AuthController extends BaseController
     public function signup()
     {
         $validator = \Validator::make($this->request->all(), [
-            'email'    => 'required|email|unique:users',
-            'password'     => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required',
         ], [
             'email.unique' => '该邮箱已被他人注册',
         ]);
@@ -113,16 +112,17 @@ class AuthController extends BaseController
             return $this->errorBadRequest($validator->messages());
         }
 
-        $email  = $this->request->get('email');
+        $email = $this->request->get('email');
         $password = $this->request->get('password');
 
-        $user = new User;
+        $user = new User();
         $user->email = $email;
         $user->password = app('hash')->make($password);
         $user->save();
 
         // 用户注册事件
         $token = \Auth::fromUser($user);
+
         return $this->response->array(['token' => $token]);
     }
 }

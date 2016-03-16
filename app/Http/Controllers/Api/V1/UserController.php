@@ -1,8 +1,9 @@
 <?php
 
 /**
- * 当前用户控制器
+ * 当前用户控制器.
  */
+
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Api\BaseController;
@@ -42,17 +43,17 @@ class UserController extends BaseController
         $user = $this->user();
 
         $validator = \Validator::make($this->request->all(), [
-            'old_password'          => 'required',
-            'password'              => 'required|confirmed|different:old_password',
+            'old_password' => 'required',
+            'password' => 'required|confirmed|different:old_password',
             'password_confirmation' => 'required|same:password',
         ], [
-            'password.confirmed'         => '两次输入的密码不一致',
+            'password.confirmed' => '两次输入的密码不一致',
             'password_confirmation.same' => '两次输入的密码不一致',
-            'password.different'         => '新旧密码不能相同',
+            'password.different' => '新旧密码不能相同',
         ]);
 
         $auth = \Auth::once([
-            'email'    => $user->email,
+            'email' => $user->email,
             'password' => $this->request->get('old_password'),
         ]);
 
@@ -67,6 +68,7 @@ class UserController extends BaseController
         }
 
         $user->password = bcrypt($this->request->get('password'));
+        $user->password = app('hash')->make($this->request->get('password'));
 
         $user->save();
 

@@ -1,7 +1,5 @@
 <?php
-/**
- * 接口基础控制器
- */
+
 namespace App\Http\Controllers\Api;
 
 use Dingo\Api\Routing\Helpers;
@@ -10,7 +8,6 @@ use Illuminate\Http\Request;
 
 class BaseController extends Controller
 {
-
     // 接口帮助调用
     use Helpers;
 
@@ -18,7 +15,7 @@ class BaseController extends Controller
     protected $request;
 
     // 返回错误的请求
-    protected function errorBadRequest($message='')
+    protected function errorBadRequest($message = '')
     {
         return $this->response->array($message)->setStatusCode(400);
     }

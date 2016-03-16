@@ -1,8 +1,9 @@
 <?php
 
 /**
- * 用户控制器
+ * 用户控制器.
  */
+
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Api\BaseController;
@@ -11,7 +12,6 @@ use App\Models\User;
 
 class UsersController extends BaseController
 {
-
     /**
      * @api {get} /users 用户列表
      * @apiDescription 当前用户信息
@@ -47,7 +47,7 @@ class UsersController extends BaseController
     {
         $users = User::paginate();
 
-        return $this->response->paginator($users, new UserTransformer);
+        return $this->response->paginator($users, new UserTransformer());
     }
     /**
      * @api {get} /user 某个用户信息
@@ -75,6 +75,6 @@ class UsersController extends BaseController
             return $this->response->errorNotFound();
         }
 
-        return $this->response->item($user, new UserTransformer);
+        return $this->response->item($user, new UserTransformer());
     }
 }
