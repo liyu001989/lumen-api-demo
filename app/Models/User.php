@@ -17,10 +17,17 @@ class User extends BaseModel implements AuthenticatableContract, JWTSubject
     // 可填充的字段
     protected $fillable = ['name'];
 
+    public function posts()
+    {
+        return $this->hasMany('App\Models\Post');
+    }
+
+    // jwt 需要实现的方法
     public function getJWTIdentifier() {
         return $this->id;
     }
 
+    // jwt 需要实现的方法
     public function getJWTCustomClaims() {
         return [];
     }

@@ -11,4 +11,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class BaseModel extends Model
 {
+    protected $casts = ['created_at', 'updated_at'];
 }
