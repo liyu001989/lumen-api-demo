@@ -33,30 +33,25 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api\V1'], function ($a
         'uses' => 'AuthController@signup'
     ]);
 
-    // 刷新token
-    $api->post('auth/token/refresh', [
-        'as'   => 'auth.refresh',
-        'uses' => 'AuthController@refreshToken'
-    ]);
-
     # User
     // 用户列表
     $api->get('users', [
         'as'   => 'users.index',
-        'uses' => 'UsersController@Index'
+        'uses' => 'UserController@Index'
     ]);
     // 用户信息
     $api->get('users/{id}', [
         'as'   => 'users.show',
-        'uses' => 'UsersController@show'
+        'uses' => 'UserController@show'
     ]);
 
     // 需要jwt验证后才能使用的API
     $api->group(['middleware' => 'api.auth'], function ($api) {
+
         # Auth
         // 刷新token
-        $api->post('auth/refreshToken', [
-            'as'   => 'auth.refreshToken',
+        $api->post('auth/token/refresh', [
+            'as'   => 'auth.token.refresh',
             'uses' => 'AuthController@refreshToken'
         ]);
 
@@ -64,13 +59,14 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api\V1'], function ($a
         // 获得个人信息
         $api->get('user', [
             'as'   => 'user.show',
-            'uses' => 'UserController@show'
+            'uses' => 'UserController@userShow'
         ]);
         // 更新个人信息
         $api->put('user', [
             'as'   => 'user.update',
             'uses' => 'UserController@update'
         ]);
+
         // 修改密码
         $api->post('user/password', [
             'as'   => 'user.password.update',

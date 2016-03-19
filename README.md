@@ -39,7 +39,10 @@ lumen 5.2取消了session，没有了auth的实例，所以使用jwt的时候需
 
 
 ## TODO
-- 写几个api
+- lumen 下邮件发送，注册验证
+- 完成几个简单的api例子
+- api写了都还没测试，文档也都没写好
+- 单元测试
 
 ## 坑
 - [https://github.com/dingo/api/issues/672](https://github.com/dingo/api/issues/672)  `transformer include`
