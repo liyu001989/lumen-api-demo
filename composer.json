@@ -9,7 +9,9 @@
         "laravel/lumen-framework": "5.2.*",
         "vlucas/phpdotenv": "~2.2",
         "dingo/api": "1.0.x@dev",
-        "tymon/jwt-auth": "0.6.*@dev"
+        "tymon/jwt-auth": "0.6.*@dev",
+        "illuminate/mail": "^5.2",
+        "guzzlehttp/guzzle": "~6.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
