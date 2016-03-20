@@ -26,9 +26,6 @@ lumen5.1看[这里](https://github.com/liyu001989/lumen-api-demo/tree/5.1) (基�
 - api规范参考 [jsonapi.org](http://jsonapi.org/format/)
 - rest测试工具 [postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en)
 
-## jwt 用法
-
-lumen 5.2取消了session，没有了auth的实例，所以使用jwt的时候需要配置一下，注意config/auth.php中的配置，而且user的model需要实现Tymon\JWTAuth\Contracts\JWTSubject;
 
 ## usage
 - composer install
@@ -37,6 +34,17 @@ lumen 5.2取消了session，没有了auth的实例，所以使用jwt的时候需
 - php artisan migrate
 - v2 版本的api 只是个例子，可以删除
 
+## 问题总结
+### jwt 用法
+
+lumen 5.2取消了session，没有了auth的实例，所以使用jwt的时候需要配置一下，注意config/auth.php中的配置，而且user的model需要实现Tymon\JWTAuth\Contracts\JWTSubject;
+
+### mail 使用
+
+- composer 加illuminate/mail 和guzzlehttp/guzzle 这两个库
+- 在bootstrap/app.php 或者 provider中注册mail服务
+- 增加配置 mail和services, 从laravel项目里面cp过来
+- 在env中增加`MAIL_DRIVER`，账户，密码等配置
 
 ## TODO
 - lumen 下邮件发送，注册验证
