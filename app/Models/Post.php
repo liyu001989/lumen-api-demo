@@ -1,10 +1,11 @@
 <?php
+
 namespace App\Models;
 
-class User extends BaseModel
+class Post extends BaseModel
 {
     // 可填充的字段
-    protected $fillable = ['name'];
+    protected $fillable = ['title', 'description'];
 
     protected $casts = ['extra' => 'array'];
 

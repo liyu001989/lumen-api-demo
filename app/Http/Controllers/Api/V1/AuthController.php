@@ -48,7 +48,7 @@ class AuthController extends BaseController
             return $this->errorBadRequest($validator->messages());
         }
 
-        return $this->response->array(['token' => $token]);
+        return $this->response->array(compact('token'));
     }
 
     /**
@@ -71,9 +71,9 @@ class AuthController extends BaseController
      */
     public function refreshToken()
     {
-        $newToken = \auth::parseToken()->refresh();
+        $token = \auth::parseToken()->refresh();
 
-        return $this->response->array(['token' => $newToken]);
+        return $this->response->array(compact('token'));
     }
 
     /**
@@ -122,6 +122,6 @@ class AuthController extends BaseController
         // 用户注册事件
         $token = \Auth::fromUser($user);
 
-        return $this->response->array(['token' => $token]);
+        return $this->response->array(compact('token'));
     }
 }

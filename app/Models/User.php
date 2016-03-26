@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -23,12 +24,14 @@ class User extends BaseModel implements AuthenticatableContract, JWTSubject
     }
 
     // jwt 需要实现的方法
-    public function getJWTIdentifier() {
+    public function getJWTIdentifier()
+    {
         return $this->id;
     }
 
     // jwt 需要实现的方法
-    public function getJWTCustomClaims() {
+    public function getJWTCustomClaims()
+    {
         return [];
     }
 }

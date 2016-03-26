@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Transformers\PostTransformer;
 use App\Models\Post;
-use App\Models\PostComment;
 
 class PostCommentController extends BaseController
 {
@@ -21,5 +20,4 @@ class PostCommentController extends BaseController
 
         return $this->response->paginate($posts, new PostTransformer());
     }
-
 }
