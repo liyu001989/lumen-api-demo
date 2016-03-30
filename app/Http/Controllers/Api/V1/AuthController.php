@@ -38,7 +38,7 @@ class AuthController extends BaseController
         // 手动验证一下用户
         $user = User::where('email', $this->request->get('email'))->first();
 
-        if (!$token = \Auth::attempt($credentials)) {
+        if (!$token = \JWTAuth::attempt($credentials)) {
             $validator->after(function ($validator) {
                 $validator->errors()->add('password', '用户名或密码错误');
             });
@@ -71,7 +71,7 @@ class AuthController extends BaseController
      */
     public function refreshToken()
     {
-        $token = \auth::parseToken()->refresh();
+        $token = \JWTAuth::parseToken()->refresh();
 
         return $this->response->array(compact('token'));
     }
@@ -120,7 +120,7 @@ class AuthController extends BaseController
         $user->save();
 
         // 用户注册事件
-        $token = \Auth::fromUser($user);
+        $token = \JWTAuth::fromUser($user);
 
         return $this->response->array(compact('token'));
     }

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Transformers\PostTransformer;
 use App\Models\Post;
+use App\Transformers\PostTransformer;
 
 class PostController extends BaseController
 {
@@ -48,9 +48,33 @@ class PostController extends BaseController
         return $this->response->created($location);
     }
 
-    public function destory($id)
+    public function update($id)
     {
-        $user = $this->user;
+        $validator = \Validator::make($this->request->all(), [
+            'title' => 'required|string',
+            'content' => 'required|string',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->errorBadRequest($validator->messages());
+        }
+
+        $user = $this->user();
+        $post = $user->posts()->find($id);
+
+        if (!$post) {
+            return $this->response->errorNotFound();
+        }
+
+        $post->fill($this->request->input());
+        $post->save();
+
+        return $this->response->noContent();
+    }
+
+    public function destroy($id)
+    {
+        $user = $this->user();
         // 找到自己的帖子
         $post = $user->posts()->find($id);
 

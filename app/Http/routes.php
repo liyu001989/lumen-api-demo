@@ -9,7 +9,7 @@
 | It is a breeze. Simply tell Lumen the URIs it should respond to
 | and give it the Closure to call when that URI is requested.
 |
-*/
+ */
 
 $app->get('/', function () use ($app) {
     return $app->version();
@@ -91,16 +91,17 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api\V1'], function ($a
         ]);
 
         # POST
-        // create a post 
+        // create a post
         $api->post('posts', [
             'as' => 'posts.store',
             'uses' => 'PostController@store',
         ]);
         // update a post
         $api->put('posts/{id}', [
-            'as' => 'posts.store',
-            'uses' => 'PostController@store',
+            'as' => 'posts.update',
+            'uses' => 'PostController@update',
         ]);
+
         // delete a post
         $api->delete('posts/{id}', [
             'as' => 'posts.destroy',

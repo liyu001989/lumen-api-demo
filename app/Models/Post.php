@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 class Post extends BaseModel
 {
+    use SoftDeletes;
     // 可填充的字段
-    protected $fillable = ['title', 'description'];
+    protected $fillable = ['title', 'content'];
 
     protected $casts = ['extra' => 'array'];
 
