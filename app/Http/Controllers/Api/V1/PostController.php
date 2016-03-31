@@ -11,7 +11,7 @@ class PostController extends BaseController
     {
         $posts = Post::paginate($this->perPage);
 
-        return $this->response->paginate($posts, new PostTransformer());
+        return $this->response->paginator($posts, new PostTransformer());
     }
 
     public function show($id)

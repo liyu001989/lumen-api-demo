@@ -2,8 +2,8 @@
 
 namespace App\Transformers;
 
-use League\Fractal\TransformerAbstract;
 use App\Models\PostComment;
+use League\Fractal\TransformerAbstract;
 
 class PostCommentTransformer extends TransformerAbstract
 {
@@ -11,7 +11,7 @@ class PostCommentTransformer extends TransformerAbstract
 
     public function transform(PostComment $comment)
     {
-        return $comment->toArray();
+        return $comment->attributesToArray();
     }
 
     public function includeUser(PostComment $comment)

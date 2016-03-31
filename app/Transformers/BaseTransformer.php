@@ -2,13 +2,13 @@
 
 namespace App\Transformers;
 
-use League\Fractal\TransformerAbstract;
 use Illuminate\Database\Eloquent\Model;
+use League\Fractal\TransformerAbstract;
 
 class BaseTransformer extends TransformerAbstract
 {
     public function transform(Model $object)
     {
-        return $object->toArray();
+        return $object->attributesToArray();
     }
 }

@@ -16,5 +16,10 @@ class AppServiceProvider extends ServiceProvider
 
             return $app->loadComponent('mail', 'Illuminate\Mail\MailServiceProvider', 'mailer');
         });
+
+        // set locale
+        $request = app('request');
+        $language = $request->get('language') ?: $request->header('accept-language') ?: 'en';
+        app('translator')->setLocale($language);
     }
 }

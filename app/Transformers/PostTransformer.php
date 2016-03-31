@@ -2,16 +2,16 @@
 
 namespace App\Transformers;
 
-use League\Fractal\TransformerAbstract;
 use App\Models\Post;
+use League\Fractal\TransformerAbstract;
 
 class PostTransformer extends TransformerAbstract
 {
-    protected $availableInclude = ['user', 'comments'];
+    protected $availableIncludes = ['user', 'comments'];
 
     public function transform(Post $post)
     {
-        return $post->toArray();
+        return $post->attributesToArray();
     }
 
     public function includeUser(Post $post)
@@ -19,8 +19,16 @@ class PostTransformer extends TransformerAbstract
         return $this->item($post->user, new UserTransformer());
     }
 
-    public function includeComments(Post $post)
+    public function includeComments(Post $post, ParamBag $params = null)
     {
-        return $this->collection($post->comments, new PostCommentTransformer());
+        $limit = 10;
+        if ($params) {
+            $limit = (array) $params->get('limit');
+            $limit = (int) current($limit);
+        }
+
+        $comments = $post->comments()->limit($limit)->get();
+        $total = $post->comments()->count();
+        return $this->collection($comments, new PostCommentTransformer())->setMeta(['total' => $total]);
     }
 }
