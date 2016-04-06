@@ -1,0 +1,1 @@
+define({  "name": "lumen-api-demo",  "version": "0.1.0",  "description": "LUMEN API DEMO",  "title": "lumen api demo",  "url": "https://lumen.lyyw.info/api",  "sampleUrl": false,  "apidoc": "0.2.0",  "generator": {    "name": "apidoc",    "time": "2016-04-06T15:43:26.265Z",    "url": "http://apidocjs.com",    "version": "0.13.1"  }});

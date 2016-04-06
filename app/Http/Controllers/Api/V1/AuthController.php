@@ -7,9 +7,8 @@ use App\Models\User;
 class AuthController extends BaseController
 {
     /**
-     * @api {post} /auth/login 登录
-     * @apiDescription 登录
-     * @apiName auth/login
+     * @api {post} /auth/signin 登录(signin)
+     * @apiDescription 登录(signin)
      * @apiGroup Auth
      * @apiPermission none
      * @apiParam {Email} email     邮箱
@@ -26,7 +25,7 @@ class AuthController extends BaseController
      *       "error": "UserNotFound"
      *     }
      */
-    public function login()
+    public function signin()
     {
         $validator = \Validator::make($this->request->all(), [
             'email' => 'required|email',
@@ -40,7 +39,7 @@ class AuthController extends BaseController
 
         if (!$token = \JWTAuth::attempt($credentials)) {
             $validator->after(function ($validator) {
-                $validator->errors()->add('password', '用户名或密码错误');
+                $validator->errors()->add('password', trans('auth.failed'));
             });
         }
 
@@ -52,9 +51,8 @@ class AuthController extends BaseController
     }
 
     /**
-     * @api {post} /auth/refreshToken jwt刷新token
-     * @apiDescription jwt刷新token
-     * @apiName auth/refreshToken
+     * @api {post} /auth/refreshToken 刷新token(refresh token)
+     * @apiDescription 刷新token(refresh token)
      * @apiGroup Auth
      * @apiPermission JWT
      * @apiVersion 0.1.0
@@ -77,14 +75,13 @@ class AuthController extends BaseController
     }
 
     /**
-     * @api {post} /auth/signup 注册
-     * @apiDescription 注册
-     * @apiName auth/signup
+     * @api {post} /auth/signup 注册(signup)
+     * @apiDescription 注册(signup)
      * @apiGroup Auth
      * @apiPermission none
      * @apiVersion 0.1.0
-     * @apiParam {Email}  email   email[唯一]
-     * @apiParam {String} password   密码
+     * @apiParam {Email}  email   email[unique]
+     * @apiParam {String} password   password
      * @apiSuccessExample {json} Success-Response:
      *     HTTP/1.1 200 OK
      *     {
@@ -103,8 +100,6 @@ class AuthController extends BaseController
         $validator = \Validator::make($this->request->all(), [
             'email' => 'required|email|unique:users',
             'password' => 'required',
-        ], [
-            'email.unique' => '该邮箱已被他人注册',
         ]);
 
         if ($validator->fails()) {

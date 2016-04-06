@@ -21,10 +21,10 @@ $api = app('Dingo\Api\Routing\Router');
 // choose version add this in header    Accept:application/vnd.lumen.v1+json
 $api->version('v1', ['namespace' => 'App\Http\Controllers\Api\V1'], function ($api) {
     # Auth
-    // login
-    $api->post('auth/login', [
-        'as' => 'auth.login',
-        'uses' => 'AuthController@login',
+    // signin
+    $api->post('auth/signin', [
+        'as' => 'auth.signin',
+        'uses' => 'AuthController@signin',
     ]);
     // signup
     $api->post('auth/signup', [

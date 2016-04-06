@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Transformers\UserTransformer;
 use App\Models\User;
+use App\Transformers\UserTransformer;
 
 class UserController extends BaseController
 {
     /**
-     * @api {get} /users 用户列表
-     * @apiDescription 当前用户信息
+     * @api {get} /users 用户列表(user list)
+     * @apiDescription 用户列表(user list)
      * @apiGroup user
      * @apiPermission none
      * @apiVersion 0.1.0
@@ -46,8 +46,8 @@ class UserController extends BaseController
     }
 
     /**
-     * @api {post} /user/password 修改密码
-     * @apiDescription 修改密码
+     * @api {post} /user/password 修改密码(edit password)
+     * @apiDescription 修改密码(edit password)
      * @apiGroup user
      * @apiPermission JWT
      * @apiVersion 0.1.0
@@ -79,10 +79,6 @@ class UserController extends BaseController
             'old_password' => 'required',
             'password' => 'required|confirmed|different:old_password',
             'password_confirmation' => 'required|same:password',
-        ], [
-            'password.confirmed' => '两次输入的密码不一致',
-            'password_confirmation.same' => '两次输入的密码不一致',
-            'password.different' => '新旧密码不能相同',
         ]);
 
         $auth = \Auth::once([
@@ -92,7 +88,7 @@ class UserController extends BaseController
 
         if (!$auth) {
             $validator->after(function ($validator) {
-                $validator->errors()->add('old_password', '密码错误');
+                $validator->errors()->add('old_password', trans('auth.invalid_password'));
             });
         }
 
@@ -109,8 +105,8 @@ class UserController extends BaseController
     }
 
     /**
-     * @api {get} /user 某个用户信息
-     * @apiDescription 某个用户信息
+     * @api {get} /users/{id} 某个用户信息(some user's info)
+     * @apiDescription 某个用户信息(some user's info)
      * @apiGroup user
      * @apiPermission none
      * @apiVersion 0.1.0
@@ -139,8 +135,8 @@ class UserController extends BaseController
     }
 
     /**
-     * @api {get} /user 当前用户信息
-     * @apiDescription 当前用户信息
+     * @api {get} /user 当前用户信息(current user info)
+     * @apiDescription 当前用户信息(current user info)
      * @apiGroup user
      * @apiPermission JWT
      * @apiVersion 0.1.0
@@ -163,12 +159,12 @@ class UserController extends BaseController
     }
 
     /**
-     * @api {put} /user 修改个人信息
-     * @apiDescription 修改个人信息
+     * @api {put} /user 修改个人信息(update my info)
+     * @apiDescription 修改个人信息(update my info)
      * @apiGroup user
      * @apiPermission JWT
      * @apiVersion 0.1.0
-     * @apiParam {String} [name] 姓名
+     * @apiParam {String} [name] name
      * @apiSuccessExample {json} Success-Response:
      *     HTTP/1.1 200 OK
      *     {
