@@ -1,6 +1,7 @@
 # lumen-api-demo
 
 一个用lumen5.2 和dingoapi 写api的例子
+api文档看[这里](http://lumen-new.lyyw.info/apidoc/)
 
 lumen5.1看[这里](https://github.com/liyu001989/lumen-api-demo/tree/5.1) (基本一样的)
 
@@ -30,9 +31,8 @@ lumen5.1看[这里](https://github.com/liyu001989/lumen-api-demo/tree/5.1) (基�
 ## usage
 - composer install
 - 复制.env.example 为.env
-- 配置数据库信息
+- 配置各种key和数据库信息
 - php artisan migrate
-- v2 版本的api 只是个例子，可以删除
 
 ## 问题总结
 ### jwt 用法
