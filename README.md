@@ -1,7 +1,6 @@
 # lumen-api-demo
 
 一个用lumen5.2 和dingoapi 写api的例子
-api文档看[这里](http://lumen-new.lyyw.info/apidoc/)
 
 lumen5.1看[这里](https://github.com/liyu001989/lumen-api-demo/tree/5.1) (基本一样的)
 
@@ -12,7 +11,7 @@ lumen5.1看[这里](https://github.com/liyu001989/lumen-api-demo/tree/5.1) (基�
         "laravel/lumen-framework": "5.2.*",
         "vlucas/phpdotenv": "~2.2" // 这是个坑啊
 
-        直接将5.2的composer.json拿来替换了
+        将5.2的composer.json拿过来对比一下吧
 
 - 修改bootstrap/app.php，照着改
 - Illuminate\Contracts\Foundation\Application 改为了Laravel\Lumen\Application，所以修改一下app\providers\EventServiceProvider.php
@@ -23,7 +22,7 @@ lumen5.1看[这里](https://github.com/liyu001989/lumen-api-demo/tree/5.1) (基�
 - 使用 [dingo/api](https://github.com/dingo/api)
 - 用户验证使用 [jwt(json-web-token)](https://github.com/tymondesigns/jwt-auth)
 - orm transformer [fractal](http://fractal.thephpleague.com/)
-- 文档使用 [apidocjs](http://apidocjs.com/)
+- 文档生成工具 [apidocjs](http://apidocjs.com/)
 - api规范参考 [jsonapi.org](http://jsonapi.org/format/)
 - rest测试工具 [postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en)
 
@@ -33,6 +32,7 @@ lumen5.1看[这里](https://github.com/liyu001989/lumen-api-demo/tree/5.1) (基�
 - 复制.env.example 为.env
 - 配置各种key和数据库信息
 - php artisan migrate
+- api文档在public/apidoc里面，也可以看[这里](http://lumen-new.lyyw.info/apidoc/)
 
 ## 问题总结
 ### jwt 用法
