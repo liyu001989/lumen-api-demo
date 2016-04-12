@@ -23,11 +23,12 @@ $app = new Laravel\Lumen\Application(
     realpath(__DIR__.'/../')
 );
 
+// phpunit 报错？？？
 $app->withFacades();
 // jwt
-class_alias('Tymon\JWTAuth\Facades\JWTAuth', 'JWTAuth');
+//class_alias('Tymon\JWTAuth\Facades\JWTAuth', 'JWTAuth');
 //mail
-class_alias('Illuminate\Support\Facades\Mail', 'mail');
+//class_alias('Illuminate\Support\Facades\Mail', 'mail');
 
 $app->withEloquent();
 

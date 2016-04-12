@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Models\User;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends BaseController
 {
@@ -34,10 +35,7 @@ class AuthController extends BaseController
 
         $credentials = $this->request->only('email', 'password');
 
-        // 手动验证一下用户
-        $user = User::where('email', $this->request->get('email'))->first();
-
-        if (!$token = \JWTAuth::attempt($credentials)) {
+        if (!$token = JWTAuth::attempt($credentials)) {
             $validator->after(function ($validator) {
                 $validator->errors()->add('password', trans('auth.failed'));
             });
@@ -69,7 +67,7 @@ class AuthController extends BaseController
      */
     public function refreshToken()
     {
-        $token = \JWTAuth::parseToken()->refresh();
+        $token = JWTAuth::parseToken()->refresh();
 
         return $this->response->array(compact('token'));
     }
@@ -115,7 +113,7 @@ class AuthController extends BaseController
         $user->save();
 
         // 用户注册事件
-        $token = \JWTAuth::fromUser($user);
+        $token = JWTAuth::fromUser($user);
 
         return $this->response->array(compact('token'));
     }
