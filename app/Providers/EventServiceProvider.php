@@ -12,8 +12,9 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'App\Events\SomeEvent' => [
-            'App\Listeners\EventListener',
+        // 跨域添加默认的返回头
+        'Dingo\Api\Event\ResponseWasMorphed' => [
+            'App\Listeners\AddCorsHeaderToResponse',
         ],
     ];
 }
