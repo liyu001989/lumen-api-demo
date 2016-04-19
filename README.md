@@ -48,7 +48,9 @@ lumen 5.2取消了session，没有了auth的实例，所以使用jwt的时候需
 
 ### cors
 
-dingoapi 返回的时候回触发事件ResponseWasMorphed, 所以可以响应这个事件，增加header。尝试过一些库laravel-cors等，感觉不太好，所以没用。当然在middle中做这件事好像更合理一点，可以控制哪些路由可以跨域，稍后再研究研究。web之外的app就不用考虑这个问题了。
+dingoapi 返回的时候回触发事件ResponseWasMorphed, 所以可以响应这个事件，增加header。
+
+但是这样就不能控制哪些路由需要这些header，所以还是写在middleware里面比较好
 
 ## TODO
 - lumen 下邮件发送，注册验证
