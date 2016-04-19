@@ -22,8 +22,7 @@ class AppServiceProvider extends ServiceProvider
         $acceptLanguage = $request->header('accept-language');
         if ($acceptLanguage) {
             $language = current(explode(',', $acceptLanguage));
+            app('translator')->setLocale($language);
         }
-
-        app('translator')->setLocale($language);
     }
 }

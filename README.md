@@ -46,6 +46,12 @@ lumen 5.2取消了session，没有了auth的实例，所以使用jwt的时候需
 - 增加配置 mail和services, 从laravel项目里面cp过来
 - 在env中增加`MAIL_DRIVER`，账户，密码等配置
 
+### cors
+
+dingoapi 返回的时候回触发事件ResponseWasMorphed, 所以可以响应这个事件，增加header。
+
+但是这样就不能控制哪些路由需要这些header，所以还是写在middleware里面比较好
+
 ## TODO
 - lumen 下邮件发送，注册验证
 - 单元测试

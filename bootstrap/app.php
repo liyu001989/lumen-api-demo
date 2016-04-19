@@ -23,11 +23,12 @@ $app = new Laravel\Lumen\Application(
     realpath(__DIR__.'/../')
 );
 
+// phpunit 报错？？？
 $app->withFacades();
 // jwt
-class_alias('Tymon\JWTAuth\Facades\JWTAuth', 'JWTAuth');
+//class_alias('Tymon\JWTAuth\Facades\JWTAuth', 'JWTAuth');
 //mail
-class_alias('Illuminate\Support\Facades\Mail', 'mail');
+//class_alias('Illuminate\Support\Facades\Mail', 'mail');
 
 $app->withEloquent();
 
@@ -75,6 +76,7 @@ $app->singleton(
 
 $app->routeMiddleware([
     'auth' => App\Http\Middleware\Authenticate::class,
+    'cors' => App\Http\Middleware\Cors::class,
 ]);
 
 /*
@@ -90,7 +92,7 @@ $app->routeMiddleware([
 
 $app->register(App\Providers\AppServiceProvider::class);
 $app->register(App\Providers\AuthServiceProvider::class);
-// $app->register(App\Providers\EventServiceProvider::class);
+//$app->register(App\Providers\EventServiceProvider::class);
 //
 
 // dingo/api
