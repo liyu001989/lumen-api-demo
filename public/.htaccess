@@ -15,4 +15,10 @@
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
+
+    # nginx完全没问题，不知道为什么apache必须写成这样，angularjs才能跨域访问到
+    Header set Access-Control-Allow-Origin "*"
+    Header set Access-Control-Allow-Headers "Origin, X-Requested-With, Content-Type, Access-Control-Allow-Origin, Authorization, Accept"
+    Header set Access-Control-Allow-Methods "PUT, GET, POST, DELETE, HEAD"
+    Header set Access-Control-Max-Age 60
 </IfModule>
