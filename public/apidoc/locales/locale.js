@@ -1,13 +1,16 @@
 define([
+    './locales/ca.js',
     './locales/de.js',
+    './locales/es.js',
     './locales/fr.js',
     './locales/nl.js',
     './locales/pl.js',
     './locales/pt_br.js',
     './locales/ru.js',
-    './locales/zh.js'
+    './locales/zh.js',
+    './locales/zh_cn.js'
 ], function() {
-    var langId = (navigator.language || navigator.userLanguage).toLowerCase();
+    var langId = (navigator.language || navigator.userLanguage).toLowerCase().replace('-', '_');
     var language = langId.substr(0, 2);
     var locales = {};
 
