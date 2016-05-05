@@ -49,7 +49,7 @@ class AuthController extends BaseController
     }
 
     /**
-     * @api {post} /auth/refreshToken 刷新token(refresh token)
+     * @api {post} /auth/token/refresh 刷新token(refresh token)
      * @apiDescription 刷新token(refresh token)
      * @apiGroup Auth
      * @apiPermission JWT
