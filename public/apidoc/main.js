@@ -9,9 +9,7 @@ require.config({
         lodash: './vendor/lodash.min',
         pathToRegexp: './vendor/path-to-regexp/index',
         prettify: './vendor/prettify/prettify',
-        semver: './vendor/semver.min',
         utilsSampleRequest: './utils/send_sample_request',
-        webfontloader: './vendor/webfontloader'
     },
     shim: {
         bootstrap: {
@@ -44,11 +42,9 @@ require([
     './api_data.js',
     'prettify',
     'utilsSampleRequest',
-    'semver',
-    'webfontloader',
     'bootstrap',
     'pathToRegexp'
-], function($, _, locale, Handlebars, apiProject, apiData, prettyPrint, sampleRequest, semver, WebFont) {
+], function($, _, locale, Handlebars, apiProject, apiData, prettyPrint, sampleRequest) {
 
     // load google web fonts
     loadGoogleFontCss();
@@ -159,7 +155,7 @@ require([
 
     // sort versions DESC
     apiVersions = Object.keys(apiVersions);
-    apiVersions.sort(semver.compare);
+    apiVersions.sort();
     apiVersions.reverse();
 
     //
@@ -268,9 +264,9 @@ require([
                     // determine versions
                     api.forEach(function(versionEntry) {
                         if (groupEntry === versionEntry.group && entry.name === versionEntry.name) {
-                            if ( ! articleVersions[entry.group].hasOwnProperty(entry.name) ) {
+                            if ( ! articleVersions[entry.group][entry.name])
                                 articleVersions[entry.group][entry.name] = [];
-                            }
+
                             articleVersions[entry.group][entry.name].push(versionEntry.version);
                         }
                     });
@@ -320,7 +316,10 @@ require([
     $('#sections').append( content );
 
     // Bootstrap Scrollspy
-    $(this).scrollspy({ target: '#scrollingNav', offset: 18 });
+    var $scrollSpy = $(this).scrollspy({ target: '#scrollingNav', offset: 18 });
+    $('[data-spy="scroll"]').each(function () {
+        $scrollSpy('refresh');
+    });
 
     // Content-Scroll on Navigation click.
     $('.sidenav').find('a').on('click', function(e) {
@@ -393,9 +392,6 @@ require([
             $(this).parent().next(name).removeClass('hide');
         });
 
-        // call scrollspy refresh method
-        $(window).scrollspy('refresh');
-
         // init modules
         sampleRequest.initDynamic();
     }
@@ -425,25 +421,13 @@ require([
             var version = $(this).data('version');
 
             if (version <= selectedVersion) {
-                if ($('article[data-group=\'' + group + '\'][data-name=\'' + name + '\']:visible').length === 0) {
+                if($('article[data-group=\'' + group + '\'][data-name=\'' + name + '\']:visible').length === 0) {
                     // enable Article
                     $('article[data-group=\'' + group + '\'][data-name=\'' + name + '\'][data-version=\'' + version + '\']').removeClass('hide');
                     // enable Navigation
                     $('#sidenav li[data-group=\'' + group + '\'][data-name=\'' + name + '\'][data-version=\'' + version + '\']').removeClass('hide');
                     $('#sidenav li.nav-header[data-group=\'' + group + '\']').removeClass('hide');
                 }
-            }
-        });
-
-
-        // show 1st equal or lower Version of each entry
-        $('article[data-version]').each(function(index) {
-            var group = $(this).data('group');
-            $('section#api-' + group).removeClass('hide');
-            if ($('section#api-' + group + ' article:visible').length === 0) {
-                $('section#api-' + group).addClass('hide');
-            } else {
-                $('section#api-' + group).removeClass('hide');
             }
         });
 
@@ -660,15 +644,17 @@ require([
      * Load google fonts.
      */
     function loadGoogleFontCss() {
-        WebFont.load({
-            active: function() {
-                // Update scrollspy
-                $(window).scrollspy('refresh')
-            },
-            google: {
-                families: ['Source Code Pro', 'Source Sans Pro:n4,n6,n7']
-            }
-        });
+        var host = document.location.hostname.toLowerCase();
+        var protocol = document.location.protocol.toLowerCase();
+        var googleCss = '//fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:400,600,700';
+        if (host == 'localhost' || !host.length || protocol === 'file:')
+            googleCss = 'http:' + googleCss;
+
+        $('<link/>', {
+            rel: 'stylesheet',
+            type: 'text/css',
+            href: googleCss
+        }).appendTo('head');
     }
 
     /**
