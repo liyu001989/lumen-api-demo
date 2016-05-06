@@ -31,6 +31,13 @@ lumen5.1看[这里](https://github.com/liyu001989/lumen-api-demo/tree/5.1) (基�
 - composer install
 - 复制.env.example 为.env
 - 配置各种key和数据库信息
+
+	    JWT_SECRET
+            可以用过 php artisan jwt:secret 生成
+	    APP_KEY
+            lumen 取消了key:generate 所以随便找个地方生成一下吧
+            md5(uniqid())，str_random(32) 之类的，或者用jwt:secret生成两个copy一下
+
 - php artisan migrate
 - api文档在public/apidoc里面，也可以看[这里](http://lumen-new.lyyw.info/apidoc/)
 
