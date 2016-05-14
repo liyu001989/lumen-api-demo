@@ -57,14 +57,6 @@ class PostController extends BaseController
      */
     public function index()
     {
-        $validator = \Validator::make($this->request->all(), [
-            'title' => 'required|string',
-            'content' => 'required|string',
-        ]);
-
-        if ($validator->fails()) {
-            return $this->errorBadRequest($validator->messages());
-        }
         $posts = Post::paginate($this->perPage);
 
         return $this->response->paginator($posts, new PostTransformer());
@@ -148,10 +140,9 @@ class PostController extends BaseController
             return $this->errorBadRequest($validator->messages());
         }
 
-        $user = $this->user();
         $post = new Post();
-        $post->user()->associate($user);
         $post->fill($this->request->input());
+        $post->user()->associate($this->user());
         $post->save();
 
         $location = dingo_route('v1', 'posts.show', $post->id);
@@ -182,8 +173,9 @@ class PostController extends BaseController
             return $this->errorBadRequest($validator->messages());
         }
 
-        $user = $this->user();
-        $post = $user->posts()->find($id);
+        $post = $this->user()
+            ->posts()
+            ->find($id);
 
         if (!$post) {
             return $this->response->errorNotFound();
@@ -206,9 +198,10 @@ class PostController extends BaseController
      */
     public function destroy($id)
     {
-        $user = $this->user();
         // find my post
-        $post = $user->posts()->find($id);
+        $post = $this->user();
+            ->posts()
+            ->find($id);
 
         if (!$post) {
             return $this->response->errorNotFound();
