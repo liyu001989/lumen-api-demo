@@ -6,12 +6,13 @@ lumen5.1看[这里](https://github.com/liyu001989/lumen-api-demo/tree/5.1) (基�
 
 
 ## 相关文档
-- 使用 [dingo/api](https://github.com/dingo/api)
-- 用户验证使用 [jwt(json-web-token)](https://github.com/tymondesigns/jwt-auth)
+- dingo/api [https://github.com/dingo/api](https://github.com/dingo/api)
+- json-web-token(jwt) [https://github.com/tymondesigns/jwt-auth](https://github.com/tymondesigns/jwt-auth)
 - orm transformer [fractal](http://fractal.thephpleague.com/)
-- 文档生成工具 [apidocjs](http://apidocjs.com/)
-- api规范参考 [jsonapi.org](http://jsonapi.org/format/)
+- doc生成工具 [apidocjs](http://apidocjs.com/)
+- api规范 [jsonapi.org](http://jsonapi.org/format/)
 - rest测试工具 [postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en)
+- 参考文章 [http://oomusou.io/laravel/laravel-architecture](http://oomusou.io/laravel/laravel-architecture/)
 - 在线api文档 [http://lumen-new.lyyw.info/apidoc](http://lumen-new.lyyw.info/apidoc)
 
 
@@ -30,6 +31,7 @@ $ vim .env
             md5(uniqid())，str_random(32) 之类的，或者用jwt:secret生成两个copy一下
 
 $ php artisan migrate
+$ 生成文档我是这么写的 apidoc -i App/Http/Controller/Api/v1 -o public/apidoc
 $ api文档在public/apidoc里面, 也可以看上面的 在线api文档
 ```
 
