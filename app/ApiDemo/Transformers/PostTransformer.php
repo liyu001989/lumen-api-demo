@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Transformers;
+namespace ApiDemo\Transformers;
 
-use App\Models\Post;
+use ApiDemo\Models\Post;
 use League\Fractal\TransformerAbstract;
 
 class PostTransformer extends TransformerAbstract

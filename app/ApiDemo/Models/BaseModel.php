@@ -5,7 +5,7 @@
  * @desc      基础模型
  */
 
-namespace App\Models;
+namespace ApiDemo\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

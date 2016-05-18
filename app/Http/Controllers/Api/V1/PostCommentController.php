@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Models\Post;
-use App\Models\PostComment;
-use App\Transformers\PostCommentTransformer;
+use ApiDemo\Models\Post;
+use ApiDemo\Models\PostComment;
+use ApiDemo\Transformers\PostCommentTransformer;
 
 class PostCommentController extends BaseController
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace ApiDemo\Models;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -14,11 +14,11 @@ class Post extends BaseModel
 
     public function user()
     {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo('ApiDemo\Models\User');
     }
 
     public function comments()
     {
-        return $this->hasMany('App\Models\PostComment');
+        return $this->hasMany('ApiDemo\Models\PostComment');
     }
 }

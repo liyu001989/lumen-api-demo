@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Models\Post;
-use App\Transformers\PostTransformer;
+use ApiDemo\Models\Post;
+use ApiDemo\Transformers\PostTransformer;
 
 class PostController extends BaseController
 {
@@ -58,6 +58,63 @@ class PostController extends BaseController
     public function index()
     {
         $posts = Post::paginate($this->perPage);
+
+        return $this->response->paginator($posts, new PostTransformer());
+    }
+
+
+    /**
+     * @api {get} /user/posts 我的帖子列表(my post list)
+     * @apiDescription 我的帖子列表(my post list)
+     * @apiGroup Post
+     * @apiPermission none
+     * @apiParam {String='comments:limit(x)'} [include]  include
+     * @apiVersion 0.1.0
+     * @apiSuccessExample {json} Success-Response:
+     *   HTTP/1.1 200 OK
+     *   {
+     *     "data": [
+     *       {
+     *         "id": 1,
+     *         "user_id": 3,
+     *         "title": "foo",
+     *         "content": "",
+     *         "created_at": "2016-03-30 15:36:30",
+     *         "user": {
+     *           "data": {
+     *             "id": 3,
+     *             "email": "foo@bar.com1",
+     *             "name": "",
+     *             "avatar": "",
+     *             "created_at": "2016-03-30 15:34:01",
+     *             "updated_at": "2016-03-30 15:34:01",
+     *             "deleted_at": null
+     *           }
+     *         },
+     *         "comments": {
+     *           "data": [],
+     *           "meta": {
+     *             "total": 0
+     *           }
+     *         }
+     *       }
+     *     ],
+     *     "meta": {
+     *       "pagination": {
+     *         "total": 2,
+     *         "count": 2,
+     *         "per_page": 15,
+     *         "current_page": 1,
+     *         "total_pages": 1,
+     *         "links": []
+     *       }
+     *     }
+     *   }
+     */
+    public function userIndex()
+    {
+        $user = $this->user();
+        $posts = $user->posts()->paginate($this->perPage);
 
         return $this->response->paginator($posts, new PostTransformer());
     }
@@ -199,7 +256,7 @@ class PostController extends BaseController
     public function destroy($id)
     {
         // find my post
-        $post = $this->user();
+        $post = $this->user()
             ->posts()
             ->find($id);
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace ApiDemo\Models;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
@@ -20,12 +20,12 @@ class User extends BaseModel implements AuthenticatableContract, JWTSubject
 
     public function posts()
     {
-        return $this->hasMany('App\Models\Post');
+        return $this->hasMany('ApiDemo\Models\Post');
     }
 
     public function postComments()
     {
-        return $this->hasMany('App\Models\PostComment');
+        return $this->hasMany('ApiDemo\Models\PostComment');
     }
 
     // jwt 需要实现的方法

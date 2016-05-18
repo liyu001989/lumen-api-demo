@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Models\User;
+use ApiDemo\Models\User;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends BaseController

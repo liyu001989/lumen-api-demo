@@ -91,6 +91,11 @@ $api->version('v1', ['middleware'=>'cors', 'namespace' => 'App\Http\Controllers\
         ]);
 
         # POST
+        // user's posts index
+        $api->get('user/posts', [
+            'as' => 'user.posts.index',
+            'uses' => 'PostController@userIndex',
+        ]);
         // create a post
         $api->post('posts', [
             'as' => 'posts.store',
