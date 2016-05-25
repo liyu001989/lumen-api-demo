@@ -20,7 +20,7 @@ lumen5.1看[这里](https://github.com/liyu001989/lumen-api-demo/tree/5.1) (基�
 ```
 $ git clone git@github.com:liyu001989/lumen-api-demo.git
 $ composer install
-$ cp.env.example .env
+$ cp .env.example .env
 $ vim .env
         DB_*
             填写数据库相关配置 your database configuration
