@@ -11,7 +11,9 @@
         "dingo/api": "1.0.x@dev",
         "tymon/jwt-auth": "^1.0@dev",
         "illuminate/mail": "^5.2",
-        "guzzlehttp/guzzle": "~6.0"
+        "guzzlehttp/guzzle": "~6.0",
+        "predis/predis": "^1.0",
+        "illuminate/redis": "^5.2"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
