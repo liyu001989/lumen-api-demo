@@ -2,13 +2,13 @@
 
 一个用lumen5.2 和dingoapi 写api的例子
 
-lumen5.1看[这里](https://github.com/liyu001989/lumen-api-demo/tree/5.1) (基本一样的)
+lumen5.1看[这里](https://github.com/liyu001989/lumen-api-demo/tree/5.1) (不更新了)
 
 
 ## 相关文档
 - dingo/api [https://github.com/dingo/api](https://github.com/dingo/api)
 - json-web-token(jwt) [https://github.com/tymondesigns/jwt-auth](https://github.com/tymondesigns/jwt-auth)
-- orm transformer [fractal](http://fractal.thephpleague.com/)
+- transformer [fractal](http://fractal.thephpleague.com/)
 - doc生成工具 [apidocjs](http://apidocjs.com/)
 - api规范 [jsonapi.org](http://jsonapi.org/format/)
 - rest测试工具 [postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en)
@@ -32,26 +32,26 @@ $ vim .env
 
 $ php artisan migrate
 $ 生成文档我是这么写的 apidoc -i App/Http/Controller/Api/v1 -o public/apidoc
-$ api文档在public/apidoc里面, 也可以看上面的 在线api文档
+$ api文档在public/apidoc里面, 也可以看上面的 `在线api文档`
 ```
 
 ## 问题总结
 
-### lumen 5.1 升级 5.2
+### lumen 5.1 upgrade to  5.2
 
-- 先修改compose.json 中的依赖
+- fix compose.json
 
         "laravel/lumen-framework": "5.2.*",
         "vlucas/phpdotenv": "~2.2" // 这是个坑啊
 
         将5.2的composer.json拿过来对比一下吧
 
-- 修改bootstrap/app.php，照着改
+- fix bootstrap/app.php
 - Illuminate\Contracts\Foundation\Application 改为了Laravel\Lumen\Application，所以修改一下app\providers\EventServiceProvider.php
 - 把Middleware cp过来
 
 
-### jwt 用法
+### jwt 使用
 
 lumen 5.2取消了session，没有了auth的实例，所以使用jwt的时候需要配置一下，注意config/auth.php中的配置，而且user的model需要实现Tymon\JWTAuth\Contracts\JWTSubject;
 
