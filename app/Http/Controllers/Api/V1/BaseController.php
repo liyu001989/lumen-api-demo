@@ -26,6 +26,6 @@ class BaseController extends Controller
     public function __construct(Request $request)
     {
         $this->request = $request;
-        $this->psrPage = $request->get('per_page') ?: null;
+        $this->perPage = $request->get('per_page');
     }
 }

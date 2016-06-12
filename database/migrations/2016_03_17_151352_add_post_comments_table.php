@@ -12,15 +12,12 @@ class AddPostCommentsTable extends Migration
     {
         Schema::create('post_comments', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('post_id');
-            $table->integer('user_id');
-            $table->integer('reply_user_id');
+            $table->integer('post_id')->unsigned()->index();
+            $table->integer('user_id')->unsigned()->index();
+            $table->integer('reply_user_id')->unsigned()->index();
             $table->string('content', 255);
             $table->timestamps();
             $table->softDeletes();
-
-            $table->index('user_id');
-            $table->index('reply_user_id');
         });
     }
 

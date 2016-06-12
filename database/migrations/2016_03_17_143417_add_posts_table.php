@@ -12,14 +12,12 @@ class AddPostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
-            $table->string('title', 50);
+            $table->integer('user_id')->unsigned()->index();
+            $table->string('title', 50)->index();
             $table->string('content', 255);
             $table->text('extra');
             $table->timestamps();
             $table->softDeletes();
-
-            $table->index('user_id');
         });
     }
 
