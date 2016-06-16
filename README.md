@@ -77,3 +77,7 @@ dingoapi 返回的时候回触发事件ResponseWasMorphed, 所以可以响应这
 ## 坑
 - [https://github.com/dingo/api/issues/672](https://github.com/dingo/api/issues/672)  `transformer include`
 - 如果.env的某个值中有空格会报错log not found
+
+## License
+
+[MIT license](http://opensource.org/licenses/MIT)
