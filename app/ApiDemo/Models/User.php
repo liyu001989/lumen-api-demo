@@ -15,9 +15,6 @@ class User extends BaseModel implements AuthenticatableContract, JWTSubject
     // 查询用户的时候，不暴露密码
     protected $hidden = ['password'];
 
-    // 可填充的字段
-    protected $fillable = ['name'];
-
     public function posts()
     {
         return $this->hasMany('ApiDemo\Models\Post');

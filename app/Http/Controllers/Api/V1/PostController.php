@@ -4,9 +4,17 @@ namespace App\Http\Controllers\Api\V1;
 
 use ApiDemo\Models\Post;
 use ApiDemo\Transformers\PostTransformer;
+use ApiDemo\Repositories\PostRepository;
+use Illuminate\Http\Request;
 
 class PostController extends BaseController
 {
+    protected $repository;
+
+    public function __construct(PostRepository $repository)
+    {
+        $this->repository = $repository;
+    }
     /**
      * @api {get} /posts 帖子列表(post list)
      * @apiDescription 帖子列表(post list)
@@ -57,7 +65,8 @@ class PostController extends BaseController
      */
     public function index()
     {
-        $posts = Post::paginate($this->perPage);
+        $posts = $this->repository
+            ->paginate();
 
         return $this->response->paginator($posts, new PostTransformer());
     }
@@ -113,8 +122,10 @@ class PostController extends BaseController
      */
     public function userIndex()
     {
-        $user = $this->user();
-        $posts = $user->posts()->paginate($this->perPage);
+
+        $posts = $this->repository
+            ->where(['user_id' => $this->user()->id])
+            ->paginate();
 
         return $this->response->paginator($posts, new PostTransformer());
     }
@@ -166,7 +177,7 @@ class PostController extends BaseController
      */
     public function show($id)
     {
-        $post = Post::find($id);
+        $post = $this->repository->find($id);
 
         if (!$post) {
             return $this->response->errorNotFound();
@@ -186,10 +197,10 @@ class PostController extends BaseController
      * @apiSuccessExample {json} Success-Response:
      *   HTTP/1.1 201 Created
      */
-    public function store()
+    public function store(Request $request)
     {
-        $validator = \Validator::make($this->request->all(), [
-            'title' => 'required|string',
+        $validator = \Validator::make($request->input(), [
+            'title' => 'required|string|max:50',
             'content' => 'required|string',
         ]);
 
@@ -197,10 +208,9 @@ class PostController extends BaseController
             return $this->errorBadRequest($validator->messages());
         }
 
-        $post = new Post();
-        $post->fill($this->request->input());
-        $post->user()->associate($this->user());
-        $post->save();
+        $attributes = $request->only('title', 'content');
+        $attributes['user_id'] = $this->user()->id;
+        $post = $this->repository->create($attributes);
 
         $location = dingo_route('v1', 'posts.show', $post->id);
         // 协议里是这么返回，把资源位置放在header里面
@@ -219,10 +229,21 @@ class PostController extends BaseController
      * @apiSuccessExample {json} Success-Response:
      *   HTTP/1.1 204 NO CONTENT
      */
-    public function update($id)
+    public function update($id, Request $request)
     {
-        $validator = \Validator::make($this->request->all(), [
-            'title' => 'required|string',
+        $post = $this->repository->find($id);
+
+        if (!$post) {
+            return $this->response->errorNotFound();
+        }
+
+        // 不属于我的forbidden
+        if ($post->user_id != $this->user()->id) {
+            return $this->response->errorForbidden();
+        }
+
+        $validator = \Validator::make($request->input(), [
+            'title' => 'required|string|max:50',
             'content' => 'required|string',
         ]);
 
@@ -230,16 +251,7 @@ class PostController extends BaseController
             return $this->errorBadRequest($validator->messages());
         }
 
-        $post = $this->user()
-            ->posts()
-            ->find($id);
-
-        if (!$post) {
-            return $this->response->errorNotFound();
-        }
-
-        $post->fill($this->request->input());
-        $post->save();
+        $this->repository->update($id, $request->only('title', 'content'));
 
         return $this->response->noContent();
     }
@@ -255,16 +267,18 @@ class PostController extends BaseController
      */
     public function destroy($id)
     {
-        // find my post
-        $post = $this->user()
-            ->posts()
-            ->find($id);
+        $post = $this->repository->find($id);
 
         if (!$post) {
             return $this->response->errorNotFound();
         }
 
-        $post->delete();
+        // 不属于我的forbidden
+        if ($post->user_id != $this->user()->id) {
+            return $this->response->errorForbidden();
+        }
+
+        $this->repository->destroy($id);
 
         return $this->response->noContent();
     }

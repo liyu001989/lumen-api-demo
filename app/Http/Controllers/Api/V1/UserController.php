@@ -178,6 +178,15 @@ class UserController extends BaseController
      */
     public function update()
     {
+        $validator = \Validator::make($this->request->input(), [
+            'email' => 'required|email',
+            'name' => 'required|string',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->errorBadRequest($validator->messages());
+        }
+
         $user = $this->user();
 
         $user->fill($this->request->input());
@@ -185,5 +194,11 @@ class UserController extends BaseController
         $user->save();
 
         return $this->response->item($user, new UserTransformer());
+    }
+
+    public function patch()
+    {
+        $user = $this->user();
+
     }
 }

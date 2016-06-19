@@ -87,6 +87,11 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api\V1'], function ($a
             'as' => 'user.update',
             'uses' => 'UserController@update',
         ]);
+        // update part of me
+        $api->patch('user', [
+            'as' => 'user.update',
+            'uses' => 'UserController@update',
+        ]);
         // update my password
         $api->post('user/password', [
             'as' => 'user.password.update',
@@ -109,7 +114,11 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api\V1'], function ($a
             'as' => 'posts.update',
             'uses' => 'PostController@update',
         ]);
-
+        // update part of a post
+        $api->patch('posts/{id}', [
+            'as' => 'posts.update',
+            'uses' => 'PostController@update',
+        ]);
         // delete a post
         $api->delete('posts/{id}', [
             'as' => 'posts.destroy',
@@ -121,6 +130,10 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api\V1'], function ($a
         $api->post('posts/{postId}/comments', [
             'as' => 'posts.comments.store',
             'uses' => 'PostCommentController@store',
+        ]);
+        $api->put('posts/{postId}/comments/{id}', [
+            'as' => 'posts.comments.update',
+            'uses' => 'PostCommentController@update',
         ]);
         // delete a comment
         $api->delete('posts/{postId}/comments/{id}', [
