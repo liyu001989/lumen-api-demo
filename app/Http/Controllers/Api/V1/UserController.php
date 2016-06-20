@@ -2,11 +2,18 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use ApiDemo\Models\User;
 use ApiDemo\Transformers\UserTransformer;
+use ApiDemo\Repositories\UserRepository;
+use Illuminate\Http\Request;
 
 class UserController extends BaseController
 {
+    protected $repository;
+
+    public function __construct(UserRepository $repository)
+    {
+        $this->repository = $repository;
+    }
     /**
      * @api {get} /users 用户列表(user list)
      * @apiDescription 用户列表(user list)
@@ -40,7 +47,7 @@ class UserController extends BaseController
      */
     public function index()
     {
-        $users = User::paginate($this->perPage);
+        $users = $this->repository->paginate();
 
         return $this->response->paginator($users, new UserTransformer());
     }
@@ -71,19 +78,19 @@ class UserController extends BaseController
      *         ]
      *     }
      */
-    public function editPassword()
+    public function editPassword(Request $request)
     {
-        $user = $this->user();
-
-        $validator = \Validator::make($this->request->all(), [
+        $validator = \Validator::make($request->all(), [
             'old_password' => 'required',
             'password' => 'required|confirmed|different:old_password',
             'password_confirmation' => 'required|same:password',
         ]);
 
+        $user = $request->user();
+
         $auth = \Auth::once([
             'email' => $user->email,
-            'password' => $this->request->get('old_password'),
+            'password' => $request->get('old_password'),
         ]);
 
         if (!$auth) {
@@ -96,10 +103,8 @@ class UserController extends BaseController
             return $this->errorBadRequest($validator->messages());
         }
 
-        $user->password = bcrypt($this->request->get('password'));
-        $user->password = app('hash')->make($this->request->get('password'));
-
-        $user->save();
+        $password =  app('hash')->make($request->get('password'));
+        $this->repository->update($user->id, ['password'=>$password]);
 
         return $this->response->noContent();
     }
@@ -125,7 +130,7 @@ class UserController extends BaseController
      */
     public function show($id)
     {
-        $user = User::find($id);
+        $user = $this->repository->find($id);
 
         if (!$user) {
             return $this->response->errorNotFound();
@@ -153,18 +158,19 @@ class UserController extends BaseController
      *       }
      *     }
      */
-    public function userShow()
+    public function userShow(Request $request)
     {
-        return $this->response->item($this->user(), new UserTransformer());
+        return $this->response->item($request->user(), new UserTransformer());
     }
 
     /**
-     * @api {put} /user 修改个人信息(update my info)
+     * @api {patch} /user 修改个人信息(update my info)
      * @apiDescription 修改个人信息(update my info)
      * @apiGroup user
      * @apiPermission JWT
      * @apiVersion 0.1.0
      * @apiParam {String} [name] name
+     * @apiParam {Url} [avatar] avatar
      * @apiSuccessExample {json} Success-Response:
      *     HTTP/1.1 200 OK
      *     {
@@ -176,29 +182,24 @@ class UserController extends BaseController
      *        "deleted_at": null,
      *     }
      */
-    public function update()
+    public function patch(Request $request)
     {
-        $validator = \Validator::make($this->request->input(), [
-            'email' => 'required|email',
-            'name' => 'required|string',
+        $validator = \Validator::make($request->input(), [
+            'name' => 'string|max:50',
+            'avatar' => 'url'
         ]);
 
         if ($validator->fails()) {
             return $this->errorBadRequest($validator->messages());
         }
 
-        $user = $this->user();
+        $user = $request->user();
+        $attributes = array_filter($request->only('name', 'avatar'));
 
-        $user->fill($this->request->input());
-
-        $user->save();
+        if ($attributes) {
+            $user = $this->repository->update($user->id, $attributes);
+        }
 
         return $this->response->item($user, new UserTransformer());
-    }
-
-    public function patch()
-    {
-        $user = $this->user();
-
     }
 }

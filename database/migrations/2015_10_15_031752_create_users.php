@@ -12,7 +12,7 @@ class CreateUsers extends Migration
         Schema::create('users', function ($table) {
             $table->increments('id');
             $table->string('email')->unique()->index();
-            $table->string('name')->index();
+            $table->string('name', 50)->index();
             $table->string('password');
             $table->string('avatar', 255)->nullable();
             $table->timestamps();

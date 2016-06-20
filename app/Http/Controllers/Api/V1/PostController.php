@@ -65,8 +65,7 @@ class PostController extends BaseController
      */
     public function index()
     {
-        $posts = $this->repository
-            ->paginate();
+        $posts = $this->repository->paginate();
 
         return $this->response->paginator($posts, new PostTransformer());
     }

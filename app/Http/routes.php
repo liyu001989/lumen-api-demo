@@ -66,15 +66,15 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api\V1'], function ($a
         'uses' => 'PostCommentController@index',
     ]);
 
+    # AUTH
+    // refresh jwt token
+    $api->post('auth/token/refresh', [
+        'as' => 'auth.token.refresh',
+        'uses' => 'AuthController@refreshToken',
+    ]);
+
     // need authentication
     $api->group(['middleware' => 'api.auth'], function ($api) {
-
-        # AUTH
-        // refresh jwt token
-        $api->post('auth/token/refresh', [
-            'as' => 'auth.token.refresh',
-            'uses' => 'AuthController@refreshToken',
-        ]);
 
         # USER
         // my detail
@@ -82,15 +82,11 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api\V1'], function ($a
             'as' => 'user.show',
             'uses' => 'UserController@userShow',
         ]);
-        // update my info
-        $api->put('user', [
-            'as' => 'user.update',
-            'uses' => 'UserController@update',
-        ]);
+
         // update part of me
         $api->patch('user', [
             'as' => 'user.update',
-            'uses' => 'UserController@update',
+            'uses' => 'UserController@patch',
         ]);
         // update my password
         $api->post('user/password', [
