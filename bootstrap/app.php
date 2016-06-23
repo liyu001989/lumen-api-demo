@@ -116,6 +116,11 @@ app('Dingo\Api\Auth\Auth')->extend('jwt', function ($app) {
    return new Dingo\Api\Auth\Provider\JWT($app['Tymon\JWTAuth\JWTAuth']);
 });
 
+//Injecting auth
+$app->singleton(Illuminate\Auth\AuthManager::class, function ($app) {
+    return $app->make('auth');
+});
+
 /*
 |--------------------------------------------------------------------------
 | Load The Application Routes

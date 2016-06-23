@@ -3,9 +3,21 @@
 namespace App\Http\Controllers\Api\V1;
 
 use ApiDemo\Models\User;
+use ApiDemo\Repositories\UserRepository;
+use Illuminate\Auth\AuthManager;
+use Illuminate\Http\Request;
 
 class AuthController extends BaseController
 {
+    protected $repository;
+
+    protected $auth;
+
+    public function __construct(UserRepository $repository, AuthManager $auth)
+    {
+        $this->repository = $repository;
+        $this->auth = $auth;
+    }
     /**
      * @api {post} /auth/login 登录(login)
      * @apiDescription 登录(login)
@@ -25,16 +37,16 @@ class AuthController extends BaseController
      *       "error": "UserNotFound"
      *     }
      */
-    public function login()
+    public function login(Request $request)
     {
-        $validator = \Validator::make($this->request->all(), [
+        $validator = \Validator::make($request->all(), [
             'email' => 'required|email',
             'password' => 'required',
         ]);
 
-        $credentials = $this->request->only('email', 'password');
+        $credentials = $request->only('email', 'password');
 
-        if (!$token = \Auth::guard('api')->attempt($credentials)) {
+        if (!$token = $this->auth->guard('api')->attempt($credentials)) {
             $validator->after(function ($validator) {
                 $validator->errors()->add('password', trans('auth.failed'));
             });
@@ -66,7 +78,7 @@ class AuthController extends BaseController
      */
     public function refreshToken()
     {
-        $token = \Auth::guard('api')->parseToken()->refresh();
+        $token = $this->auth::guard('api')->parseToken()->refresh();
 
         return $this->response->array(compact('token'));
     }
@@ -92,9 +104,9 @@ class AuthController extends BaseController
      *         ],
      *     }
      */
-    public function register()
+    public function register(Request $request)
     {
-        $validator = \Validator::make($this->request->all(), [
+        $validator = \Validator::make($request->input(), [
             'email' => 'required|email|unique:users',
             'password' => 'required',
         ]);
@@ -103,16 +115,19 @@ class AuthController extends BaseController
             return $this->errorBadRequest($validator->messages());
         }
 
-        $email = $this->request->get('email');
-        $password = $this->request->get('password');
+        $email = $request->get('email');
+        $password = $request->get('password');
 
-        $user = new User();
-        $user->email = $email;
-        $user->password = app('hash')->make($password);
-        $user->save();
+        //$user = new User();
+        $attributes = [
+            'email' => $email,
+            'password' => app('hash')->make($password),
+        ];
+
+        $user = $this->repository->create($attributes);
 
         // 用户注册事件
-        $token = \auth::guard('api')->fromUser($user);
+        $token = $this->auth->guard('api')->fromUser($user);
 
         return $this->response->array(compact('token'));
     }
