@@ -3,13 +3,12 @@
 namespace App\Http\Controllers\Api\V1;
 
 use ApiDemo\Models\User;
-use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends BaseController
 {
     /**
-     * @api {post} /auth/signin 登录(signin)
-     * @apiDescription 登录(signin)
+     * @api {post} /auth/login 登录(login)
+     * @apiDescription 登录(login)
      * @apiGroup Auth
      * @apiPermission none
      * @apiParam {Email} email     邮箱
@@ -26,7 +25,7 @@ class AuthController extends BaseController
      *       "error": "UserNotFound"
      *     }
      */
-    public function signin()
+    public function login()
     {
         $validator = \Validator::make($this->request->all(), [
             'email' => 'required|email',
@@ -35,7 +34,7 @@ class AuthController extends BaseController
 
         $credentials = $this->request->only('email', 'password');
 
-        if (!$token = JWTAuth::attempt($credentials)) {
+        if (!$token = \Auth::guard('api')->attempt($credentials)) {
             $validator->after(function ($validator) {
                 $validator->errors()->add('password', trans('auth.failed'));
             });
@@ -67,14 +66,14 @@ class AuthController extends BaseController
      */
     public function refreshToken()
     {
-        $token = JWTAuth::parseToken()->refresh();
+        $token = \Auth::guard('api')->parseToken()->refresh();
 
         return $this->response->array(compact('token'));
     }
 
     /**
-     * @api {post} /auth/signup 注册(signup)
-     * @apiDescription 注册(signup)
+     * @api {post} /auth/register 注册(register)
+     * @apiDescription 注册(register)
      * @apiGroup Auth
      * @apiPermission none
      * @apiVersion 0.1.0
@@ -93,7 +92,7 @@ class AuthController extends BaseController
      *         ],
      *     }
      */
-    public function signup()
+    public function register()
     {
         $validator = \Validator::make($this->request->all(), [
             'email' => 'required|email|unique:users',
@@ -113,7 +112,7 @@ class AuthController extends BaseController
         $user->save();
 
         // 用户注册事件
-        $token = JWTAuth::fromUser($user);
+        $token = \auth::guard('api')->fromUser($user);
 
         return $this->response->array(compact('token'));
     }

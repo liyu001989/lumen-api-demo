@@ -25,14 +25,14 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api\V1'], function ($a
 
     # Auth
     // signin
-    $api->post('auth/signin', [
-        'as' => 'auth.signin',
-        'uses' => 'AuthController@signin',
+    $api->post('auth/login', [
+        'as' => 'auth.login',
+        'uses' => 'AuthController@login',
     ]);
     // signup
-    $api->post('auth/signup', [
-        'as' => 'auth.signup',
-        'uses' => 'AuthController@signup',
+    $api->post('auth/register', [
+        'as' => 'auth.register',
+        'uses' => 'AuthController@register',
     ]);
 
     # User
