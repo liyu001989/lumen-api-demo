@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use ApiDemo\Models\User;
 use ApiDemo\Repositories\UserRepository;
 use Illuminate\Auth\AuthManager;
 use Illuminate\Http\Request;
 
 class AuthController extends BaseController
 {
-    protected $repository;
+    protected $userRepository;
 
     protected $auth;
 
-    public function __construct(UserRepository $repository, AuthManager $auth)
+    public function __construct(UserRepository $userRepository, AuthManager $auth)
     {
-        $this->repository = $repository;
+        $this->userRepository = $userRepository;
+
         $this->auth = $auth;
     }
     /**
@@ -44,16 +44,15 @@ class AuthController extends BaseController
             'password' => 'required',
         ]);
 
-        $credentials = $request->only('email', 'password');
-
-        if (!$token = $this->auth->guard('api')->attempt($credentials)) {
-            $validator->after(function ($validator) {
-                $validator->errors()->add('password', trans('auth.failed'));
-            });
-        }
-
         if ($validator->fails()) {
             return $this->errorBadRequest($validator->messages());
+        }
+
+        $credentials = $request->only('email', 'password');
+
+        // 验证失败返回403
+        if (!$token = $this->auth->guard('api')->attempt($credentials)) {
+            $this->response->errorForbidden(trans('auth.failed'));
         }
 
         return $this->response->array(compact('token'));
@@ -78,7 +77,7 @@ class AuthController extends BaseController
      */
     public function refreshToken()
     {
-        $token = $this->auth::guard('api')->parseToken()->refresh();
+        $token = $this->auth->guard('api')->parseToken()->refresh();
 
         return $this->response->array(compact('token'));
     }
@@ -124,7 +123,7 @@ class AuthController extends BaseController
             'password' => app('hash')->make($password),
         ];
 
-        $user = $this->repository->create($attributes);
+        $user = $this->userRepository->create($attributes);
 
         // 用户注册事件
         $token = $this->auth->guard('api')->fromUser($user);

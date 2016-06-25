@@ -13,7 +13,7 @@ abstract class BaseRepository
 
     abstract public function model();
 
-    public function paginate($limit)
+    public function paginate($limit = null)
     {
         return $this->model
             ->paginate($limit);
@@ -22,6 +22,11 @@ abstract class BaseRepository
     public function where(array $data)
     {
         return $this->model->where($data);
+    }
+
+    public function first()
+    {
+        return $this->model->first();
     }
 
     public function find($id)

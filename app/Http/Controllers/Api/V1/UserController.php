@@ -8,11 +8,9 @@ use Illuminate\Http\Request;
 
 class UserController extends BaseController
 {
-    protected $repository;
-
-    public function __construct(UserRepository $repository)
+    public function __construct(UserRepository $userRepository)
     {
-        $this->repository = $repository;
+        $this->userRepository = $userRepository;
     }
     /**
      * @api {get} /users 用户列表(user list)
@@ -47,7 +45,7 @@ class UserController extends BaseController
      */
     public function index()
     {
-        $users = $this->repository->paginate();
+        $users = $this->userRepository->paginate();
 
         return $this->response->paginator($users, new UserTransformer());
     }
@@ -104,7 +102,7 @@ class UserController extends BaseController
         }
 
         $password =  app('hash')->make($request->get('password'));
-        $this->repository->update($user->id, ['password'=>$password]);
+        $this->userRepository->update($user->id, ['password'=>$password]);
 
         return $this->response->noContent();
     }
@@ -130,7 +128,7 @@ class UserController extends BaseController
      */
     public function show($id)
     {
-        $user = $this->repository->find($id);
+        $user = $this->userRepository->find($id);
 
         if (!$user) {
             return $this->response->errorNotFound();
@@ -197,7 +195,7 @@ class UserController extends BaseController
         $attributes = array_filter($request->only('name', 'avatar'));
 
         if ($attributes) {
-            $user = $this->repository->update($user->id, $attributes);
+            $user = $this->userRepository->update($user->id, $attributes);
         }
 
         return $this->response->item($user, new UserTransformer());

@@ -2,12 +2,24 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use ApiDemo\Models\Post;
-use ApiDemo\Models\PostComment;
 use ApiDemo\Transformers\PostCommentTransformer;
+use ApiDemo\Repositories\PostRepository;
+use ApiDemo\Repositories\PostCommentRepository;
+use Illuminate\Http\Request;
 
 class PostCommentController extends BaseController
 {
+    protected $postRepository;
+
+    protected $postCommentRepository;
+
+    public function __construct(PostCommentRepository $postCommentRepository, PostRepository $postRepository)
+    {
+        $this->postCommentRepository = $postCommentRepository;
+
+        $this->postRepository = $postRepository;
+    }
+
     /**
      * @api {get} /posts/{postId}/comments 评论列表(post comment list)
      * @apiDescription 评论列表(post comment list)
@@ -91,16 +103,18 @@ class PostCommentController extends BaseController
      */
     public function index($postId)
     {
-        $post = Post::find($postId);
+        $post = $this->postRepository->find($postId);
 
         if (!$post) {
             return $this->response->errorNotFound();
         }
 
         // 研究一下cursor，这里应该无限下拉
-        $comment = $post->comments()->paginate();
+        $comments = $this->postCommentRepository
+            ->where(['post_id'=>$postId])
+            ->paginate();
 
-        return $this->response->paginator($comment, new PostCommentTransformer());
+        return $this->response->paginator($comments, new PostCommentTransformer());
     }
 
     /**
@@ -113,15 +127,15 @@ class PostCommentController extends BaseController
      * @apiSuccessExample {json} Success-Response:
      *   HTTP/1.1 201 Created
      */
-    public function store($postId)
+    public function store($postId, Request $request)
     {
-        $post = Post::find($postId);
+        $post = $this->postRepository->find($postId);
 
         if (!$post) {
             return $this->response->errorNotFound();
         }
 
-        $validator = \Validator::make($this->request->all(), [
+        $validator = \Validator::make($request->all(), [
             'content' => 'required|string',
         ]);
 
@@ -131,11 +145,11 @@ class PostCommentController extends BaseController
 
         $user = $this->user();
 
-        $comment = new PostComment;
-        $comment->post()->associate($post);
-        $comment->user()->associate($user);
-        $comment->content = $this->request->get('content');
-        $comment->save();
+        $attributes = $request->only('content');
+        $attributes['user_id'] = $user->id;
+        $attributes['post_id'] = $postId;
+
+        $this->postCommentRepository->create($attributes);
 
         return $this->response->created();
     }
@@ -152,15 +166,16 @@ class PostCommentController extends BaseController
     public function destroy($postId, $id)
     {
         $user = $this->user();
-        $comment = $user->postComments()
-            ->where(['post_id' => $postId, 'id' => $id])
-            ->first();
+
+        $comment = $this->postCommentRepository
+            ->where(['post_id'=>$postId, 'user_id'=>$user->id])
+            ->find($id);
 
         if (!$comment) {
             return $this->response->errorNotFound();
         }
 
-        $comment->delete();
+        $this->postCommentRepository->destroy($id);
 
         return $this->response->noContent();
     }

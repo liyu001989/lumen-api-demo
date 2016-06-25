@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use ApiDemo\Models\Post;
 use ApiDemo\Transformers\PostTransformer;
 use ApiDemo\Repositories\PostRepository;
 use Illuminate\Http\Request;
 
 class PostController extends BaseController
 {
-    protected $repository;
+    private $postRepository;
 
-    public function __construct(PostRepository $repository)
+    public function __construct(PostRepository $postRepository)
     {
-        $this->repository = $repository;
+        $this->postRepository = $postRepository;
     }
     /**
      * @api {get} /posts 帖子列表(post list)
@@ -65,7 +64,7 @@ class PostController extends BaseController
      */
     public function index()
     {
-        $posts = $this->repository->paginate();
+        $posts = $this->postRepository->paginate();
 
         return $this->response->paginator($posts, new PostTransformer());
     }
@@ -122,7 +121,7 @@ class PostController extends BaseController
     public function userIndex()
     {
 
-        $posts = $this->repository
+        $posts = $this->postRepository
             ->where(['user_id' => $this->user()->id])
             ->paginate();
 
@@ -176,7 +175,7 @@ class PostController extends BaseController
      */
     public function show($id)
     {
-        $post = $this->repository->find($id);
+        $post = $this->postRepository->find($id);
 
         if (!$post) {
             return $this->response->errorNotFound();
@@ -209,7 +208,7 @@ class PostController extends BaseController
 
         $attributes = $request->only('title', 'content');
         $attributes['user_id'] = $this->user()->id;
-        $post = $this->repository->create($attributes);
+        $post = $this->postRepository->create($attributes);
 
         $location = dingo_route('v1', 'posts.show', $post->id);
         // 协议里是这么返回，把资源位置放在header里面
@@ -230,7 +229,7 @@ class PostController extends BaseController
      */
     public function update($id, Request $request)
     {
-        $post = $this->repository->find($id);
+        $post = $this->postRepository->find($id);
 
         if (!$post) {
             return $this->response->errorNotFound();
@@ -250,7 +249,7 @@ class PostController extends BaseController
             return $this->errorBadRequest($validator->messages());
         }
 
-        $this->repository->update($id, $request->only('title', 'content'));
+        $this->postRepository->update($id, $request->only('title', 'content'));
 
         return $this->response->noContent();
     }
@@ -266,7 +265,7 @@ class PostController extends BaseController
      */
     public function destroy($id)
     {
-        $post = $this->repository->find($id);
+        $post = $this->postRepository->find($id);
 
         if (!$post) {
             return $this->response->errorNotFound();
@@ -277,7 +276,7 @@ class PostController extends BaseController
             return $this->response->errorForbidden();
         }
 
-        $this->repository->destroy($id);
+        $this->postRepository->destroy($id);
 
         return $this->response->noContent();
     }
