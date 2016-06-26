@@ -23,7 +23,7 @@ $api = app('Dingo\Api\Routing\Router');
 // choose version add this in header    Accept:application/vnd.lumen.v1+json
 $api->version('v1', ['namespace' => 'App\Http\Controllers\Api\V1'], function ($api) {
 
-    # Auth
+    // Auth
     // signin
     $api->post('auth/login', [
         'as' => 'auth.login',
@@ -35,7 +35,7 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api\V1'], function ($a
         'uses' => 'AuthController@register',
     ]);
 
-    # User
+    // User
     // user list
     $api->get('users', [
         'as' => 'users.index',
@@ -47,7 +47,7 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api\V1'], function ($a
         'uses' => 'UserController@show',
     ]);
 
-    # POST
+    // POST
     // post list
     $api->get('posts', [
         'as' => 'posts.index',
@@ -59,14 +59,14 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api\V1'], function ($a
         'uses' => 'PostController@show',
     ]);
 
-    # POST COMMENT
+    // POST COMMENT
     // post comment list
     $api->get('posts/{postId}/comments', [
         'as' => 'posts.comments.index',
         'uses' => 'PostCommentController@index',
     ]);
 
-    # AUTH
+    // AUTH
     // refresh jwt token
     $api->post('auth/token/refresh', [
         'as' => 'auth.token.refresh',
@@ -76,7 +76,7 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api\V1'], function ($a
     // need authentication
     $api->group(['middleware' => 'api.auth'], function ($api) {
 
-        # USER
+        // USER
         // my detail
         $api->get('user', [
             'as' => 'user.show',
@@ -94,7 +94,7 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api\V1'], function ($a
             'uses' => 'UserController@editPassword',
         ]);
 
-        # POST
+        // POST
         // user's posts index
         $api->get('user/posts', [
             'as' => 'user.posts.index',
@@ -121,7 +121,7 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api\V1'], function ($a
             'uses' => 'PostController@destroy',
         ]);
 
-        # POST COMMENT
+        // POST COMMENT
         // create a comment
         $api->post('posts/{postId}/comments', [
             'as' => 'posts.comments.store',

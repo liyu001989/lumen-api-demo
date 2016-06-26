@@ -18,6 +18,7 @@ class AuthController extends BaseController
 
         $this->auth = $auth;
     }
+
     /**
      * @api {post} /auth/login 登录(login)
      * @apiDescription 登录(login)
@@ -51,7 +52,7 @@ class AuthController extends BaseController
         $credentials = $request->only('email', 'password');
 
         // 验证失败返回403
-        if (!$token = $this->auth->attempt($credentials)) {
+        if (! $token = $this->auth->attempt($credentials)) {
             $this->response->errorForbidden(trans('auth.failed'));
         }
 

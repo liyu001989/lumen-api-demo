@@ -3,12 +3,12 @@
 namespace App\Listeners;
 
 use Dingo\Api\Event\ResponseWasMorphed;
+
 //use Illuminate\Queue\InteractsWithQueue;
 //use Illuminate\Contracts\Queue\ShouldQueue;
 
 class AddCorsHeaderToResponse
 {
-
     public function __construct()
     {
     }

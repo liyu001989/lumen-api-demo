@@ -15,5 +15,4 @@ class BaseController extends Controller
     {
         return $this->response->array($message)->setStatusCode(400);
     }
-
 }

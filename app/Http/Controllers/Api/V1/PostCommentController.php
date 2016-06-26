@@ -105,13 +105,13 @@ class PostCommentController extends BaseController
     {
         $post = $this->postRepository->find($postId);
 
-        if (!$post) {
+        if (! $post) {
             return $this->response->errorNotFound();
         }
 
         // 研究一下cursor，这里应该无限下拉
         $comments = $this->postCommentRepository
-            ->where(['post_id'=>$postId])
+            ->where(['post_id' => $postId])
             ->paginate();
 
         return $this->response->paginator($comments, new PostCommentTransformer());
@@ -131,7 +131,7 @@ class PostCommentController extends BaseController
     {
         $post = $this->postRepository->find($postId);
 
-        if (!$post) {
+        if (! $post) {
             return $this->response->errorNotFound();
         }
 
@@ -168,10 +168,10 @@ class PostCommentController extends BaseController
         $user = $this->user();
 
         $comment = $this->postCommentRepository
-            ->where(['post_id'=>$postId, 'user_id'=>$user->id])
+            ->where(['post_id' => $postId, 'user_id' => $user->id])
             ->find($id);
 
-        if (!$comment) {
+        if (! $comment) {
             return $this->response->errorNotFound();
         }
 

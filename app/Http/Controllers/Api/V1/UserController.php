@@ -12,6 +12,7 @@ class UserController extends BaseController
     {
         $this->userRepository = $userRepository;
     }
+
     /**
      * @api {get} /users 用户列表(user list)
      * @apiDescription 用户列表(user list)
@@ -91,7 +92,7 @@ class UserController extends BaseController
             'password' => $request->get('old_password'),
         ]);
 
-        if (!$auth) {
+        if (! $auth) {
             $validator->after(function ($validator) {
                 $validator->errors()->add('old_password', trans('auth.invalid_password'));
             });
@@ -101,8 +102,8 @@ class UserController extends BaseController
             return $this->errorBadRequest($validator->messages());
         }
 
-        $password =  app('hash')->make($request->get('password'));
-        $this->userRepository->update($user->id, ['password'=>$password]);
+        $password = app('hash')->make($request->get('password'));
+        $this->userRepository->update($user->id, ['password' => $password]);
 
         return $this->response->noContent();
     }
@@ -130,7 +131,7 @@ class UserController extends BaseController
     {
         $user = $this->userRepository->find($id);
 
-        if (!$user) {
+        if (! $user) {
             return $this->response->errorNotFound();
         }
 
@@ -184,7 +185,7 @@ class UserController extends BaseController
     {
         $validator = \Validator::make($request->input(), [
             'name' => 'string|max:50',
-            'avatar' => 'url'
+            'avatar' => 'url',
         ]);
 
         if ($validator->fails()) {

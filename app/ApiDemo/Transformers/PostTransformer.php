@@ -29,6 +29,7 @@ class PostTransformer extends TransformerAbstract
 
         $comments = $post->comments()->limit($limit)->get();
         $total = $post->comments()->count();
+
         return $this->collection($comments, new PostCommentTransformer())->setMeta(['total' => $total]);
     }
 }
