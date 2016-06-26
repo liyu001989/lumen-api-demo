@@ -14,6 +14,7 @@ class PostController extends BaseController
     {
         $this->postRepository = $postRepository;
     }
+
     /**
      * @api {get} /posts 帖子列表(post list)
      * @apiDescription 帖子列表(post list)
@@ -69,7 +70,6 @@ class PostController extends BaseController
         return $this->response->paginator($posts, new PostTransformer());
     }
 
-
     /**
      * @api {get} /user/posts 我的帖子列表(my post list)
      * @apiDescription 我的帖子列表(my post list)
@@ -120,7 +120,6 @@ class PostController extends BaseController
      */
     public function userIndex()
     {
-
         $posts = $this->postRepository
             ->where(['user_id' => $this->user()->id])
             ->paginate();
@@ -177,7 +176,7 @@ class PostController extends BaseController
     {
         $post = $this->postRepository->find($id);
 
-        if (!$post) {
+        if (! $post) {
             return $this->response->errorNotFound();
         }
 
@@ -231,7 +230,7 @@ class PostController extends BaseController
     {
         $post = $this->postRepository->find($id);
 
-        if (!$post) {
+        if (! $post) {
             return $this->response->errorNotFound();
         }
 
@@ -267,7 +266,7 @@ class PostController extends BaseController
     {
         $post = $this->postRepository->find($id);
 
-        if (!$post) {
+        if (! $post) {
             return $this->response->errorNotFound();
         }
 

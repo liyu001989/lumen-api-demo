@@ -38,6 +38,7 @@ abstract class BaseRepository
     {
         $model = $this->model->newInstance($attributes);
         $model->save();
+
         return $model;
     }
 
@@ -46,6 +47,7 @@ abstract class BaseRepository
         // 感觉不太对
         $model = $this->model->find($id);
         $model->fill($attributes)->save();
+
         return $model;
     }
 

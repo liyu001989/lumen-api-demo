@@ -9,4 +9,3 @@ class UserRepository extends BaseRepository
         return 'ApiDemo\Models\User';
     }
 }
-

@@ -25,7 +25,7 @@ class AppServiceProvider extends ServiceProvider
             app('translator')->setLocale($language);
         }
 
-        /**
+        /*
          * 有些情况，比如angularjs调用后端程序并跳转到第三方的时候
          * 比如要去第三方登录或第三方付款。需要新开窗口，那么因为浏览器安全限制
          * 无法拿到服务器返回的302 再新开窗口跳转
@@ -36,6 +36,5 @@ class AppServiceProvider extends ServiceProvider
         if ($token = $request->get('authorization')) {
             $request->headers->set('Authorization', 'Beare '.$token);
         }
-
     }
 }
