@@ -70,9 +70,9 @@ dingoapi 返回的时候回触发事件ResponseWasMorphed, 所以可以响应这
 
 ## TODO
 - lumen 下邮件发送，注册验证
-- 增加Repositories
-- cursor 解决分页的问题
+- cursor 解决无限下拉的问题
 - 单元测试
+- 尝试增加mongodb的repository
 
 ## 坑
 - [https://github.com/dingo/api/issues/672](https://github.com/dingo/api/issues/672)  `transformer include`

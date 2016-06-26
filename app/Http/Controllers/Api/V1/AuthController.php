@@ -51,7 +51,7 @@ class AuthController extends BaseController
         $credentials = $request->only('email', 'password');
 
         // 验证失败返回403
-        if (!$token = $this->auth->guard('api')->attempt($credentials)) {
+        if (!$token = $this->auth->attempt($credentials)) {
             $this->response->errorForbidden(trans('auth.failed'));
         }
 
@@ -77,7 +77,7 @@ class AuthController extends BaseController
      */
     public function refreshToken()
     {
-        $token = $this->auth->guard('api')->parseToken()->refresh();
+        $token = $this->auth->parseToken()->refresh();
 
         return $this->response->array(compact('token'));
     }
@@ -126,7 +126,7 @@ class AuthController extends BaseController
         $user = $this->userRepository->create($attributes);
 
         // 用户注册事件
-        $token = $this->auth->guard('api')->fromUser($user);
+        $token = $this->auth->fromUser($user);
 
         return $this->response->array(compact('token'));
     }
