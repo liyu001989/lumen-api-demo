@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use ApiDemo\Repositories\UserRepository;
+use ApiDemo\Repositories\Contracts\UserRepositoryInterface;
 use Illuminate\Auth\AuthManager;
 use Illuminate\Http\Request;
 
@@ -12,7 +12,7 @@ class AuthController extends BaseController
 
     protected $auth;
 
-    public function __construct(UserRepository $userRepository, AuthManager $auth)
+    public function __construct(UserRepositoryInterface $userRepository, AuthManager $auth)
     {
         $this->userRepository = $userRepository;
 

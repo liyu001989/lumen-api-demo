@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Api\V1;
 
 use ApiDemo\Transformers\UserTransformer;
-use ApiDemo\Repositories\UserRepository;
+use ApiDemo\Repositories\Contracts\UserRepository;
 use Illuminate\Http\Request;
 
 class UserController extends BaseController
 {
-    public function __construct(UserRepository $userRepository)
+    public function __construct(UserRepositoryInterface $userRepository)
     {
         $this->userRepository = $userRepository;
     }

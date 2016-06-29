@@ -94,6 +94,8 @@ $app->register(App\Providers\AuthServiceProvider::class);
 $app->register(Illuminate\Redis\RedisServiceProvider::class);
 //$app->register(App\Providers\EventServiceProvider::class);
 //
+// 注入repository
+$app->register(App\Providers\RepositoryServiceProvider::class);
 
 // dingo/api
 $app->register(Dingo\Api\Provider\LumenServiceProvider::class);

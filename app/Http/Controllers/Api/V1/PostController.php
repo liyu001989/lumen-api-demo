@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Api\V1;
 
 use ApiDemo\Transformers\PostTransformer;
-use ApiDemo\Repositories\PostRepository;
+use ApiDemo\Repositories\Contracts\PostRepositoryInterface;
 use Illuminate\Http\Request;
 
 class PostController extends BaseController
 {
     private $postRepository;
 
-    public function __construct(PostRepository $postRepository)
+    public function __construct(PostRepositoryInterface $postRepository)
     {
         $this->postRepository = $postRepository;
     }
