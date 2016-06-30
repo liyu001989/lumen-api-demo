@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'invalid_password' => 'invalid password',
+    'incorrect' => 'email or password is incorrect',
 ];
