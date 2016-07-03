@@ -1,6 +1,6 @@
 <?php
 
-class AuthTest extends TestCase
+class AuthControllerTest extends TestCase
 {
     public function tearDown()
     {
@@ -19,7 +19,7 @@ class AuthTest extends TestCase
             ->assertResponseStatus(400);
 
         $authMock = Mockery::mock('Illuminate\Auth\AuthManager');
-        $authMock->shouldReceive('attempt')->once()->andReturn(false);
+        $authMock->shouldReceive('attempt')->twice()->andReturnValues([false, 123456]);
         $this->app->instance('Illuminate\Auth\AuthManager', $authMock);
 
         // 用户名密码错误
@@ -31,10 +31,6 @@ class AuthTest extends TestCase
             ->assertResponseStatus(403);
 
         // 正确
-        $authMock = Mockery::mock('Illuminate\Auth\AuthManager');
-        $authMock->shouldReceive('attempt')->once()->andReturn(123456);
-        $this->app->instance('Illuminate\Auth\AuthManager', $authMock);
-
         $this->json('POST', 'api/auth/login', ['email'=>'foobar@bar.com', 'password' => 123456])
             ->seeJsonEquals([
                 'token' => 123456,
