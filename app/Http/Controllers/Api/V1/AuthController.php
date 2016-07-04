@@ -78,7 +78,7 @@ class AuthController extends BaseController
      */
     public function refreshToken()
     {
-        $token = $this->auth->parseToken()->refresh();
+        $token = $this->auth->refresh();
 
         return $this->response->array(compact('token'));
     }
