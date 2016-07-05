@@ -23,7 +23,7 @@ class AuthControllerTest extends TestCase
         $this->app->instance('Illuminate\Auth\AuthManager', $authMock);
 
         // 用户名密码错误
-        $this->json('POST', 'api/auth/login', ['email'=>'foobar@bar.com', 'password' => 123456])
+        $this->json('POST', 'api/auth/login', ['email' => 'foobar@bar.com', 'password' => 123456])
             ->seeJsonEquals([
                 'status_code' => 403,
                 'message' =>  'email or password is incorrect',
@@ -31,7 +31,7 @@ class AuthControllerTest extends TestCase
             ->assertResponseStatus(403);
 
         // 正确
-        $this->json('POST', 'api/auth/login', ['email'=>'foobar@bar.com', 'password' => 123456])
+        $this->json('POST', 'api/auth/login', ['email' => 'foobar@bar.com', 'password' => 123456])
             ->seeJsonEquals([
                 'token' => 123456,
             ])
@@ -63,9 +63,9 @@ class AuthControllerTest extends TestCase
             ->assertResponseStatus(400);
 
         // 测试邮箱格式不正确
-        $this->json('POST', 'api/auth/register', ['email'=>'foobar', 'password' => 123456])
+        $this->json('POST', 'api/auth/register', ['email' => 'foobar', 'password' => 123456])
             ->seeJsonEquals([
-                'email' => ['The Email must be a valid email address.']
+                'email' => ['The Email must be a valid email address.'],
             ])
             ->assertResponseStatus(400);
 
@@ -93,11 +93,11 @@ class AuthControllerTest extends TestCase
             ->once()
             ->andReturn(['email not pass']);
 
-        $this->json('POST', 'api/auth/register', ['email'=>'foobar@bar.com', 'password' => 123456])
+        $this->json('POST', 'api/auth/register', ['email' => 'foobar@bar.com', 'password' => 123456])
             ->seeJsonEquals(['email not pass'])
             ->assertResponseStatus(400);
 
-        $this->json('POST', 'api/auth/register', ['email'=>'foobar@bar.com', 'password' => 123456])
+        $this->json('POST', 'api/auth/register', ['email' => 'foobar@bar.com', 'password' => 123456])
             ->seeJsonEquals([
                 'token'  => 'register-token',
             ])
