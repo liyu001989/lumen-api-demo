@@ -118,7 +118,6 @@ class AuthController extends BaseController
         $email = $request->get('email');
         $password = $request->get('password');
 
-        //$user = new User();
         $attributes = [
             'email' => $email,
             'password' => app('hash')->make($password),
