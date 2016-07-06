@@ -42,7 +42,7 @@ abstract class BaseRepository
         return $model;
     }
 
-    public function update(int $id, array $attributes)
+    public function update($id, array $attributes)
     {
         // 感觉不太对
         $model = $this->model->find($id);
