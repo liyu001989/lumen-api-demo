@@ -2,7 +2,7 @@
 
 namespace ApiDemo\Repositories\Contracts;
 
-interface RepositoryInterface
+interface RepositoryContract
 {
     public function paginate($limit = null);
 

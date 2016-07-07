@@ -2,9 +2,9 @@
 
 namespace ApiDemo\Repositories\Eloquent;
 
-use ApiDemo\Repositories\Contracts\PostRepositoryInterface;
+use ApiDemo\Repositories\Contracts\PostRepositoryContract;
 
-class PostRepository extends BaseRepository implements PostRepositoryInterface
+class PostRepository extends BaseRepository implements PostRepositoryContract
 {
     public function model()
     {

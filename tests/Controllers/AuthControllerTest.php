@@ -77,9 +77,9 @@ class AuthControllerTest extends TestCase
         $this->app->instance('Illuminate\Auth\AuthManager', $authMock);
 
         //mock user repository
-        $userMock = Mockery::mock('ApiDemo\Repositories\Contracts\UserRepositoryInterface');
+        $userMock = Mockery::mock('ApiDemo\Repositories\Contracts\UserRepositoryContract');
         $userMock->shouldReceive('create')->once();
-        $this->app->instance('ApiDemo\Repositories\Contracts\UserRepositoryInterface', $userMock);
+        $this->app->instance('ApiDemo\Repositories\Contracts\UserRepositoryContract', $userMock);
 
         // validate,验证数据库unique，所以需要mock
         // 两次，第一次返回错误，第二次正确

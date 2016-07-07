@@ -2,9 +2,9 @@
 
 namespace ApiDemo\Repositories\Eloquent;
 
-use ApiDemo\Repositories\Contracts\UserRepositoryInterface;
+use ApiDemo\Repositories\Contracts\UserRepositoryContract;
 
-class UserRepository extends BaseRepository implements UserRepositoryInterface
+class UserRepository extends BaseRepository implements UserRepositoryContract
 {
     public function model()
     {
