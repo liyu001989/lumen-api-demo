@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\V1;
 
 use ApiDemo\Transformers\UserTransformer;
-use ApiDemo\Repositories\Contracts\UserRepository;
+use ApiDemo\Repositories\Contracts\UserRepositoryInterface;
 use Illuminate\Http\Request;
 
 class UserController extends BaseController
