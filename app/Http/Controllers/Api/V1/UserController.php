@@ -44,11 +44,11 @@ class UserController extends BaseController
      *       }
      *     }
      */
-    public function index()
+    public function index(UserTransformer $userTransformer)
     {
         $users = $this->userRepository->paginate();
 
-        return $this->response->paginator($users, new UserTransformer());
+        return $this->response->paginator($users, $userTransformer);
     }
 
     /**
