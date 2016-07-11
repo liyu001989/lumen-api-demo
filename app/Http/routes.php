@@ -89,7 +89,7 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api\V1'], function ($a
             'uses' => 'UserController@patch',
         ]);
         // update my password
-        $api->post('user/password', [
+        $api->put('user/password', [
             'as' => 'user.password.update',
             'uses' => 'UserController@editPassword',
         ]);

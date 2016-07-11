@@ -1,6 +1,6 @@
 # lumen-api-demo
 
-一个用lumen5.2 和dingoapi 写api的例子
+应该是一个比较完整的lumen api例子了，思路跟laravel完全一样，使用laravel开发起来会更爽。这个例子使用了`dingo/api`写rest风格的api，jwt实现登录，功能上很简单，登录，注册，发帖，评论，写了单元测试，还没写...
 
 lumen5.1看[这里](https://github.com/liyu001989/lumen-api-demo/tree/5.1) (不更新了)
 

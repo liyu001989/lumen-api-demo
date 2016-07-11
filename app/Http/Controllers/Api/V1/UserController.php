@@ -52,7 +52,7 @@ class UserController extends BaseController
     }
 
     /**
-     * @api {post} /user/password 修改密码(edit password)
+     * @api {put} /user/password 修改密码(edit password)
      * @apiDescription 修改密码(edit password)
      * @apiGroup user
      * @apiPermission JWT
@@ -85,6 +85,10 @@ class UserController extends BaseController
             'password_confirmation' => 'required|same:password',
         ]);
 
+        if ($validator->fails()) {
+            return $this->errorBadRequest($validator->messages());
+        }
+
         $user = $request->user();
 
         $auth = \Auth::once([
@@ -93,14 +97,9 @@ class UserController extends BaseController
         ]);
 
         if (! $auth) {
-            $validator->after(function ($validator) {
-                $validator->errors()->add('old_password', trans('auth.invalid_password'));
-            });
+            return $this->response->errorUnauthorized();
         }
 
-        if ($validator->fails()) {
-            return $this->errorBadRequest($validator->messages());
-        }
 
         $password = app('hash')->make($request->get('password'));
         $this->userRepository->update($user->id, ['password' => $password]);
