@@ -6,6 +6,8 @@
 
 lumen5.1看[这里](https://github.com/liyu001989/lumen-api-demo/tree/5.1) (不更新了)
 
+[english readme](./EN_README.md)
+
 
 ## USEFUL LINK
 - dingo/api [https://github.com/dingo/api](https://github.com/dingo/api)
