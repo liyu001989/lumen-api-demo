@@ -52,7 +52,7 @@ class UserControllerTest extends TestCase
         $params = [
             'old_password' => 123456,
             'password' => 123456,
-            'password_confirmation' => 654321
+            'password_confirmation' => 654321,
         ];
 
         $this->PUT('api/user/password', $params)
@@ -66,7 +66,7 @@ class UserControllerTest extends TestCase
         $params = [
             'old_password' => 123456,
             'password' => 12341234,
-            'password_confirmation' => 12341234
+            'password_confirmation' => 12341234,
         ];
 
         $onceResult = false;
@@ -74,6 +74,7 @@ class UserControllerTest extends TestCase
             ->twice()
             ->andReturnUsing(function ($params) use (&$onceAttribute, &$onceResult) {
                 $onceAttribute = $params;
+
                 return $onceResult;
             });
 
@@ -85,9 +86,10 @@ class UserControllerTest extends TestCase
         $updateResult = [];
         $userMock = Mockery::mock('ApiDemo\Repositories\Contracts\UserRepositoryContract');
         $userMock->shouldReceive('update')->once()->andReturnUsing(function ($id, $attributes) use (&$updateResult) {
-           $updateResult = $attributes;
-           $updateResult['id'] = $id;
-           return true;
+            $updateResult = $attributes;
+            $updateResult['id'] = $id;
+
+            return true;
         });
         $this->app->instance('ApiDemo\Repositories\Contracts\UserRepositoryContract', $userMock);
 
@@ -145,7 +147,7 @@ class UserControllerTest extends TestCase
         // 参数不正确
         $params = [
             'name' => [1],
-            'avatar' => 'foobar'
+            'avatar' => 'foobar',
         ];
 
         $this->PATCH('api/user', $params)
@@ -159,7 +161,7 @@ class UserControllerTest extends TestCase
         // 名字过长
         $params = [
             'name' => str_random(51),
-            'avatar' => 'http://www.lyyw.com'
+            'avatar' => 'http://www.lyyw.com',
         ];
 
         $this->PATCH('api/user', $params)
@@ -172,8 +174,9 @@ class UserControllerTest extends TestCase
         $updateResult = [];
         $userMock = Mockery::mock('ApiDemo\Repositories\Contracts\UserRepositoryContract');
         $userMock->shouldReceive('update')->once()->andReturnUsing(function ($id, $attributes) use (&$updateResult) {
-           $updateResult = $attributes;
-           return true;
+            $updateResult = $attributes;
+
+            return true;
         });
         $this->app->instance('ApiDemo\Repositories\Contracts\UserRepositoryContract', $userMock);
 
@@ -207,13 +210,13 @@ class UserControllerTest extends TestCase
         $authMiddleware = Mockery::mock('Dingo\Api\Http\Middleware\Auth');
         $authMiddleware->shouldReceive('handle')->andReturnUsing(function ($request, $next) {
             return $next($request);
-        }) ;
+        });
         $this->app->instance('Dingo\Api\Http\Middleware\Auth', $authMiddleware);
 
         // 返回假用户
         $userMock = Mockery::mock('Dingo\Api\Auth\Auth');
         $userMock->shouldReceive('user')
-            ->andReturn((object)['email'=>'foo@bar.com', 'id' => 1]);
+            ->andReturn((object) ['email' => 'foo@bar.com', 'id' => 1]);
         $this->app->instance('Dingo\Api\Auth\Auth', $userMock);
     }
 }

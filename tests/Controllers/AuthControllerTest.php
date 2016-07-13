@@ -15,7 +15,7 @@ class AuthControllerTest extends TestCase
         $this->json('POST', 'api/auth/login')
             ->seeJsonStructure([
                 'email',
-                'password', 
+                'password',
             ])
             ->assertResponseStatus(400);
 
@@ -23,8 +23,9 @@ class AuthControllerTest extends TestCase
         $attemptResult = [];
         $attempValue = false;
         $authMock = Mockery::mock('Illuminate\Auth\AuthManager');
-        $authMock->shouldReceive('attempt')->andReturnUsing(function($credentials) use (&$attemptResult, &$attempValue) {
-            $attemptResult  = $credentials;
+        $authMock->shouldReceive('attempt')->andReturnUsing(function ($credentials) use (&$attemptResult, &$attempValue) {
+            $attemptResult = $credentials;
+
             return $attempValue ? 'login-token' : false;
         });
         $this->app->instance('Illuminate\Auth\AuthManager', $authMock);
@@ -33,7 +34,7 @@ class AuthControllerTest extends TestCase
         $params = [
             'email' => 'foo@bar.com',
             'password' => '123456',
-            'foo' => 'bar'
+            'foo' => 'bar',
         ];
 
         $this->json('POST', 'api/auth/login', $params)
@@ -112,7 +113,7 @@ class AuthControllerTest extends TestCase
         $createResult = [];
         //mock user repository
         $userMock = Mockery::mock('ApiDemo\Repositories\Contracts\UserRepositoryContract');
-        $userMock->shouldReceive('create')->andReturnUsing(function($attributes) use (&$createResult) {
+        $userMock->shouldReceive('create')->andReturnUsing(function ($attributes) use (&$createResult) {
             return $createResult = $attributes;
         });
         $this->app->instance('ApiDemo\Repositories\Contracts\UserRepositoryContract', $userMock);
