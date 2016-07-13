@@ -1,22 +1,24 @@
 # lumen-api-demo
 
+这是一个比较完整用lumen写的的rest api例子，如果你正在做相同的事，那么这个例子或许能帮助你，
+
 应该是一个比较完整的lumen api例子了，思路跟laravel完全一样，使用laravel开发起来会更爽。这个例子使用了`dingo/api`写rest风格的api，jwt实现登录，功能上很简单，登录，注册，发帖，评论，写了单元测试，还没写...
 
 lumen5.1看[这里](https://github.com/liyu001989/lumen-api-demo/tree/5.1) (不更新了)
 
 
-## 相关文档
+## USEFUL LINK
 - dingo/api [https://github.com/dingo/api](https://github.com/dingo/api)
 - json-web-token(jwt) [https://github.com/tymondesigns/jwt-auth](https://github.com/tymondesigns/jwt-auth)
 - transformer [fractal](http://fractal.thephpleague.com/)
-- doc生成工具 [apidocjs](http://apidocjs.com/)
-- api规范 [jsonapi.org](http://jsonapi.org/format/)
-- rest测试工具 [postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en)
+- apidoc [apidocjs](http://apidocjs.com/)
+- rest api [jsonapi.org](http://jsonapi.org/format/)
+- debug rest api [postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en)
 - 参考文章 [http://oomusou.io/laravel/laravel-architecture](http://oomusou.io/laravel/laravel-architecture/)
 - 在线api文档 [http://lumen-new.lyyw.info/apidoc](http://lumen-new.lyyw.info/apidoc)
 
 
-## usage
+## USAGE
 ```
 $ git clone git@github.com:liyu001989/lumen-api-demo.git
 $ composer install
@@ -43,7 +45,7 @@ $ api文档在public/apidoc里面, 也可以看上面的 `在线api文档`
 
         "laravel/lumen-framework": "5.2.*",
         "vlucas/phpdotenv": "~2.2" // 这是个坑啊
-
+      
         将5.2的composer.json拿过来对比一下吧
 
 - fix bootstrap/app.php

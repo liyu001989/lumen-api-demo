@@ -89,7 +89,7 @@ class UserController extends BaseController
             return $this->errorBadRequest($validator->messages());
         }
 
-        $user = $request->user();
+        $user = $this->user();
 
         $auth = \Auth::once([
             'email' => $user->email,
@@ -99,7 +99,6 @@ class UserController extends BaseController
         if (! $auth) {
             return $this->response->errorUnauthorized();
         }
-
 
         $password = app('hash')->make($request->get('password'));
         $this->userRepository->update($user->id, ['password' => $password]);
@@ -156,9 +155,9 @@ class UserController extends BaseController
      *       }
      *     }
      */
-    public function userShow(Request $request)
+    public function userShow()
     {
-        return $this->response->item($request->user(), new UserTransformer());
+        return $this->response->item($this->user(), new UserTransformer());
     }
 
     /**
@@ -191,7 +190,7 @@ class UserController extends BaseController
             return $this->errorBadRequest($validator->messages());
         }
 
-        $user = $request->user();
+        $user = $this->user();
         $attributes = array_filter($request->only('name', 'avatar'));
 
         if ($attributes) {

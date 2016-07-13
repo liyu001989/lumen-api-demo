@@ -11,10 +11,11 @@ class AuthControllerTest extends TestCase
     public function testLogin()
     {
         // 测试没有传参数
+        // 只验证是否有这个key就行，不用管具体报错
         $this->json('POST', 'api/auth/login')
-            ->seeJsonEquals([
-                'email' => ['The Email field is required.'],
-                'password' => ['The password field is required.'],
+            ->seeJsonStructure([
+                'email',
+                'password', 
             ])
             ->assertResponseStatus(400);
 
