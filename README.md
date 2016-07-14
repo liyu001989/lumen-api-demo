@@ -70,6 +70,10 @@ dingoapi 返回的时候回触发事件ResponseWasMorphed, 所以可以响应这
 
 我是写了一个全局的middleware。
 
+### repository
+
+我随便写的，`rinvex/repository`和`prettus/l5-repository` 这两个库都不错，大家可以试试
+
 ## TODO
 - lumen 下邮件发送，注册验证
 - cursor 解决无限下拉的问题
