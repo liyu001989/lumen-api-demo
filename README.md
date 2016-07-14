@@ -1,12 +1,10 @@
 # lumen-api-demo
 
-这是一个比较完整用lumen写的的rest api例子，如果你正在做相同的事，那么这个例子或许能帮助你，
-
-应该是一个比较完整的lumen api例子了，思路跟laravel完全一样，使用laravel开发起来会更爽。这个例子使用了`dingo/api`写rest风格的api，jwt实现登录，功能上很简单，登录，注册，发帖，评论，写了单元测试，还没写...
+这是一个比较完整用lumen 5.2写的的REST api例子，如果你正在做相同的事，那么这个例子或许能帮助你。这个例子使用了`dingo/api`写rest风格的api，jwt实现登录，功能上很简单，登录，注册，发帖，评论，还写了单元测试。
 
 lumen5.1看[这里](https://github.com/liyu001989/lumen-api-demo/tree/5.1) (不更新了)
 
-[english readme](./EN_README.md)
+[ENGLISH README](./EN_README.md)
 
 
 ## USEFUL LINK
@@ -70,7 +68,7 @@ lumen 5.2取消了session，没有了auth的实例，所以使用jwt的时候需
 
 dingoapi 返回的时候回触发事件ResponseWasMorphed, 所以可以响应这个事件，增加header。
 
-但是这样就不能控制哪些路由需要这些header，所以还是写在middleware里面比较好
+我是写了一个全局的middleware。
 
 ## TODO
 - lumen 下邮件发送，注册验证
