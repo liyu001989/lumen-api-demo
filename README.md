@@ -75,10 +75,9 @@ dingoapi 返回的时候回触发事件ResponseWasMorphed, 所以可以响应这
 我随便写的，`rinvex/repository`和`prettus/l5-repository` 这两个库都不错，大家可以试试
 
 ## TODO
-- lumen 下邮件发送，注册验证
-- cursor 解决无限下拉的问题
-- 单元测试
-- 尝试增加mongodb的repository
+- [] lumen 下邮件发送，注册验证
+- [] cursor 解决无限下拉的问题
+- [x] 单元测试
 
 ## 坑
 - [https://github.com/dingo/api/issues/672](https://github.com/dingo/api/issues/672)  `transformer include`
