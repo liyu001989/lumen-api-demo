@@ -40,6 +40,32 @@ $ php artisan migrate
 $ generate api doc like this "apidoc -i App/Http/Controller/Api/v1 -o public/apidoc"
 ```
 
+
+
+## REST API DESIGN
+
+just a demo for rest api design
+
+```
+    demo： user, post, comment
+    get    /api/posts              	 post index
+    post   /api/posts              	 create a post
+    get    /api/posts/5            	 post detail
+    put    /api/posts/5            	 replace a post
+    patch  /api/posts/5            	 update part of a post
+    delete /api/posts/5            	 delete a post
+    get    /api/posts/5/comments     comment list of a post
+    post   /api/posts/5/comments     add a comment
+    get    /api/posts/5/comments/8   comment detail
+    put    /api/posts/5/comments/8   replace a comment
+    patch  /api/posts/5/comments/8   update part of a comment
+    delete /api/posts/5/comments/8   delete a comment
+    get    /api/users/4/posts        post list of a user
+    get    /api/user/posts           post list of current user
+```
+
+##
+
 ## Problems and Solutions
 
 ### lumen 5.1 upgrade to  5.2
@@ -76,6 +102,12 @@ There is no session and auth guard in lumen 5.2, so attention `config/auth.php`.
 
 
 - add a global cors middleware
+
+### repository
+
+I achieved myself, there are two good repository packages you can try
+
+`rinvex/repository`  and  `prettus/l5-repository`
 
 ## TODO
 

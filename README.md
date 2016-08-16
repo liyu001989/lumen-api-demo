@@ -37,6 +37,26 @@ $ 生成文档我是这么写的 apidoc -i App/Http/Controller/Api/v1 -o public/
 $ api文档在public/apidoc里面, 也可以看上面的 `在线api文档`
 ```
 
+
+## REST API DESIGN
+大概举个例子说明一下rest api吧，看了很多人设计的api，其实都不太对。
+
+        例子： 用户，帖子，评论
+        get    /api/posts              	 帖子列表
+        post   /api/posts              	 创建帖子
+        get    /api/posts/5            	 id为5的帖子详情
+        put    /api/posts/5            	 替换帖子5的全部信息
+        patch  /api/posts/5            	 修改部分帖子5的信息
+        delete /api/posts/5            	 删除帖子5
+        get    /api/posts/5/comments     帖子5的评论列表
+        post   /api/posts/5/comments     添加评论
+        get    /api/posts/5/comments/8   id为5的帖子的id为8的评论详情
+        put    /api/posts/5/comments/8   替换帖子评论内容
+        patch  /api/posts/5/comments/8   部分更新帖子评论
+        delete /api/posts/5/comments/8   删除某个评论
+        get    /api/users/4/posts        id为4的用户的帖子列表
+        get    /api/user/posts           当前用户的帖子列表
+
 ## 问题总结
 
 ### lumen 5.1 upgrade to  5.2
