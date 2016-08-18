@@ -15,7 +15,7 @@ lumen5.1看[这里](https://github.com/liyu001989/lumen-api-demo/tree/5.1) (不�
 - rest api [jsonapi.org](http://jsonapi.org/format/)
 - debug rest api [postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en)
 - 参考文章 [http://oomusou.io/laravel/laravel-architecture](http://oomusou.io/laravel/laravel-architecture/)
-- 在线api文档 [http://lumen-new.lyyw.info/apidoc](http://lumen-new.lyyw.info/apidoc)
+- 在线api文档 [http://lumen-new.lyyw.info/apidoc](https://lumen-new.lyyw.info/apidoc)
 
 
 ## USAGE
