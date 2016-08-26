@@ -123,6 +123,18 @@ $app->singleton(Illuminate\Auth\AuthManager::class, function ($app) {
     return $app->make('auth');
 });
 
+
+// 设置 transformer 的 serializer
+//$app['Dingo\Api\Transformer\Factory']->setAdapter(function ($app) {
+    //$fractal = new League\Fractal\Manager;
+    //$serializer = new League\Fractal\Serializer\ArraySerializer();
+    ////$serializer = new League\Fractal\Serializer\JsonApiSerializer();
+    ////$serializer = new ApiDemo\Serializers\NoDataArraySerializer();
+    //$fractal->setSerializer($serializer);
+    //return new Dingo\Api\Transformer\Adapter\Fractal($fractal);
+//});
+
+
 /*
 |--------------------------------------------------------------------------
 | Load The Application Routes

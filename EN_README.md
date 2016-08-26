@@ -103,6 +103,22 @@ There is no session and auth guard in lumen 5.2, so attention `config/auth.php`.
 
 - add a global cors middleware
 
+### transformer
+
+dingo/api use [Fractal](http://fractal.thephpleague.com/) to transformer resouses，fractal provider 3 serializer,Array,DataArray,JsonApi.more details at here [http://fractal.thephpleague.com/serializers/](http://fractal.thephpleague.com/serializers/)。DataArray is default.You can set your own serizlizer like this：
+
+        see bootstrap/app.php
+        $app['Dingo\Api\Transformer\Factory']->setAdapter(function ($app) {
+            $fractal = new League\Fractal\Manager;
+            // $serializer = new League\Fractal\Serializer\JsonApiSerializer();
+            $serializer = new League\Fractal\Serializer\ArraySerializer();
+            // $serializer = new ApiDemo\Serializers\NoDataArraySerializer();
+            $fractal->setSerializer($serializer);,
+            return new Dingo\Api\Transformer\Adapter\Fractal($fractal);
+        });
+
+I think default DataArray is good enough.
+
 ### repository
 
 I achieved myself, there are two good repository packages you can try
@@ -111,10 +127,9 @@ I achieved myself, there are two good repository packages you can try
 
 ## TODO
 
-- register send a verify email
-- use cursor to fix paginate problem
-- phpunit
-- try to add  mongodb repositories
+- [ ] register send a verify email
+- [ ] use cursor to fix paginate problem
+- [x] phpunit
 
 ## carefully
 
