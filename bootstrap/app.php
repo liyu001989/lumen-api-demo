@@ -103,14 +103,6 @@ $app->register(Dingo\Api\Provider\LumenServiceProvider::class);
 //jwt
 $app->register(Tymon\JWTAuth\Providers\LumenServiceProvider::class);
 
-// fractal use other serializer [ArraySerializer, JsonApiSerializer, CustomSerialzer]
-// 都尝试了一下，还是data,meta这种数据结构最好
-//$app['Dingo\Api\Transformer\Factory']->setAdapter(function ($app) {
-    //$fractal = new League\Fractal\Manager;
-    //$fractal->setSerializer(new League\Fractal\Serializer\ArraySerializer());
-    //return new Dingo\Api\Transformer\Adapter\Fractal($fractal);
-//});
-
 // email 或者放在 provider里面
 //$app->register(Illuminate\Mail\MailServiceProvider::class);
 
