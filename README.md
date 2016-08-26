@@ -39,7 +39,7 @@ $ api文档在public/apidoc里面, 也可以看上面的 `在线api文档`
 
 
 ## REST API DESIGN
-大概举个例子说明一下rest api吧，看了很多人设计的api，其实都不太对。
+大概举个例子说明一下rest api吧，看了很多人设计的api，感觉都不太好。并不是定义一个路由，返回个值就叫rest api。
 
         例子： 用户，帖子，评论
         get    /api/posts              	 帖子列表
