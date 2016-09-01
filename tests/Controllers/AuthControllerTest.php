@@ -12,7 +12,7 @@ class AuthControllerTest extends TestCase
     {
         // 测试没有传参数
         // 只验证是否有这个key就行，不用管具体报错
-        $this->json('POST', 'api/auth/login')
+        $this->json('POST', 'api/authorization')
             ->seeJsonStructure([
                 'email',
                 'password',
@@ -37,7 +37,7 @@ class AuthControllerTest extends TestCase
             'foo' => 'bar',
         ];
 
-        $this->json('POST', 'api/auth/login', $params)
+        $this->json('POST', 'api/authorization', $params)
             ->seeJsonEquals([
                 'status_code' => 403,
                 'message' =>  'email or password is incorrect',
@@ -53,7 +53,7 @@ class AuthControllerTest extends TestCase
 
         // 正确登录
         $attempValue = true;
-        $this->json('POST', 'api/auth/login', $params)
+        $this->json('POST', 'api/authorization', $params)
             ->seeJsonEquals([
                 'token' => 'login-token',
             ])
@@ -66,7 +66,7 @@ class AuthControllerTest extends TestCase
         $authMock->shouldReceive('refresh')->once()->andReturn('refresh-token');
         $this->app->instance('Illuminate\Auth\AuthManager', $authMock);
 
-        $this->json('POST', 'api/auth/token/refresh')
+        $this->json('POST', 'api/auth/token/new')
             ->seeJsonEquals([
                 'token' => 'refresh-token',
             ])
@@ -76,7 +76,7 @@ class AuthControllerTest extends TestCase
     public function testRegister()
     {
         //测试没有邮箱和密码
-        $this->json('POST', 'api/auth/register')
+        $this->json('POST', 'api/users')
             ->seeJsonEquals([
                 'email' => ['The Email field is required.'],
                 'password'  => ['The password field is required.'],
@@ -85,7 +85,7 @@ class AuthControllerTest extends TestCase
 
         // 测试邮箱格式不正确
         $params = ['email' => 'foobar', 'password' => 123456];
-        $this->json('POST', 'api/auth/register', $params)
+        $this->json('POST', 'api/users', $params)
             ->seeJsonEquals([
                 'email' => ['The Email must be a valid email address.'],
             ])
@@ -127,11 +127,11 @@ class AuthControllerTest extends TestCase
         $params = ['email' => 'foo@bar.com', 'password' => 123456];
 
         // 使用 $this->json 调用 request->get() 取不到值，有空研究一下
-        $this->post('api/auth/register', $params)
+        $this->post('api/users', $params)
             ->seeJsonEquals(['email not pass'])
             ->assertResponseStatus(400);
 
-        $this->post('api/auth/register', $params)
+        $this->post('api/users', $params)
             ->seeJsonEquals([
                 'token'  => 'register-token',
             ])

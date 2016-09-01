@@ -21,17 +21,20 @@ $api = app('Dingo\Api\Routing\Router');
 
 // v1 version API
 // choose version add this in header    Accept:application/vnd.lumen.v1+json
-$api->version('v1', ['namespace' => 'App\Http\Controllers\Api\V1'], function ($api) {
+$api->version('v1', [
+        'namespace' => 'App\Http\Controllers\Api\V1',
+        'middleware' => ['cors']
+    ], function ($api) {
 
     // Auth
-    // signin
-    $api->post('auth/login', [
+    // login
+    $api->post('authorization', [
         'as' => 'auth.login',
         'uses' => 'AuthController@login',
     ]);
-    // signup
-    $api->post('auth/register', [
-        'as' => 'auth.register',
+    // register
+    $api->post('users', [
+        'as' => 'users.store',
         'uses' => 'AuthController@register',
     ]);
 
@@ -68,8 +71,8 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api\V1'], function ($a
 
     // AUTH
     // refresh jwt token
-    $api->post('auth/token/refresh', [
-        'as' => 'auth.token.refresh',
+    $api->post('auth/token/new', [
+        'as' => 'auth.token.new',
         'uses' => 'AuthController@refreshToken',
     ]);
 

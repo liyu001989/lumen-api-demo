@@ -20,7 +20,7 @@ class AuthController extends BaseController
     }
 
     /**
-     * @api {post} /auth/login 登录(login)
+     * @api {post} /authorization 登录(login)
      * @apiDescription 登录(login)
      * @apiGroup Auth
      * @apiPermission none
@@ -60,7 +60,7 @@ class AuthController extends BaseController
     }
 
     /**
-     * @api {post} /auth/token/refresh 刷新token(refresh token)
+     * @api {post} /auth/token/new 刷新token(refresh token)
      * @apiDescription 刷新token(refresh token)
      * @apiGroup Auth
      * @apiPermission JWT
@@ -84,7 +84,7 @@ class AuthController extends BaseController
     }
 
     /**
-     * @api {post} /auth/register 注册(register)
+     * @api {post} /users 注册(register)
      * @apiDescription 注册(register)
      * @apiGroup Auth
      * @apiPermission none

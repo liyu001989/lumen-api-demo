@@ -199,4 +199,32 @@ class UserController extends BaseController
 
         return $this->response->item($user, new UserTransformer());
     }
+
+
+    public function store(Request $request)
+    {
+        $validator = \Validator::make($request->input(), [
+            'email' => 'required|email|unique:users',
+            'password' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->errorBadRequest($validator->messages());
+        }
+
+        $email = $request->get('email');
+        $password = $request->get('password');
+
+        $attributes = [
+            'email' => $email,
+            'password' => app('hash')->make($password),
+        ];
+
+        $user = $this->userRepository->create($attributes);
+
+        // 用户注册事件
+        $token = $this->auth->fromUser($user);
+
+        return $this->response->array(compact('token'));
+    }
 }
