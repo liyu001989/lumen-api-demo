@@ -11,6 +11,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+
+
         $this->app->singleton('mailer', function ($app) {
             $app->configure('services');
 
@@ -25,6 +27,13 @@ class AppServiceProvider extends ServiceProvider
             app('translator')->setLocale($language);
         }
 
+        // cors 增加对options的处理
+        if ($request->isMethod('OPTIONS')) {
+            app()->options($request->path(), function() {
+                $headers = config('cors');
+                return response('', 200, $headers);
+            });
+        }
         /*
          * 有些情况，比如angularjs调用后端程序并跳转到第三方的时候
          * 比如要去第三方登录或第三方付款。需要新开窗口，那么因为浏览器安全限制

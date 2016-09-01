@@ -37,6 +37,8 @@ $app->withEloquent();
 $app->configure('jwt');
 // mail
 $app->configure('mail');
+// cors 配置
+$app->configure('cors');
 
 /*
 |--------------------------------------------------------------------------
@@ -71,11 +73,11 @@ $app->singleton(
 */
 
 $app->middleware([
-    App\Http\Middleware\Cors::class,
 ]);
 
 $app->routeMiddleware([
     'auth' => App\Http\Middleware\Authenticate::class,
+    'cors' => App\Http\Middleware\Cors::class,
 ]);
 
 /*
