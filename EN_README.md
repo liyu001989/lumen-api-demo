@@ -96,13 +96,6 @@ There is no session and auth guard in lumen 5.2, so attention `config/auth.php`.
 - add `mail.php` `services.php` in config, just copy them from laravel
 - add `MAIL_DRIVER` in env
 
-### cors
-
-- dingoapi will trigger event ResponseWasMorphed when return a response, so we can add headers use this event。
-
-
-- add a global cors middleware
-
 ### transformer
 
 dingo/api use [Fractal](http://fractal.thephpleague.com/) to transformer resouses，fractal provider 3 serializer,Array,DataArray,JsonApi.more details at here [http://fractal.thephpleague.com/serializers/](http://fractal.thephpleague.com/serializers/)。DataArray is default.You can set your own serizlizer like this：

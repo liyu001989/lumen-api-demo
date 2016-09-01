@@ -85,12 +85,6 @@ lumen 5.2 取消了session，没有了 auth 的实例，所以使用jwt的时候
 - 增加配置 mail 和 services, 从 laravel 项目里面 cp 过来
 - 在 env 中增加 `MAIL_DRIVER`，账户，密码等配置
 
-### cors
-
-dingoapi 返回的时候回触发事件 ResponseWasMorphed, 所以可以响应这个事件，增加 header。
-
-我是写了一个全局的 middleware。
-
 ### transformer 使用
 
 dingo/api 使用了 [Fractal](http://fractal.thephpleague.com/) 做数据转换，fractal 提供了3种基础的序列化格式，Array，DataArray，JsonApi，在这里有详细的说明 [http://fractal.thephpleague.com/serializers/](http://fractal.thephpleague.com/serializers/)。DataArray 是默认的，也就是所有资源一定有data和meta。当然也可以按下面这样自定义：
