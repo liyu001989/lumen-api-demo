@@ -1,11 +1,14 @@
 # lumen-api-demo
 
-这是一个比较完整用 lumen 5.2 写的的 REST API 例子，如果你正在做相同的事，那么这个例子或许能帮助你。这个例子使用了 `dingo/api` 写 rest 风格的 api，jwt 实现登录，功能上很简单，登录，注册，发帖，评论，还写了单元测试。
+这是一个比较完整用 lumen 5.3 写的的 REST API 例子，如果你正在做相同的事，那么这个例子或许能帮助你。这个例子使用了 `dingo/api` 写 rest 风格的 api，jwt 实现登录，功能上很简单，登录，注册，发帖，评论，还写了单元测试。
 
 lumen5.1看[这里](https://github.com/liyu001989/lumen-api-demo/tree/5.1) (不更新了)
 
+lumen5.2看[这里](https://github.com/liyu001989/lumen-api-demo/tree/5.2)
+
 [ENGLISH README](./EN_README.md)
 
+升级到 5.3 后单元测试错误，应该是容器的问题，慢慢解决吧
 
 ## USEFUL LINK
 - dingo/api [https://github.com/dingo/api](https://github.com/dingo/api)
