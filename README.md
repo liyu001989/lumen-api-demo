@@ -9,11 +9,12 @@ lumen5.1看[这里](https://github.com/liyu001989/lumen-api-demo/tree/5.1) (不�
 
 ## USEFUL LINK
 - dingo/api [https://github.com/dingo/api](https://github.com/dingo/api)
+- dingo api 中文文档 [dingo-api-wiki-zh](https://github.com/liyu001989/dingo-api-wiki-zh)
 - json-web-token(jwt) [https://github.com/tymondesigns/jwt-auth](https://github.com/tymondesigns/jwt-auth)
 - transformer [fractal](http://fractal.thephpleague.com/)
-- apidoc [apidocjs](http://apidocjs.com/)
-- rest api [jsonapi.org](http://jsonapi.org/format/)
-- debug rest api [postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en)
+- apidoc 生成在线文档 [apidocjs](http://apidocjs.com/)
+- rest api 参考规范 [jsonapi.org](http://jsonapi.org/format/)
+- api 调试工具 [postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en)
 - 参考文章 [http://oomusou.io/laravel/laravel-architecture](http://oomusou.io/laravel/laravel-architecture/)
 - 在线api文档 [http://lumen-new.lyyw.info/apidoc](https://lumen-new.lyyw.info/apidoc)
 
@@ -40,7 +41,9 @@ $ api文档在public/apidoc里面, 也可以看上面的 `在线api文档`
 
 ## REST API DESIGN
 
-大概举个例子说明一下 rest api 吧，看了很多人设计的 api，感觉都不太好。并不是定义一个路由，返回个值就叫 rest api。
+大概举个例子说明一下 rest api 吧，看了很多人设计的 api，感觉都好难受。
+
+github 的 api 真的很有参考价值 [github-rest-api](https://developer.github.com/v3/)
 
         例子： 用户，帖子，评论
         get    /api/posts              	 帖子列表
@@ -113,7 +116,7 @@ dingo/api 使用了 [Fractal](http://fractal.thephpleague.com/) 做数据转换�
 
 ## 坑
 - [https://github.com/dingo/api/issues/672](https://github.com/dingo/api/issues/672)  `transformer include`
-- 如果 .env 的某个值中有空格会报错 log not found，laravel 没有这个问题
+- 如果 .env 的某个值中有空格会报错 log not found。env 中的值有空格需要引号包裹
 
 ## License
 
