@@ -25,8 +25,6 @@ $app = new Laravel\Lumen\Application(
 
 // phpunit 报错？？？
 $app->withFacades();
-// jwt
-//class_alias('Tymon\JWTAuth\Facades\JWTAuth', 'JWTAuth');
 //mail
 //class_alias('Illuminate\Support\Facades\Mail', 'mail');
 
@@ -98,13 +96,10 @@ $app->register(Illuminate\Redis\RedisServiceProvider::class);
 //
 // 注入repository
 $app->register(App\Providers\RepositoryServiceProvider::class);
-
 // dingo/api
 $app->register(Dingo\Api\Provider\LumenServiceProvider::class);
-
 //jwt
 $app->register(Tymon\JWTAuth\Providers\LumenServiceProvider::class);
-
 // email 或者放在 provider里面
 //$app->register(Illuminate\Mail\MailServiceProvider::class);
 

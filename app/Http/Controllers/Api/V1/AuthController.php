@@ -10,13 +10,9 @@ class AuthController extends BaseController
 {
     protected $userRepository;
 
-    protected $auth;
-
-    public function __construct(UserRepositoryContract $userRepository, AuthManager $auth)
+    public function __construct(UserRepositoryContract $userRepository)
     {
         $this->userRepository = $userRepository;
-
-        $this->auth = $auth;
     }
 
     /**
@@ -52,7 +48,7 @@ class AuthController extends BaseController
         $credentials = $request->only('email', 'password');
 
         // 验证失败返回403
-        if (! $token = $this->auth->attempt($credentials)) {
+        if (! $token = \Auth::attempt($credentials)) {
             $this->response->errorForbidden(trans('auth.incorrect'));
         }
 
@@ -78,7 +74,7 @@ class AuthController extends BaseController
      */
     public function refreshToken()
     {
-        $token = $this->auth->refresh();
+        $token = \Auth::refresh();
 
         return $this->response->array(compact('token'));
     }
@@ -122,11 +118,9 @@ class AuthController extends BaseController
             'email' => $email,
             'password' => app('hash')->make($password),
         ];
-
         $user = $this->userRepository->create($attributes);
-
         // 用户注册事件
-        $token = $this->auth->fromUser($user);
+        $token = \Auth::fromUser($user);
 
         return $this->response->array(compact('token'));
     }
