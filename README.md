@@ -8,7 +8,7 @@ lumen5.2看[这里](https://github.com/liyu001989/lumen-api-demo/tree/5.2)
 
 [ENGLISH README](./EN_README.md)
 
-升级到 5.3 后单元测试错误，应该是容器的问题，慢慢解决吧
+升级到 5.3 后单元测试错误，应该是容器的问题，可能是 bug，慢慢解决
 
 ## USEFUL LINK
 - dingo/api [https://github.com/dingo/api](https://github.com/dingo/api)
