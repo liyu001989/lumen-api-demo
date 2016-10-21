@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "bbd0cf59c288f2d7c03e10d7b4e59868",
-    "content-hash": "437dc07e4794567e7b13c178c2aab506",
+    "hash": "a7cc40cf4c9e6d459b07397f2f8a6f1a",
+    "content-hash": "7e7ed3fb46827f2706b2cca645ab1ae7",
     "packages": [
         {
             "name": "dingo/api",
@@ -13,12 +13,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/dingo/api.git",
-                "reference": "950b37f1e1cd1c99366b096436c2ab4dd7bff7b1"
+                "reference": "dc312a566ff8fe16098f95360d3778789727f63f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dingo/api/zipball/950b37f1e1cd1c99366b096436c2ab4dd7bff7b1",
-                "reference": "950b37f1e1cd1c99366b096436c2ab4dd7bff7b1",
+                "url": "https://api.github.com/repos/dingo/api/zipball/dc312a566ff8fe16098f95360d3778789727f63f",
+                "reference": "dc312a566ff8fe16098f95360d3778789727f63f",
                 "shasum": ""
             },
             "require": {
@@ -80,7 +80,7 @@
                 "laravel",
                 "restful"
             ],
-            "time": "2016-10-13 00:21:28"
+            "time": "2016-10-18 16:20:39"
         },
         {
             "name": "dingo/blueprint",
@@ -2132,16 +2132,16 @@
         },
         {
             "name": "paragonie/random_compat",
-            "version": "v2.0.2",
+            "version": "v2.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paragonie/random_compat.git",
-                "reference": "088c04e2f261c33bed6ca5245491cfca69195ccf"
+                "reference": "c0125896dbb151380ab47e96c621741e79623beb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/088c04e2f261c33bed6ca5245491cfca69195ccf",
-                "reference": "088c04e2f261c33bed6ca5245491cfca69195ccf",
+                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/c0125896dbb151380ab47e96c621741e79623beb",
+                "reference": "c0125896dbb151380ab47e96c621741e79623beb",
                 "shasum": ""
             },
             "require": {
@@ -2176,7 +2176,7 @@
                 "pseudorandom",
                 "random"
             ],
-            "time": "2016-04-03 06:00:07"
+            "time": "2016-10-17 15:23:22"
         },
         {
             "name": "phpdocumentor/reflection-common",
@@ -3243,16 +3243,16 @@
         },
         {
             "name": "tymon/jwt-auth",
-            "version": "dev-develop",
+            "version": "1.0.0-alpha.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tymondesigns/jwt-auth.git",
-                "reference": "804abb0fb619e72e5bfab1c138fe373c74426ed6"
+                "reference": "c153d85a44e531959e439f04569eb988e4a3e2e5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tymondesigns/jwt-auth/zipball/804abb0fb619e72e5bfab1c138fe373c74426ed6",
-                "reference": "804abb0fb619e72e5bfab1c138fe373c74426ed6",
+                "url": "https://api.github.com/repos/tymondesigns/jwt-auth/zipball/c153d85a44e531959e439f04569eb988e4a3e2e5",
+                "reference": "c153d85a44e531959e439f04569eb988e4a3e2e5",
                 "shasum": ""
             },
             "require": {
@@ -3305,7 +3305,7 @@
                 "jwt",
                 "laravel"
             ],
-            "time": "2016-10-13 19:15:26"
+            "time": "2016-09-05 09:04:33"
         },
         {
             "name": "vlucas/phpdotenv",
@@ -4677,7 +4677,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "dingo/api": 20,
-        "tymon/jwt-auth": 20
+        "tymon/jwt-auth": 15
     },
     "prefer-stable": false,
     "prefer-lowest": false,

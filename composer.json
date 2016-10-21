@@ -11,7 +11,7 @@
         "illuminate/redis": "^5.3",
         "vlucas/phpdotenv": "~2.2",
         "dingo/api": "1.0.x@dev",
-        "tymon/jwt-auth": "^1.0@dev",
+        "tymon/jwt-auth": "1.0.0-alpha.3",
         "guzzlehttp/guzzle": "~6.0",
         "predis/predis": "^1.0"
     },
