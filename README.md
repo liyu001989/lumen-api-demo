@@ -6,9 +6,14 @@ lumen5.1看[这里](https://github.com/liyu001989/lumen-api-demo/tree/5.1) (不�
 
 lumen5.2看[这里](https://github.com/liyu001989/lumen-api-demo/tree/5.2)
 
-[ENGLISH README](./EN_README.md)
-
 升级到 5.3 后单元测试错误，应该是容器的问题，可能是 bug，慢慢解决
+
+有需要随时联系我 
+
+- QQ: 490554191
+- email: liyu001989@gmail.com
+
+[ENGLISH README](./EN_README.md)
 
 ## USEFUL LINK
 - dingo/api [https://github.com/dingo/api](https://github.com/dingo/api)

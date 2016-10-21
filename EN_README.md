@@ -2,13 +2,13 @@
 
 Forgive my poor English.
 
-This is a demo for lumen. if you are using lumen to write REST api it will help you.
+This is a demo for lumen5.3. if you are using lumen to write REST api it will help you.
 
-This demo use `dingo/api`  `tymon/jwt-auth` and write some easy API and PHPUNIT
+This demo use `dingo/api`  `tymon/jwt-auth` and write some easy APIs and PHPUNIT
 
+lumen5.1 look [here](https://github.com/liyu001989/lumen-api-demo/tree/5.1) (no longer update)
 
-
-There is a lumen5.1 version [here](https://github.com/liyu001989/lumen-api-demo/tree/5.1) (no longer update)
+lumen5.2 look [here](https://github.com/liyu001989/lumen-api-demo/tree/5.2)
 
 ## USEFUL LINK
 
