@@ -4,6 +4,7 @@ namespace ApiDemo\Transformers;
 
 use ApiDemo\Models\Post;
 use League\Fractal\TransformerAbstract;
+use League\Fractal\ParamBag;
 
 class PostTransformer extends TransformerAbstract
 {
