@@ -16,6 +16,9 @@ lumen5.2看[这里](https://github.com/liyu001989/lumen-api-demo/tree/5.2)
 [ENGLISH README](./EN_README.md)
 
 ## USEFUL LINK
+
+读文档很重要，请先仔细读读 dingo/api，jwt，fractal 的文档。
+
 - dingo/api [https://github.com/dingo/api](https://github.com/dingo/api)
 - dingo api 中文文档 [dingo-api-wiki-zh](https://github.com/liyu001989/dingo-api-wiki-zh)
 - json-web-token(jwt) [https://github.com/tymondesigns/jwt-auth](https://github.com/tymondesigns/jwt-auth)
