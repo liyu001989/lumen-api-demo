@@ -48,6 +48,7 @@ $ php artisan migrate
 $ 生成文档我是这么写的 apidoc -i App/Http/Controller/Api/v1 -o public/apidoc
 $ api文档在public/apidoc里面, 也可以看上面的 `在线api文档`
 ```
+如果访问一直不对，可以进入public 目录执行`php -S localhost:8080`，然后尝试调用几个接口，从而确定是否为web服务器的配置问题。
 
 
 ## REST API DESIGN

@@ -96,7 +96,7 @@ class UserController extends BaseController
             'password' => $request->get('old_password'),
         ]);
 
-        if (! $auth) {
+        if (!$auth) {
             return $this->response->errorUnauthorized();
         }
 
@@ -129,7 +129,7 @@ class UserController extends BaseController
     {
         $user = $this->userRepository->find($id);
 
-        if (! $user) {
+        if (!$user) {
             return $this->response->errorNotFound();
         }
 
@@ -199,7 +199,6 @@ class UserController extends BaseController
 
         return $this->response->item($user, new UserTransformer());
     }
-
 
     public function store(Request $request)
     {

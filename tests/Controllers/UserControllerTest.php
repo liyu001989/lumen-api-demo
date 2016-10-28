@@ -157,7 +157,6 @@ class UserControllerTest extends TestCase
             ])
             ->assertResponseStatus(400);
 
-
         // 名字过长
         $params = [
             'name' => str_random(51),

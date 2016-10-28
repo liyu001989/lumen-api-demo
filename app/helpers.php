@@ -1,7 +1,7 @@
 <?php
 
 // 获取当前登录用户
-if (! function_exists('auth_user')) {
+if (!function_exists('auth_user')) {
     /**
      * Get the auth_user.
      *
@@ -13,7 +13,7 @@ if (! function_exists('auth_user')) {
     }
 }
 
-if (! function_exists('dingo_route')) {
+if (!function_exists('dingo_route')) {
     /**
      * 根据别名获得url.
      *
@@ -31,7 +31,7 @@ if (! function_exists('dingo_route')) {
     }
 }
 
-if (! function_exists('trans')) {
+if (!function_exists('trans')) {
     /**
      * Translate the given message.
      *

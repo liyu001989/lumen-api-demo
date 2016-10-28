@@ -19,7 +19,6 @@ class NoDataArraySerializer extends ArraySerializer
      */
     public function item($resourceKey, array $data)
     {
-        return ($resourceKey) ? [ $resourceKey => $data ] : $data;
+        return ($resourceKey) ? [$resourceKey => $data] : $data;
     }
 }
-

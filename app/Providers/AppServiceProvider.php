@@ -11,8 +11,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-
-
         $this->app->singleton('mailer', function ($app) {
             $app->configure('services');
 
@@ -29,8 +27,9 @@ class AppServiceProvider extends ServiceProvider
 
         // cors 增加对options的处理
         if ($request->isMethod('OPTIONS')) {
-            app()->options($request->path(), function() {
+            app()->options($request->path(), function () {
                 $headers = config('cors');
+
                 return response('', 200, $headers);
             });
         }
