@@ -132,7 +132,7 @@ I achieved myself, there are two good repository packages you can try
 
 - [ ] register send a verify email
 - [ ] use cursor to fix paginate problem
-- [x] phpunit
+- [ ] phpunit
 
 ## carefully
 

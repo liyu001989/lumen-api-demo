@@ -134,7 +134,7 @@ dingo/api 使用了 [Fractal](http://fractal.thephpleague.com/) 做数据转换�
 ## TODO
 - [ ] lumen 下邮件发送，注册验证
 - [ ] cursor 解决无限下拉的问题
-- [x] 单元测试
+- [ ] 单元测试
 
 ## 坑
 - [https://github.com/dingo/api/issues/672](https://github.com/dingo/api/issues/672)  `transformer include`
