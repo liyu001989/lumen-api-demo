@@ -98,7 +98,7 @@ lumen 5.2 取消了session，没有了 auth 的实例，所以使用jwt的时候
 </details>
 
 <details>
-  <summary>mail 使用<summary>
+  <summary>mail 使用</summary>
 
 - composer 加 illuminate/mail 和 guzzlehttp/guzzle 这两个库
 - 在 bootstrap/app.php 或者 provider 中注册 mail 服务

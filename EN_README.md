@@ -66,9 +66,10 @@ just a demo for rest api design
 
 ##
 
-## Problems and Solutions
+## FAQ
 
-### lumen 5.1 upgrade to  5.2
+<details>
+  <summary>lumen 5.1 upgrade to  5.2</summary>
 
 - fix compose.json
 
@@ -84,19 +85,25 @@ just a demo for rest api design
 - `Illuminate\Contracts\Foundation\Application` changed to `Laravel\Lumen\Application`，so fix `app\providers\EventServiceProvider.php`
 
 - cp Middleware to `app/Http/Middleware`
+</details>
 
-### jwt
+<details>
+  <summary>jwt</summary>
 
 There is no session and auth guard in lumen 5.2, so attention `config/auth.php`. Also user model must implement `Tymon\JWTAuth\Contracts\JWTSubject`
+</details>
 
-### mail
+<details>
+ <summary>mail</summary>
 
 - composer require `illuminate/mail` and `guzzlehttp/guzzle`
 - register email service in `bootstrap/app.php` or `some provider`
 - add `mail.php` `services.php` in config, just copy them from laravel
 - add `MAIL_DRIVER` in env
+</details>
 
-### transformer
+<details>
+  <summary>transformer</summary>
 
 dingo/api use [Fractal](http://fractal.thephpleague.com/) to transformer resouses，fractal provider 3 serializer,Array,DataArray,JsonApi.more details at here [http://fractal.thephpleague.com/serializers/](http://fractal.thephpleague.com/serializers/)。DataArray is default.You can set your own serizlizer like this：
 
@@ -111,12 +118,15 @@ dingo/api use [Fractal](http://fractal.thephpleague.com/) to transformer resouse
         });
 
 I think default DataArray is good enough.
+</details>
 
-### repository
+<details>
+  <summary>repository</summary>
 
 I achieved myself, there are two good repository packages you can try
 
 `rinvex/repository`  and  `prettus/l5-repository`
+</details>
 
 ## TODO
 
