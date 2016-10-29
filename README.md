@@ -75,7 +75,8 @@ github 的 api 真的很有参考价值 [github-rest-api](https://developer.gith
 
 ## 问题总结
 
-### lumen 5.1 upgrade to  5.2
+<details>
+  <summary>lumen 5.1 升级到 5.2</summary>
 
 - fix compose.json
 
@@ -87,20 +88,26 @@ github 的 api 真的很有参考价值 [github-rest-api](https://developer.gith
 - fix bootstrap/app.php
 - Illuminate\Contracts\Foundation\Application 改为了Laravel\Lumen\Application，所以修改一下app\providers\EventServiceProvider.php
 - 可以从 5.2 的项目中，把 Middleware cp 过来
+</details>
 
 
-### jwt 使用
+<details>
+  <summary>jwt 使用</summary>
 
 lumen 5.2 取消了session，没有了 auth 的实例，所以使用jwt的时候需要配置一下，注意 config/auth.php 中的配置，而且 user 的 model 需要实现 `Tymon\JWTAuth\Contracts\JWTSubject`;
+</details>
 
-### mail 使用
+<details>
+  <summary>mail 使用<summary>
 
 - composer 加 illuminate/mail 和 guzzlehttp/guzzle 这两个库
 - 在 bootstrap/app.php 或者 provider 中注册 mail 服务
 - 增加配置 mail 和 services, 从 laravel 项目里面 cp 过来
 - 在 env 中增加 `MAIL_DRIVER`，账户，密码等配置
+</details>
 
-### transformer 使用
+<details>
+  <summary>transformer 使用</summary>
 
 dingo/api 使用了 [Fractal](http://fractal.thephpleague.com/) 做数据转换，fractal 提供了3种基础的序列化格式，Array，DataArray，JsonApi，在这里有详细的说明 [http://fractal.thephpleague.com/serializers/](http://fractal.thephpleague.com/serializers/)。DataArray 是默认的，也就是所有资源一定有data和meta。当然也可以按下面这样自定义：
 
@@ -116,10 +123,13 @@ dingo/api 使用了 [Fractal](http://fractal.thephpleague.com/) 做数据转换�
         });
 
 个人认为默认的 DataArray 就很好用了，基本满足了 API 的需求
+</details>
 
-### repository
+<details>
+  <summary>repository 使用</summary>
 
 我随便写的，`rinvex/repository` 和 `prettus/l5-repository` 这两个库都不错，大家可以试试
+</details>
 
 ## TODO
 - [ ] lumen 下邮件发送，注册验证
