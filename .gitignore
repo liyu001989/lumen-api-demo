@@ -2,3 +2,4 @@
 .env
 .DS_Store
 *.swp
+.php_cs.cache
