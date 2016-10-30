@@ -2,6 +2,9 @@
 
 这是一个比较完整用 lumen 5.3 写的的 REST API 例子，如果你正在做相同的事，那么这个例子或许能帮助你。这个例子使用了 `dingo/api` 写 rest 风格的 api，jwt 实现登录，功能上很简单，登录，注册，发帖，评论，还写了单元测试。
 
+[![StyleCI](https://styleci.io/repos/44219096/shield)](https://styleci.io/repos/44219096)
+[![License](https://img.shields.io/github/license/liyu001989/lumen-api-demo.svg)](LICENSE)
+
 lumen5.1看[这里](https://github.com/liyu001989/lumen-api-demo/tree/5.1) (不更新了)
 
 lumen5.2看[这里](https://github.com/liyu001989/lumen-api-demo/tree/5.2)
@@ -142,4 +145,4 @@ dingo/api 使用了 [Fractal](http://fractal.thephpleague.com/) 做数据转换�
 
 ## License
 
-[MIT license](http://opensource.org/licenses/MIT)
+[MIT](http://opensource.org/licenses/MIT)
