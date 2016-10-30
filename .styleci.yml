@@ -1,1 +1,6 @@
 preset: laravel
+
+linting: true
+
+disabled:
+  - unused_use
