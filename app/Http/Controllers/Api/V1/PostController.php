@@ -176,7 +176,7 @@ class PostController extends BaseController
     {
         $post = $this->postRepository->find($id);
 
-        if (!$post) {
+        if (! $post) {
             return $this->response->errorNotFound();
         }
 
@@ -230,7 +230,7 @@ class PostController extends BaseController
     {
         $post = $this->postRepository->find($id);
 
-        if (!$post) {
+        if (! $post) {
             return $this->response->errorNotFound();
         }
 
@@ -266,7 +266,7 @@ class PostController extends BaseController
     {
         $post = $this->postRepository->find($id);
 
-        if (!$post) {
+        if (! $post) {
             return $this->response->errorNotFound();
         }
 

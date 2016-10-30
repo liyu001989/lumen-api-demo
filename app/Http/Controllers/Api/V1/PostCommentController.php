@@ -105,7 +105,7 @@ class PostCommentController extends BaseController
     {
         $post = $this->postRepository->find($postId);
 
-        if (!$post) {
+        if (! $post) {
             return $this->response->errorNotFound();
         }
 
@@ -131,7 +131,7 @@ class PostCommentController extends BaseController
     {
         $post = $this->postRepository->find($postId);
 
-        if (!$post) {
+        if (! $post) {
             return $this->response->errorNotFound();
         }
 
@@ -171,7 +171,7 @@ class PostCommentController extends BaseController
             ->where(['post_id' => $postId, 'user_id' => $user->id])
             ->find($id);
 
-        if (!$comment) {
+        if (! $comment) {
             return $this->response->errorNotFound();
         }
 
