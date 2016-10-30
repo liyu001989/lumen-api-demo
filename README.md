@@ -132,7 +132,7 @@ dingo/api 使用了 [Fractal](http://fractal.thephpleague.com/) 做数据转换�
 </details>
 
 ## TODO
-- [ ] lumen 下邮件发送，注册验证
+- [x] 注册成功后发送欢迎邮件
 - [ ] cursor 解决无限下拉的问题
 - [ ] 单元测试
 

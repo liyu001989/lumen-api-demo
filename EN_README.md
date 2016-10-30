@@ -130,7 +130,7 @@ I achieved myself, there are two good repository packages you can try
 
 ## TODO
 
-- [ ] register send a verify email
+- [x] register send a welcome email
 - [ ] use cursor to fix paginate problem
 - [ ] phpunit
 
