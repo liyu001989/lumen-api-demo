@@ -25,8 +25,6 @@ $app = new Laravel\Lumen\Application(
 
 // phpunit 报错？？？
 $app->withFacades();
-//mail
-//class_alias('Illuminate\Support\Facades\Mail', 'mail');
 
 $app->withEloquent();
 
@@ -37,6 +35,7 @@ $app->configure('jwt');
 $app->configure('mail');
 // cors 配置
 $app->configure('cors');
+$app->configure('services');
 
 /*
 |--------------------------------------------------------------------------
@@ -101,7 +100,7 @@ $app->register(Dingo\Api\Provider\LumenServiceProvider::class);
 //jwt
 $app->register(Tymon\JWTAuth\Providers\LumenServiceProvider::class);
 // email 或者放在 provider里面
-//$app->register(Illuminate\Mail\MailServiceProvider::class);
+$app->register(Illuminate\Mail\MailServiceProvider::class);
 
 app('Dingo\Api\Auth\Auth')->extend('jwt', function ($app) {
     return new Dingo\Api\Auth\Provider\JWT($app['Tymon\JWTAuth\JWTAuth']);

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use ApiDemo\Repositories\Contracts\UserRepositoryContract;
 use Illuminate\Auth\AuthManager;
 use Illuminate\Http\Request;
+use App\Jobs\SendRegisterEmail;
 
 class AuthController extends BaseController
 {
@@ -121,6 +122,9 @@ class AuthController extends BaseController
         $user = $this->userRepository->create($attributes);
         // 用户注册事件
         $token = \Auth::fromUser($user);
+
+        // 用户注册成功后发送邮件
+        \Queue::push(new SendRegisterEmail($user));
 
         return $this->response->array(compact('token'));
     }
