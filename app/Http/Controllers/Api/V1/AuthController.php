@@ -124,7 +124,8 @@ class AuthController extends BaseController
         $token = \Auth::fromUser($user);
 
         // 用户注册成功后发送邮件
-        \Queue::push(new SendRegisterEmail($user));
+        // 或者 \Queue::push(new SendRegisterEmail($user));
+        dispatch(new SendRegisterEmail($user));
 
         return $this->response->array(compact('token'));
     }
