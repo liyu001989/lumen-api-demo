@@ -49,7 +49,7 @@ $fixers = [
     'short_array_syntax',
     'short_scalar_cast',
     'single_blank_line_before_namespace',
-    'single_line_after_imports',
+    /*'single_line_after_imports', // php7 use multiple lines*/
     'single_quote',
     'switch_case_semicolon_to_colon',
     'switch_case_space',

@@ -23,7 +23,7 @@ class PostTransformer extends TransformerAbstract
     public function includeComments(Post $post, ParamBag $params = null)
     {
         $limit = 10;
-        if ($params) {
+        if ($params->get('limit')) {
             $limit = (array) $params->get('limit');
             $limit = (int) current($limit);
         }

@@ -88,13 +88,13 @@ just a demo for rest api design
 </details>
 
 <details>
-  <summary>jwt</summary>
+  <summary>about jwt</summary>
 
 There is no session and auth guard in lumen 5.2, so attention `config/auth.php`. Also user model must implement `Tymon\JWTAuth\Contracts\JWTSubject`
 </details>
 
 <details>
- <summary>mail</summary>
+ <summary>how to use mail</summary>
 
 - composer require `illuminate/mail` and `guzzlehttp/guzzle`
 - register email service in `bootstrap/app.php` or `some provider`
@@ -103,7 +103,23 @@ There is no session and auth guard in lumen 5.2, so attention `config/auth.php`.
 </details>
 
 <details>
-  <summary>transformer</summary>
+  <summary>how to user transformer </summary>
+
+  transformer is a layer help you format you resource and their relationship.
+  
+  maybe you can knowstand with this links:
+
+  - [https://lumen-new.lyyw.info/api/posts](https://lumen-new.lyyw.info/api/posts)
+  - [https://lumen-new.lyyw.info/api/posts?include=user](https://lumen-new.lyyw.info/api/posts?include=user) 
+  - [https://lumen-new.lyyw.info/api/posts?include=user,comments](https://lumen-new.lyyw.info/api/posts?include=user,comments)
+  - [https://lumen-new.lyyw.info/api/posts?include=user,comments:limit(1)](https://lumen-new.lyyw.info/api/posts?include=user,comments:limit(1))
+  - [https://lumen-new.lyyw.info/api/posts?include=user,comments.user](https://lumen-new.lyyw.info/api/posts?include=user,comments.user)
+  - [https://lumen-new.lyyw.info/api/posts?include=user,comments:limit(1),comments.user](https://lumen-new.lyyw.info/api/posts?include=user,comments:limit(1),comments.user)
+
+</details>
+
+<details>
+  <summary>transformer data serizlizer </summary>
 
 dingo/api use [Fractal](http://fractal.thephpleague.com/) to transformer resouses，fractal provider 3 serializer,Array,DataArray,JsonApi.more details at here [http://fractal.thephpleague.com/serializers/](http://fractal.thephpleague.com/serializers/)。DataArray is default.You can set your own serizlizer like this：
 

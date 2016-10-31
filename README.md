@@ -101,7 +101,8 @@ lumen 5.2 取消了session，没有了 auth 的实例，所以使用jwt的时候
 </details>
 
 <details>
-  <summary>mail 使用</summary>
+  <summary>使用mail</summary>
+  写了个例子，注册之后给用户发送邮件, 可以参考一下。
 
 - composer 加 illuminate/mail 和 guzzlehttp/guzzle 这两个库
 - 在 bootstrap/app.php 或者 provider 中注册 mail 服务
@@ -110,7 +111,26 @@ lumen 5.2 取消了session，没有了 auth 的实例，所以使用jwt的时候
 </details>
 
 <details>
-  <summary>transformer 使用</summary>
+  <summary>transformer 的正确使用</summary>
+
+  transformer 是个数据转换层，帮助你格式化资源。还可以帮助你处理资源之间的引用关系。
+
+  试着体会一下以下几个url的也许就明白了
+
+  - [https://lumen-new.lyyw.info/api/posts](https://lumen-new.lyyw.info/api/posts)  所有帖子列表
+  - [https://lumen-new.lyyw.info/api/posts?include=user](https://lumen-new.lyyw.info/api/posts?include=user) 所有帖子列表及发帖用户
+  - [https://lumen-new.lyyw.info/api/posts?include=user,comments](https://lumen-new.lyyw.info/api/posts?include=user,comments) 帖子列表及发帖的用户和发帖的评论
+  - [https://lumen-new.lyyw.info/api/posts?include=user,comments:limit(1)](https://lumen-new.lyyw.info/api/posts?include=user,comments:limit(1)) 帖子列表及发帖的用户和发帖的1条评论
+  - [https://lumen-new.lyyw.info/api/posts?include=user,comments.user](https://lumen-new.lyyw.info/api/posts?include=user,comments.user) 帖子列表及发帖的用户和发帖的评论，及评论的用户信息
+  - [https://lumen-new.lyyw.info/api/posts?include=user,comments:limit(1),comments.user](https://lumen-new.lyyw.info/api/posts?include=user,comments:limit(1),comments.user)  帖子列表及发帖的用户和发帖的1条评论，及评论的用户信息，及评论的用户信息
+
+  
+  是不是很强大，我们只需要提供资源，及资源之间的引用关系，省了多少事
+ 
+</details>
+
+<details>
+  <summary>transformer 改变数据结构</summary>
 
 dingo/api 使用了 [Fractal](http://fractal.thephpleague.com/) 做数据转换，fractal 提供了3种基础的序列化格式，Array，DataArray，JsonApi，在这里有详细的说明 [http://fractal.thephpleague.com/serializers/](http://fractal.thephpleague.com/serializers/)。DataArray 是默认的，也就是所有资源一定有data和meta。当然也可以按下面这样自定义：
 
