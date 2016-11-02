@@ -12,9 +12,5 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        // cors, maybe write it in middleware is batter
-        //'Dingo\Api\Event\ResponseWasMorphed' => [
-            //'App\Listeners\AddCorsHeaderToResponse',
-        //],
     ];
 }
