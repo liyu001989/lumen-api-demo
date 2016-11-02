@@ -11,8 +11,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        // 注册mail
         $this->app->singleton('mailer', function ($app) {
             $app->configure('services');
+            $app->configure('mail');
 
             return $app->loadComponent('mail', 'Illuminate\Mail\MailServiceProvider', 'mailer');
         });
@@ -23,15 +25,6 @@ class AppServiceProvider extends ServiceProvider
         if ($acceptLanguage) {
             $language = current(explode(',', $acceptLanguage));
             app('translator')->setLocale($language);
-        }
-
-        // cors 增加对options的处理
-        if ($request->isMethod('OPTIONS')) {
-            app()->options($request->path(), function () {
-                $headers = config('cors');
-
-                return response('', 200, $headers);
-            });
         }
     }
 }

@@ -56,7 +56,7 @@ $ api文档在public/apidoc里面, 也可以看上面的 `在线api文档`
 
 ## REST API DESIGN
 
-大概举个例子说明一下 rest api 吧，看了很多人设计的 api，感觉都好难受。
+大概举个例子说明一下 rest api 吧
 
 github 的 api 真的很有参考价值 [github-rest-api](https://developer.github.com/v3/)
 

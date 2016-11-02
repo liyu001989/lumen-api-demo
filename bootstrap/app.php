@@ -31,11 +31,6 @@ $app->withEloquent();
 //config
 // jwt
 $app->configure('jwt');
-// mail
-$app->configure('mail');
-// cors 配置
-$app->configure('cors');
-$app->configure('services');
 
 /*
 |--------------------------------------------------------------------------
@@ -70,11 +65,11 @@ $app->singleton(
 */
 
 $app->middleware([
+    'cors' => palanik\lumen\Middleware\LumenCors::class,
 ]);
 
 $app->routeMiddleware([
     'auth' => App\Http\Middleware\Authenticate::class,
-    'cors' => App\Http\Middleware\Cors::class,
 ]);
 
 /*
@@ -99,8 +94,6 @@ $app->register(App\Providers\RepositoryServiceProvider::class);
 $app->register(Dingo\Api\Provider\LumenServiceProvider::class);
 //jwt
 $app->register(Tymon\JWTAuth\Providers\LumenServiceProvider::class);
-// email 或者放在 provider里面
-$app->register(Illuminate\Mail\MailServiceProvider::class);
 
 app('Dingo\Api\Auth\Auth')->extend('jwt', function ($app) {
     return new Dingo\Api\Auth\Provider\JWT($app['Tymon\JWTAuth\JWTAuth']);
