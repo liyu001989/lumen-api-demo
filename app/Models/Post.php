@@ -12,11 +12,11 @@ class Post extends BaseModel
 
     public function user()
     {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo(User::class);
     }
 
     public function comments()
     {
-        return $this->hasMany('App\Models\PostComment');
+        return $this->hasMany(PostComment::class);
     }
 }

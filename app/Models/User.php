@@ -17,12 +17,12 @@ class User extends BaseModel implements AuthenticatableContract, JWTSubject
 
     public function posts()
     {
-        return $this->hasMany('App\Models\Post');
+        return $this->hasMany(Post::class);
     }
 
     public function postComments()
     {
-        return $this->hasMany('App\Models\PostComment');
+        return $this->hasMany(PostComment::class);
     }
 
     // jwt 需要实现的方法
