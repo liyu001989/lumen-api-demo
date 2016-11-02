@@ -30,7 +30,7 @@ lumen5.2看[这里](https://github.com/liyu001989/lumen-api-demo/tree/5.2)
 - rest api 参考规范 [jsonapi.org](http://jsonapi.org/format/)
 - api 调试工具 [postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en)
 - 参考文章 [http://oomusou.io/laravel/laravel-architecture](http://oomusou.io/laravel/laravel-architecture/)
-- 在线api文档 [http://lumen-new.lyyw.info/apidoc](https://lumen-new.lyyw.info/apidoc)
+- 我的api文档 [http://lumen-new.lyyw.info/apidoc](https://lumen-new.lyyw.info/apidoc)
 
 
 ## USAGE
@@ -130,7 +130,7 @@ lumen 5.2 取消了session，没有了 auth 的实例，所以使用jwt的时候
 </details>
 
 <details>
-  <summary>transformer 改变数据结构</summary>
+  <summary>transformer 如何自定义格式化资源</summary>
 
 dingo/api 使用了 [Fractal](http://fractal.thephpleague.com/) 做数据转换，fractal 提供了3种基础的序列化格式，Array，DataArray，JsonApi，在这里有详细的说明 [http://fractal.thephpleague.com/serializers/](http://fractal.thephpleague.com/serializers/)。DataArray 是默认的，也就是所有资源一定有data和meta。当然也可以按下面这样自定义：
 
@@ -149,9 +149,10 @@ dingo/api 使用了 [Fractal](http://fractal.thephpleague.com/) 做数据转换�
 </details>
 
 <details>
-  <summary>repository 使用</summary>
+  <summary>repository 的使用</summary>
+仓库很好的帮我们解耦 controller 和 model，controller 只需要通过仓库操作数据，而并不关心具体是如何操作的，这些完全交给仓库。所以只要定义好接口，然后我们就可以实现orm仓库，DB仓库，xxxorm仓库，并且可以通过仓库增加缓存，非常方便。但是不应该将大段的业务逻辑封装在仓库里面，仓库就是仓库，逻辑交给 controller 和 service。
 
-我随便写的，`rinvex/repository` 和 `prettus/l5-repository` 这两个库都不错，大家可以试试
+例子中我是随便写的，`rinvex/repository` 和 `prettus/l5-repository` 这两个库都不错，大家可以试试
 </details>
 
 ## TODO
