@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use ApiDemo\Models\User;
+use App\Models\User;
 
 class CreateUser extends Command
 {

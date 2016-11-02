@@ -1,6 +1,6 @@
 <?php
 
-namespace ApiDemo\Transformers;
+namespace App\Transformers;
 
 use Illuminate\Database\Eloquent\Model;
 use League\Fractal\TransformerAbstract;

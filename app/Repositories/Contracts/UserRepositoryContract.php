@@ -1,6 +1,6 @@
 <?php
 
-namespace ApiDemo\Repositories\Contracts;
+namespace App\Repositories\Contracts;
 
 interface UserRepositoryContract extends RepositoryContract
 {

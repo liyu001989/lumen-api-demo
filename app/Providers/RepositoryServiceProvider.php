@@ -9,16 +9,16 @@ class RepositoryServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(
-            \ApiDemo\Repositories\Contracts\UserRepositoryContract::class,
-            \ApiDemo\Repositories\Eloquent\UserRepository::class
+            \App\Repositories\Contracts\UserRepositoryContract::class,
+            \App\Repositories\Eloquent\UserRepository::class
         );
         $this->app->bind(
-            \ApiDemo\Repositories\Contracts\PostRepositoryContract::class,
-            \ApiDemo\Repositories\Eloquent\PostRepository::class
+            \App\Repositories\Contracts\PostRepositoryContract::class,
+            \App\Repositories\Eloquent\PostRepository::class
         );
         $this->app->bind(
-            \ApiDemo\Repositories\Contracts\PostCommentRepositoryContract::class,
-            \ApiDemo\Repositories\Eloquent\PostCommentRepository::class
+            \App\Repositories\Contracts\PostCommentRepositoryContract::class,
+            \App\Repositories\Eloquent\PostCommentRepository::class
         );
     }
 }

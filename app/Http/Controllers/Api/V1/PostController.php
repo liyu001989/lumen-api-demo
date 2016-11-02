@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use ApiDemo\Transformers\PostTransformer;
-use ApiDemo\Repositories\Contracts\PostRepositoryContract;
+use App\Transformers\PostTransformer;
+use App\Repositories\Contracts\PostRepositoryContract;
 use Illuminate\Http\Request;
 
 class PostController extends BaseController

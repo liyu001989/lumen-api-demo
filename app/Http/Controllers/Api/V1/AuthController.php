@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use ApiDemo\Repositories\Contracts\UserRepositoryContract;
+use App\Repositories\Contracts\UserRepositoryContract;
 use Illuminate\Auth\AuthManager;
 use Illuminate\Http\Request;
 use App\Jobs\SendRegisterEmail;

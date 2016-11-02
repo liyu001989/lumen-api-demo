@@ -1,6 +1,6 @@
 <?php
 
-namespace ApiDemo\Repositories\Eloquent;
+namespace App\Repositories\Eloquent;
 
 abstract class BaseRepository
 {

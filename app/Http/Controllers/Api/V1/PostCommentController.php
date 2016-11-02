@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use ApiDemo\Transformers\PostCommentTransformer;
-use ApiDemo\Repositories\Contracts\PostRepositoryContract;
-use ApiDemo\Repositories\Contracts\PostCommentRepositoryContract;
+use App\Transformers\PostCommentTransformer;
+use App\Repositories\Contracts\PostRepositoryContract;
+use App\Repositories\Contracts\PostCommentRepositoryContract;
 use Illuminate\Http\Request;
 
 class PostCommentController extends BaseController

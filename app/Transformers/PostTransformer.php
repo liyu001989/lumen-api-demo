@@ -1,8 +1,8 @@
 <?php
 
-namespace ApiDemo\Transformers;
+namespace App\Transformers;
 
-use ApiDemo\Models\Post;
+use App\Models\Post;
 use League\Fractal\TransformerAbstract;
 use League\Fractal\ParamBag;
 
