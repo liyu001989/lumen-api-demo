@@ -68,14 +68,7 @@ class PostController extends BaseController
     {
         $posts = $this->postRepository->paginate();
 
-        $cursor->setCurrent($posts->last()->id);
-        $cursor->setPrev($posts->first()->id);
-        //$cursor->setNext($posts->first()->id);
-
-        return $this->response->paginator($posts, $postTransformer, [], function ($resource, $fractal) use ($cursor) {
-            
-            $resource->setCursor($cursor); 
-        });
+        return $this->response->paginator($posts, $postTransformer);
     }
 
     /**
