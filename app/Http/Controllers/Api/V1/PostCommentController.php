@@ -110,7 +110,7 @@ class PostCommentController extends BaseController
             return $this->response->errorNotFound();
         }
 
-        $currentCursor = (int)$request->get('cursor', null);
+        $currentCursor = (int) $request->get('cursor', null);
         $prevCursor = $request->get('previous', null);
         $limit = $request->get('limit', 10);
 
@@ -134,7 +134,7 @@ class PostCommentController extends BaseController
         $cursor->setPrev($prevCursor);
         $cursor->setCount($comments->count());
 
-        return $this->response->collection($comments, new PostCommentTransformer(), [], function($resource, $fractal) use ($cursor) {
+        return $this->response->collection($comments, new PostCommentTransformer(), [], function ($resource, $fractal) use ($cursor) {
             $resource->setCursor($cursor);
         });
     }
