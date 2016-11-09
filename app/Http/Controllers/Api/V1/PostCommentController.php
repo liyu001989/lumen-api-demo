@@ -6,6 +6,7 @@ use App\Transformers\PostCommentTransformer;
 use App\Repositories\Contracts\PostRepositoryContract;
 use App\Repositories\Contracts\PostCommentRepositoryContract;
 use Illuminate\Http\Request;
+use League\Fractal\Pagination\Cursor;
 
 class PostCommentController extends BaseController
 {
@@ -101,7 +102,7 @@ class PostCommentController extends BaseController
      *    }
      *  }
      */
-    public function index($postId)
+    public function index($postId, Request $request, Cursor $cursor)
     {
         $post = $this->postRepository->find($postId);
 
@@ -109,12 +110,33 @@ class PostCommentController extends BaseController
             return $this->response->errorNotFound();
         }
 
-        // 研究一下cursor，这里应该无限下拉
+        $currentCursor = (int)$request->get('cursor', null);
+        $prevCursor = $request->get('previous', null);
+        $limit = $request->get('limit', 10);
+
         $comments = $this->postCommentRepository
             ->where(['post_id' => $postId])
-            ->paginate();
+            ->limit($limit);
 
-        return $this->response->paginator($comments, new PostCommentTransformer());
+        if ($currentCursor) {
+            $comments->where('id', '>', $currentCursor);
+        }
+
+        $comments = $comments->get();
+
+        $nextCursor = $comments->last()->id;
+        $prevCursor = $currentCursor;
+
+        // 研究一下cursor，这里应该无限下拉
+        // 一个帖子的评论，
+        $cursor->setCurrent($currentCursor);
+        $cursor->setNext($nextCursor);
+        $cursor->setPrev($prevCursor);
+        $cursor->setCount($comments->count());
+
+        return $this->response->collection($comments, new PostCommentTransformer(), [], function($resource, $fractal) use ($cursor) {
+            $resource->setCursor($cursor);
+        });
     }
 
     /**

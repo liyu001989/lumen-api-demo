@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\Transformers\PostTransformer;
 use App\Repositories\Contracts\PostRepositoryContract;
 use Illuminate\Http\Request;
+use League\Fractal\Pagination\cursor;
 
 class PostController extends BaseController
 {
@@ -63,11 +64,18 @@ class PostController extends BaseController
      *     }
      *   }
      */
-    public function index()
+    public function index(PostTransformer $postTransformer, Cursor $cursor)
     {
         $posts = $this->postRepository->paginate();
 
-        return $this->response->paginator($posts, new PostTransformer());
+        $cursor->setCurrent($posts->last()->id);
+        $cursor->setPrev($posts->first()->id);
+        //$cursor->setNext($posts->first()->id);
+
+        return $this->response->paginator($posts, $postTransformer, [], function($resource, $fractal) use ($cursor){
+            
+            $resource->setCursor($cursor); 
+        });
     }
 
     /**

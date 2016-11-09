@@ -21,7 +21,9 @@ abstract class BaseRepository
 
     public function where(array $data)
     {
-        return $this->model->where($data);
+        $this->model->where($data);
+
+        return $this;
     }
 
     public function first()
@@ -54,5 +56,15 @@ abstract class BaseRepository
     public function destroy($id)
     {
         return $this->model->destroy($id);
+    }
+
+    public function get()
+    {
+        return $this->model->get();
+    }
+
+    public function limit($limit)
+    {
+        return $this->model->limit($limit);
     }
 }
