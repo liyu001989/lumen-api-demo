@@ -48,6 +48,7 @@ $ vim .env
             md5(uniqid())，str_random(32) 之类的，或者用jwt:secret生成两个copy一下
 
 $ php artisan migrate
+$ php artisan db:seed (默认添加了10个用户，50篇帖子, 100调评论)
 $ 生成文档我是这么写的 apidoc -i App/Http/Controller/Api/v1 -o public/apidoc
 $ api文档在public/apidoc里面, 也可以看上面的 `在线api文档`
 ```

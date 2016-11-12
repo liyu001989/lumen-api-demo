@@ -11,11 +11,50 @@
 |
 */
 
-$factory->define(App\User::class, function ($faker) {
+function randDate()
+{
+    return \Carbon\Carbon::now()
+        ->subDays(rand(1, 100))
+        ->subHours(rand(1, 23))
+        ->subMinutes(rand(1, 60));
+}
+
+$factory->define(App\Models\User::class, function (Faker\Generator $faker) {
+    $createdAt = randDate();
+
     return [
         'name' => $faker->name,
-        'email' => $faker->email,
-        'password' => str_random(10),
-        'remember_token' => str_random(10),
+        'email' => $faker->safeEmail,
+        'password' => app('hash')->make(str_random(10)),
+        'created_at' => $createdAt,
+        'updated_at' => $createdAt,
+    ];
+});
+
+$factory->define(App\Models\Post::class, function (Faker\Generator $faker) {
+    $userIds = App\Models\User::pluck('id')->toArray();
+    $createdAt = randDate();
+
+    return [
+        'user_id' => $faker->randomElement($userIds),
+        'title' => $faker->sentence(),
+        'content' => $faker->text,
+        'created_at' => $createdAt,
+        'updated_at' => $createdAt,
+    ];
+});
+
+$factory->define(App\Models\PostComment::class, function (Faker\Generator $faker) {
+    $userIds = App\Models\User::pluck('id')->toArray();
+    $postIds = App\Models\Post::pluck('id')->toArray();
+    $createdAt = randDate();
+
+    return [
+        'user_id' => $faker->randomElement($userIds),
+        'reply_user_id' => $faker->randomElement($userIds),
+        'post_id' => $faker->randomElement($postIds),
+        'content' => $faker->text,
+        'created_at' => $createdAt,
+        'updated_at' => $createdAt,
     ];
 });

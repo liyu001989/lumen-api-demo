@@ -37,6 +37,7 @@ $ vim .env
             md5(uniqid())，str_random(32) etc.，maybe use jwt:secret and copy it
 
 $ php artisan migrate
+$ php artisan db:seed
 $ generate api doc like this "apidoc -i App/Http/Controller/Api/v1 -o public/apidoc"
 ```
 

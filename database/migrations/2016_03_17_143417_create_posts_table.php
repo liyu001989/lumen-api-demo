@@ -3,19 +3,19 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddPostCommentsTable extends Migration
+class CreatePostsTable extends Migration
 {
     /**
      * Run the migrations.
      */
     public function up()
     {
-        Schema::create('post_comments', function (Blueprint $table) {
+        Schema::create('posts', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('post_id')->unsigned()->index();
             $table->integer('user_id')->unsigned()->index();
-            $table->integer('reply_user_id')->unsigned()->index();
+            $table->string('title', 50)->index();
             $table->string('content', 255);
+            $table->text('extra');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -26,6 +26,6 @@ class AddPostCommentsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('post_comments');
+        Schema::drop('posts');
     }
 }
