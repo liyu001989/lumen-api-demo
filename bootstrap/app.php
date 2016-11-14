@@ -85,7 +85,7 @@ $app->routeMiddleware([
 $app->register(Dingo\Api\Provider\LumenServiceProvider::class);
 // jwt
 $app->register('Tymon\JWTAuth\Providers\JWTAuthServiceProvider');
-// $app->register(App\Providers\AppServiceProvider::class);
+$app->register(App\Providers\AppServiceProvider::class);
 $app->register(App\Providers\EventServiceProvider::class);
 
 

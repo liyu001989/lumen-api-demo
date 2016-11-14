@@ -9,7 +9,7 @@
         "laravel/lumen-framework": "5.1.*",
         "vlucas/phpdotenv": "~1.0",
         "dingo/api": "1.0.x@dev",
-        "tymon/jwt-auth": "^0.5.5",
+        "tymon/jwt-auth": "0.5.*",
         "basicit/lumen-vendor-publish": "^1.0"
     },
     "require-dev": {
