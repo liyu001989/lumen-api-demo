@@ -159,8 +159,6 @@ dingo/api 使用了 [Fractal](http://fractal.thephpleague.com/) 做数据转换�
 </details>
 
 ## TODO
-- [x] 注册成功后发送欢迎邮件
-- [ ] cursor 解决无限下拉的问题
 - [ ] 单元测试
 
 ## 坑

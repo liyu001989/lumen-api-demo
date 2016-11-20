@@ -29,6 +29,7 @@
         <env name="QUEUE_DRIVER" value="sync"/>
         <env name="API_VERSION" value="v1"/>
         <env name="API_PREFIX" value="api"/>
+        <env name="API_DEBUG" value="false"/>
         <env name="API_KEY" value="boGKx5jl0OK99IskSibhg2N2QZIAJabc"/>
         <env name="JWT_SECRET" value="boGKx5jl0OK99IskSibhg2N2QZIAJdef"/>
     </php>
