@@ -102,7 +102,7 @@ class PostCommentController extends BaseController
      *    }
      *  }
      */
-    public function index($postId, Request $request, Cursor $cursor)
+    public function index($postId, Request $request)
     {
         $post = $this->postRepository->find($postId);
 
@@ -110,33 +110,30 @@ class PostCommentController extends BaseController
             return $this->response->errorNotFound();
         }
 
-        $currentCursor = (int) $request->get('cursor', null);
-        $prevCursor = $request->get('previous', null);
-        $limit = $request->get('limit', 10);
+        $comments = $this->postCommentRepository->where(['post_id' => $postId]);
 
-        $comments = $this->postCommentRepository
-            ->where(['post_id' => $postId])
-            ->limit($limit);
+        $currentCursor = $request->get('cursor');
 
-        if ($currentCursor) {
-            $comments->where('id', '>', $currentCursor);
+        if ($currentCursor !== null) {
+            $currentCursor = (int) $request->get('cursor', null);
+            // how to use previous ??
+            // $prevCursor = $request->get('previous', null);
+            $limit = $request->get('limit', 10);
+
+            $comments = $comments->where([['id', '>', $currentCursor]])->limit($limit)->get();
+
+            $nextCursor = $comments->last()->id;
+            $prevCursor = $currentCursor;
+            $cursor = new Cursor($currentCursor, $nextCursor, $prevCursor, $comments->count());
+
+            $cursorPatination = new Cursor($currentCursor, $prevCursor, $nextCursor, $comments->count());
+            return $this->response->collection($comments, new PostCommentTransformer(), [], function ($resource) use ($cursorPatination) {
+                $resource->setCursor($cursorPatination);
+            });
+        } else {
+            $comments = $comments->paginate();
+            return $this->response->paginator($comments, new PostCommentTransformer());
         }
-
-        $comments = $comments->get();
-
-        $nextCursor = $comments->last()->id;
-        $prevCursor = $currentCursor;
-
-        // 研究一下cursor，这里应该无限下拉
-        // 一个帖子的评论，
-        $cursor->setCurrent($currentCursor);
-        $cursor->setNext($nextCursor);
-        $cursor->setPrev($prevCursor);
-        $cursor->setCount($comments->count());
-
-        return $this->response->collection($comments, new PostCommentTransformer(), [], function ($resource, $fractal) use ($cursor) {
-            $resource->setCursor($cursor);
-        });
     }
 
     /**
@@ -151,18 +148,18 @@ class PostCommentController extends BaseController
      */
     public function store($postId, Request $request)
     {
-        $post = $this->postRepository->find($postId);
-
-        if (! $post) {
-            return $this->response->errorNotFound();
-        }
-
         $validator = \Validator::make($request->all(), [
             'content' => 'required|string',
         ]);
 
         if ($validator->fails()) {
             return $this->errorBadRequest($validator->messages());
+        }
+
+        $post = $this->postRepository->find($postId);
+
+        if (! $post) {
+            return $this->response->errorNotFound();
         }
 
         $user = $this->user();

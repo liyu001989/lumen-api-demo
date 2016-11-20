@@ -21,7 +21,7 @@ abstract class BaseRepository
 
     public function where(array $data)
     {
-        $this->model->where($data);
+        $this->model = $this->model->where($data);
 
         return $this;
     }
@@ -65,6 +65,7 @@ abstract class BaseRepository
 
     public function limit($limit)
     {
-        return $this->model->limit($limit);
+        $this->model = $this->model->limit($limit);
+        return $this;
     }
 }
