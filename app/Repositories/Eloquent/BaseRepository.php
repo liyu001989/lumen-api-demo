@@ -66,6 +66,7 @@ abstract class BaseRepository
     public function limit($limit)
     {
         $this->model = $this->model->limit($limit);
+
         return $this;
     }
 }
