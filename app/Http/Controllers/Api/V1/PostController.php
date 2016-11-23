@@ -64,11 +64,11 @@ class PostController extends BaseController
      *     }
      *   }
      */
-    public function index(PostTransformer $postTransformer, Cursor $cursor)
+    public function index()
     {
         $posts = $this->postRepository->paginate();
 
-        return $this->response->paginator($posts, $postTransformer);
+        return $this->response->paginator($posts, new PostTransformer());
     }
 
     /**

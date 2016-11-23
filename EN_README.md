@@ -6,7 +6,7 @@ This is a demo for lumen5.3. if you are using lumen to write REST api it will he
 
 This demo use `dingo/api`  `tymon/jwt-auth` and write some easy APIs and PHPUNIT
 
-lumen5.1 look [here](https://github.com/liyu001989/lumen-api-demo/tree/5.1) (no longer update)
+lumen5.1 look [here](https://github.com/liyu001989/lumen-api-demo/tree/5.1)
 
 lumen5.2 look [here](https://github.com/liyu001989/lumen-api-demo/tree/5.2)
 
