@@ -129,7 +129,7 @@ dingo/api use [Fractal](http://fractal.thephpleague.com/) to transformer resouse
             $fractal = new League\Fractal\Manager;
             // $serializer = new League\Fractal\Serializer\JsonApiSerializer();
             $serializer = new League\Fractal\Serializer\ArraySerializer();
-            // $serializer = new ApiDemo\Serializers\NoDataArraySerializer();
+            // $serializer = new App\Serializers\NoDataArraySerializer();
             $fractal->setSerializer($serializer);,
             return new Dingo\Api\Transformer\Adapter\Fractal($fractal);
         });

@@ -112,11 +112,11 @@ class AuthControllerTest extends TestCase
 
         $createResult = [];
         //mock user repository
-        $userMock = Mockery::mock('ApiDemo\Repositories\Contracts\UserRepositoryContract');
+        $userMock = Mockery::mock('App\Repositories\Contracts\UserRepositoryContract');
         $userMock->shouldReceive('create')->andReturnUsing(function ($attributes) use (&$createResult) {
             return $createResult = $attributes;
         });
-        $this->app->instance('ApiDemo\Repositories\Contracts\UserRepositoryContract', $userMock);
+        $this->app->instance('App\Repositories\Contracts\UserRepositoryContract', $userMock);
 
         //$attributes = [];
         // mock auth

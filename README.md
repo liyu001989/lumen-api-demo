@@ -142,7 +142,7 @@ dingo/api 使用了 [Fractal](http://fractal.thephpleague.com/) 做数据转换�
             // 自定义的和fractal提供的
             // $serializer = new League\Fractal\Serializer\JsonApiSerializer();
             $serializer = new League\Fractal\Serializer\ArraySerializer();
-            // $serializer = new ApiDemo\Serializers\NoDataArraySerializer();
+            // $serializer = new App\Serializers\NoDataArraySerializer();
             $fractal->setSerializer($serializer);,
             return new Dingo\Api\Transformer\Adapter\Fractal($fractal);
         });

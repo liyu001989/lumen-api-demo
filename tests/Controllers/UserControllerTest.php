@@ -11,13 +11,13 @@ class UserControllerTest extends TestCase
     public function testIndex()
     {
         // user mock
-        $userMock = Mockery::mock('ApiDemo\Repositories\Contracts\UserRepositoryContract');
+        $userMock = Mockery::mock('App\Repositories\Contracts\UserRepositoryContract');
         $userMock->shouldReceive('paginate')
             ->once()
             ->andReturnUsing(function () {
                 return new Illuminate\Pagination\Paginator([], 15);
             });
-        $this->app->instance('ApiDemo\Repositories\Contracts\UserRepositoryContract', $userMock);
+        $this->app->instance('App\Repositories\Contracts\UserRepositoryContract', $userMock);
 
         // 假的response
         $responseMock = Mockery::mock('Dingo\Api\Http\Response\Factory');
@@ -84,14 +84,14 @@ class UserControllerTest extends TestCase
         $onceResult = true;
 
         $updateResult = [];
-        $userMock = Mockery::mock('ApiDemo\Repositories\Contracts\UserRepositoryContract');
+        $userMock = Mockery::mock('App\Repositories\Contracts\UserRepositoryContract');
         $userMock->shouldReceive('update')->once()->andReturnUsing(function ($id, $attributes) use (&$updateResult) {
             $updateResult = $attributes;
             $updateResult['id'] = $id;
 
             return true;
         });
-        $this->app->instance('ApiDemo\Repositories\Contracts\UserRepositoryContract', $userMock);
+        $this->app->instance('App\Repositories\Contracts\UserRepositoryContract', $userMock);
 
         $this->PUT('api/user/password', $params)
             ->assertResponseStatus(204);
@@ -104,11 +104,11 @@ class UserControllerTest extends TestCase
     {
         $this->withoutAuth();
 
-        $userMock = Mockery::mock('ApiDemo\Repositories\Contracts\UserRepositoryContract');
+        $userMock = Mockery::mock('App\Repositories\Contracts\UserRepositoryContract');
         $userMock->shouldReceive('find')->twice()->andReturnUsing(function ($id) {
             return $id > 5 ? true : false;
         });
-        $this->app->instance('ApiDemo\Repositories\Contracts\UserRepositoryContract', $userMock);
+        $this->app->instance('App\Repositories\Contracts\UserRepositoryContract', $userMock);
 
         // 没有找到用户
         $this->GET('api/users/1')
@@ -171,13 +171,13 @@ class UserControllerTest extends TestCase
 
         // 参数正确
         $updateResult = [];
-        $userMock = Mockery::mock('ApiDemo\Repositories\Contracts\UserRepositoryContract');
+        $userMock = Mockery::mock('App\Repositories\Contracts\UserRepositoryContract');
         $userMock->shouldReceive('update')->once()->andReturnUsing(function ($id, $attributes) use (&$updateResult) {
             $updateResult = $attributes;
 
             return true;
         });
-        $this->app->instance('ApiDemo\Repositories\Contracts\UserRepositoryContract', $userMock);
+        $this->app->instance('App\Repositories\Contracts\UserRepositoryContract', $userMock);
 
         // mock response
         $responseMock = Mockery::mock('Dingo\Api\Http\Response\Factory');
