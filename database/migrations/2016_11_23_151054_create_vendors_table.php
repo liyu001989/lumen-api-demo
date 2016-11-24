@@ -4,19 +4,20 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUsers extends Migration
+class CreateVendorsTable extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * @return void
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->increments('id');
+        Schema::create('vendors', function (Blueprint $table) {
+            $table->increments('id');  
             $table->string('email')->unique()->index();
             $table->string('name', 50)->index();
             $table->string('password');
-            $table->string('avatar', 255)->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -24,9 +25,11 @@ class CreateUsers extends Migration
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
     public function down()
     {
-        Schema::drop('users');
+        Schema::drop('vendors');
     }
 }

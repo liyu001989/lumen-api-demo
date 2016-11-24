@@ -3,7 +3,9 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Dingo\Api\Routing\Router;
 use Illuminate\Contracts\Auth\Factory as Auth;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 class Authenticate
 {
@@ -35,10 +37,20 @@ class Authenticate
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if ($this->auth->guard($guard)->guest()) {
+        // 验证token是来自对应的模型
+        $payload = \Auth::getPayload();
+        if ($payload->get('type') != $guard) {
+            return response('Forbidden', 403);
+        }
+
+        if (! $this->auth->check(false)) {
             return response('Unauthorized.', 401);
         }
 
+        // 自己try catch
+        $user = $this->auth->guard($guard)->authenticate();
+
+        app('Dingo\Api\Auth\Auth')->setUser($user);
         return $next($request);
     }
 }

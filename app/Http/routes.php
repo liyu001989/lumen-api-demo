@@ -71,8 +71,20 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api\V1'], function ($a
         'uses' => 'AuthController@refreshToken',
     ]);
 
+    $api->post('vendor/authorization', [
+        'as' => 'vendor.login',
+        'uses' => 'VendorController@login'
+    ]);
+
+    $api->group(['middleware' => 'auth:vendor'], function($api) {
+        $api->get('vendor', [
+            'as' => 'vendor.show',
+            'uses' => 'VendorController@show',
+        ]);
+    });
+
     // need authentication
-    $api->group(['middleware' => 'api.auth'], function ($api) {
+    $api->group(['middleware' => 'auth:user'], function ($api) {
 
         // USER
         // my detail

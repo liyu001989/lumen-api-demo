@@ -7,23 +7,13 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Auth\Authenticatable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends BaseModel implements AuthenticatableContract, JWTSubject
+class Vendor extends BaseModel implements AuthenticatableContract, JWTSubject
 {
     // 软删除和用户验证attempt
     use SoftDeletes, Authenticatable;
 
     // 查询用户的时候，不暴露密码
     protected $hidden = ['password'];
-
-    public function posts()
-    {
-        return $this->hasMany(Post::class);
-    }
-
-    public function postComments()
-    {
-        return $this->hasMany(PostComment::class);
-    }
 
     // jwt 需要实现的方法
     public function getJWTIdentifier()
@@ -34,6 +24,6 @@ class User extends BaseModel implements AuthenticatableContract, JWTSubject
     // jwt 需要实现的方法
     public function getJWTCustomClaims()
     {
-        return ['type' => 'user'];
+        return ['type' => 'vendor'];
     }
 }
