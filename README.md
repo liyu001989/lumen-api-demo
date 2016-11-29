@@ -153,7 +153,9 @@ dingo/api 使用了 [Fractal](http://fractal.thephpleague.com/) 做数据转换�
 <details>
   <summary>repository 的使用</summary>
 
-仓库很好的帮我们解耦 controller 和 model，controller 只需要通过仓库操作数据，而并不关心具体是如何操作的，这些完全交给仓库。所以只要定义好接口，然后我们就可以实现orm仓库，DB仓库，xxxorm仓库，并且可以通过仓库增加缓存，非常方便。但是不应该将大段的业务逻辑封装在仓库里面，仓库就是仓库，逻辑交给 controller 和 service。
+一般的小项目就直接使用 Eloquent 吧, 不要过度设计，这里只是个例子。
+
+仓库很好的帮我们解耦 controller 和 model，controller 只需要通过仓库操作数据，而并不关心具体是如何操作的，这些完全交给仓库。所以只要定义好接口，然后我们就可以实现Eloquent orm仓库，DB仓库，xxxorm仓库，并且可以通过仓库增加缓存，非常方便。但是不应该将大段的业务逻辑封装在仓库里面，仓库就是仓库，逻辑交给 controller 和 service。
 
 例子中我是随便写的，`rinvex/repository` 和 `prettus/l5-repository` 这两个库都不错，大家可以试试
 </details>
