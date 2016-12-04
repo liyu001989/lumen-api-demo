@@ -153,7 +153,7 @@ dingo/api 使用了 [Fractal](http://fractal.thephpleague.com/) 做数据转换�
 <details>
   <summary>repository 的使用</summary>
 
-一般的小项目就直接使用 Eloquent 吧, 不要过度设计，这里只是个例子。
+一般的项目就直接使用 Eloquent 吧, 不要过度设计，这里只是个例子。因为使用 ORM 是一件很方面的事情， dingo 的 transform 这一层就是通过 Eloquent 去预加载的。
 
 仓库很好的帮我们解耦 controller 和 model，controller 只需要通过仓库操作数据，而并不关心具体是如何操作的，这些完全交给仓库。所以只要定义好接口，然后我们就可以实现Eloquent orm仓库，DB仓库，xxxorm仓库，并且可以通过仓库增加缓存，非常方便。但是不应该将大段的业务逻辑封装在仓库里面，仓库就是仓库，逻辑交给 controller 和 service。
 
