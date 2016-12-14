@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Transformers\PostTransformer;
-use App\Repositories\Contracts\PostRepositoryContract;
 use Illuminate\Http\Request;
+use App\Transformers\PostTransformer;
 use League\Fractal\Pagination\cursor;
+use App\Repositories\Contracts\PostRepositoryContract;
 
 class PostController extends BaseController
 {

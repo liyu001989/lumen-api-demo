@@ -3,8 +3,8 @@
 namespace App\Transformers;
 
 use App\Models\Post;
-use League\Fractal\TransformerAbstract;
 use League\Fractal\ParamBag;
+use League\Fractal\TransformerAbstract;
 
 class PostTransformer extends TransformerAbstract
 {

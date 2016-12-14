@@ -114,7 +114,6 @@ $app->singleton(Illuminate\Auth\AuthManager::class, function ($app) {
     //return new Dingo\Api\Transformer\Adapter\Fractal($fractal);
 //});
 
-
 /*
 |--------------------------------------------------------------------------
 | Load The Application Routes

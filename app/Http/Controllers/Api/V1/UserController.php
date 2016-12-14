@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use Illuminate\Http\Request;
 use App\Transformers\UserTransformer;
 use App\Repositories\Contracts\UserRepositoryContract;
-use Illuminate\Http\Request;
 
 class UserController extends BaseController
 {

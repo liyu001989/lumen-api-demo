@@ -25,7 +25,6 @@ abstract class BaseRepository
         return $this->makeModel();
     }
 
-
     public function paginate($limit = null)
     {
         return $this->model
@@ -58,6 +57,7 @@ abstract class BaseRepository
         $model->save();
 
         $this->resetModel();
+
         return $model;
     }
 
@@ -68,6 +68,7 @@ abstract class BaseRepository
         $model->fill($attributes)->save();
 
         $this->resetModel();
+
         return $model;
     }
 
