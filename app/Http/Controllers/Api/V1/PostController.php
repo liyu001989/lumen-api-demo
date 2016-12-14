@@ -217,15 +217,15 @@ class PostController extends BaseController
     }
 
     /**
-     * @api {put} /posts/{id} 修改帖子(update post)
-     * @apiDescription 修改帖子(update post)
+     * @api {put} /posts/{id} 替换帖子(update post)
+     * @apiDescription 替换帖子(update post)
      * @apiGroup Post
      * @apiPermission jwt
      * @apiParam {String} title  post title
      * @apiParam {String} content  post content
      * @apiVersion 0.1.0
      * @apiSuccessExample {json} Success-Response:
-     *   HTTP/1.1 204 NO CONTENT
+     *   HTTP/1.1 204 No Content
      */
     public function update($id, Request $request)
     {
@@ -250,6 +250,47 @@ class PostController extends BaseController
         }
 
         $this->postRepository->update($id, $request->only('title', 'content'));
+
+        return $this->response->noContent();
+    }
+
+    /**
+     * @api {patch} /posts/{id} 修改帖子(update part of post)
+     * @apiDescription 修改帖子(update part of post)
+     * @apiGroup Post
+     * @apiPermission jwt
+     * @apiParam {String} [title]  post title
+     * @apiParam {String} [content]  post content
+     * @apiVersion 0.1.0
+     * @apiSuccessExample {json} Success-Response:
+     *   HTTP/1.1 204 No Content
+     */
+    public function patch($id, Request $request)
+    {
+        $post = $this->postRepository->find($id);
+
+        if (! $post) {
+            return $this->response->errorNotFound();
+        }
+
+        // 不属于我的forbidden
+        if ($post->user_id != $this->user()->id) {
+            return $this->response->errorForbidden();
+        }
+
+        $validator = \Validator::make($request->input(), [
+            'title' => 'string|max:50',
+            'content' => 'string',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->errorBadRequest($validator->messages());
+        }
+
+        $this->postRepository->update(
+            $id,
+            array_filter($request->only('title', 'content'))
+        );
 
         return $this->response->noContent();
     }
