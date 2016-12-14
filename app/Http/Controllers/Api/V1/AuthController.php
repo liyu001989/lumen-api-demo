@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Repositories\Contracts\UserRepositoryContract;
-use Illuminate\Auth\AuthManager;
 use Illuminate\Http\Request;
 use App\Jobs\SendRegisterEmail;
+use Illuminate\Auth\AuthManager;
+use App\Repositories\Contracts\UserRepositoryContract;
 
 class AuthController extends BaseController
 {

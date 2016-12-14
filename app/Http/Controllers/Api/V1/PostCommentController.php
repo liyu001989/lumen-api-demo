@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use Illuminate\Http\Request;
+use League\Fractal\Pagination\Cursor;
 use App\Transformers\PostCommentTransformer;
 use App\Repositories\Contracts\PostRepositoryContract;
 use App\Repositories\Contracts\PostCommentRepositoryContract;
-use Illuminate\Http\Request;
-use League\Fractal\Pagination\Cursor;
 
 class PostCommentController extends BaseController
 {

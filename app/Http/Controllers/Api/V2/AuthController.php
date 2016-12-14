@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Api\V2;
 
 use App\Models\User;
-use Illuminate\Auth\AuthManager;
 use Illuminate\Http\Request;
 use App\Jobs\SendRegisterEmail;
+use Illuminate\Auth\AuthManager;
 
 class AuthController extends BaseController
 {
