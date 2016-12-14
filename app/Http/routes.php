@@ -139,7 +139,7 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api\V1'], function ($a
 
 // v2 version API
 // add in header    Accept:application/vnd.lumen.v2+json
-$api->version('v2', ['namespace' => 'App\Http\Controllers\Api\V1'], function ($api) {
+$api->version('v2', ['namespace' => 'App\Http\Controllers\Api\V2'], function ($api) {
     // Auth
     // login
     $api->post('authorization', [
