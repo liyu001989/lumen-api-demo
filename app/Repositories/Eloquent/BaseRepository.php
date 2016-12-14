@@ -2,16 +2,29 @@
 
 namespace App\Repositories\Eloquent;
 
+use Illuminate\Database\Eloquent\Model;
+
 abstract class BaseRepository
 {
     protected $model;
 
     public function __construct()
     {
-        $this->model = app()->make($this->model());
+        $this->makeModel();
     }
 
     abstract public function model();
+
+    protected function makeModel()
+    {
+        return $this->model = app()->make($this->model());
+    }
+
+    protected function resetModel()
+    {
+        return $this->makeModel();
+    }
+
 
     public function paginate($limit = null)
     {
@@ -33,7 +46,10 @@ abstract class BaseRepository
 
     public function find($id)
     {
-        return $this->model->find($id);
+        $model = $this->model->find($id);
+        $this->resetModel();
+
+        return $model;
     }
 
     public function create(array $attributes)
@@ -41,26 +57,34 @@ abstract class BaseRepository
         $model = $this->model->newInstance($attributes);
         $model->save();
 
+        $this->resetModel();
         return $model;
     }
 
     public function update($id, array $attributes)
     {
-        // 感觉不太对
-        $model = $this->model->find($id);
+        $model = $id instanceof Model ? $id : $this->model->find($id);
+
         $model->fill($attributes)->save();
 
+        $this->resetModel();
         return $model;
     }
 
     public function destroy($id)
     {
-        return $this->model->destroy($id);
+        $result = $this->model->destroy($id);
+        $this->resetModel();
+
+        return $result;
     }
 
     public function get()
     {
-        return $this->model->get();
+        $result = $this->model->get();
+        $this->resetModel();
+
+        return $result;
     }
 
     public function limit($limit)
