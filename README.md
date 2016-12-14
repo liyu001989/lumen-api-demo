@@ -153,11 +153,15 @@ dingo/api 使用了 [Fractal](http://fractal.thephpleague.com/) 做数据转换�
 <details>
   <summary>repository 的使用</summary>
 
-一般的项目就直接使用 Eloquent 吧, 不要过度设计，这里只是个例子。因为使用 ORM 是一件很方面的事情， dingo 的 transform 这一层就是通过 Eloquent 去预加载的。
+  为了不造成误解，v1 版本的 api 使用了仓库, v2 版本直接使用的 Eloquent。
 
-仓库很好的帮我们解耦 controller 和 model，controller 只需要通过仓库操作数据，而并不关心具体是如何操作的，这些完全交给仓库。所以只要定义好接口，然后我们就可以实现Eloquent orm仓库，DB仓库，xxxorm仓库，并且可以通过仓库增加缓存，非常方便。但是不应该将大段的业务逻辑封装在仓库里面，仓库就是仓库，逻辑交给 controller 和 service。
+  我对 repository 的理解是，它是一层对 orm 的封装，让 model 和 controller 层解耦，controller 只是关心增删该查什么数据，并不关心数据的操作是通过什么完成的，orm也好，DB也好，只要实现接口就好。而且封装了一层，我就可以对一些查询数据方便的进行缓存，而不需要调整 controller，非常方面，清晰。
 
-例子中我是随便写的，`rinvex/repository` 和 `prettus/l5-repository` 这两个库都不错，大家可以试试
+  上面这些是它的好处，那么当然也有不好的地方，就是对于普通的项目来说，切换 orm，或者抛弃 orm 转为全部使用 DB，这样的场景还是很少的，或者也是很后期优化的时候才会用到。还有就是，当一开始大家对 repository 的概念不清楚的时候，尝尝把大段的业务逻辑放在里面，而原本这些个业务逻辑应该出现在 controller 和 services 中。
+
+  所以一般的项目就直接使用 Eloquent 吧, 不要过度设计，这里只是个例子。使用 ORM 是一件很方面的事情， dingo 的 transform 这一层就是通过 Eloquent 去预加载的。
+
+  例子中我是随便写的，`rinvex/repository` 和 `prettus/l5-repository` 这两个库都不错，大家可以试试
 </details>
 
 ## TODO
