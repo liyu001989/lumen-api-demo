@@ -212,8 +212,12 @@ class PostController extends BaseController
 
         $location = dingo_route('v2', 'posts.show', $post->id);
         // 协议里是这么返回，把资源位置放在header里面
-        // 也可以返回200加数据
         return $this->response->created($location);
+        // 也可以返回 201 加数据
+        //return $this->response
+            //->item($post, new PostTransformer())
+            //->withHeader('Location', $location)
+            //->setStatusCode(201);
     }
 
     /**

@@ -20,6 +20,7 @@ lumen5.2 look [here](https://github.com/liyu001989/lumen-api-demo/tree/5.2)
 - debug rest api [postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en)
 - a good article [http://oomusou.io/laravel/laravel-architecture](http://oomusou.io/laravel/laravel-architecture/)
 - my api doc [http://lumen.lyyw.info/apidoc](http://lumen.lyyw.info/apidoc)
+- php lint [phplint](https://github.com/overtrue/phplint)
 
 ## USAGE
 

@@ -31,6 +31,7 @@ lumen5.2看[这里](https://github.com/liyu001989/lumen-api-demo/tree/5.2)
 - api 调试工具 [postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en)
 - 参考文章 [http://oomusou.io/laravel/laravel-architecture](http://oomusou.io/laravel/laravel-architecture/)
 - 该项目api文档 [http://lumen.lyyw.info/apidoc](https://lumen.lyyw.info/apidoc)
+- php lint [phplint](https://github.com/overtrue/phplint)
 
 
 ## USAGE
