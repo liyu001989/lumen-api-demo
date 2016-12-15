@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Loading...</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -171,9 +172,9 @@
       <table>
         <thead>
           <tr>
-            <th style="width: 30%">{{#if _col1}}{{__ _col1}}{{else}}{{__ "Field"}}{{/if}}</th>
+          <th style="width: 30%">{{#if ../../_col1}}{{__ ../../_col1}}{{else}}{{__ "Field"}}{{/if}}</th>
             {{#if ../../_hasType}}<th style="width: 10%">{{__ "Type"}}</th>{{/if}}
-            <th style="width: {{#if _hasType}}60%{{else}}70%{{/if}}">{{__ "Description"}}</th>
+            <th style="width: {{#if ../../_hasType}}60%{{else}}70%{{/if}}">{{__ "Description"}}</th>
           </tr>
         </thead>
         <tbody>
@@ -214,7 +215,7 @@
       <div class="tab-content">
       {{#each params.examples}}
         <div class="tab-pane{{#if_eq @index compare=0}} active{{/if_eq}}" id="{{../section}}-examples-{{../id}}-{{@index}}">
-        <pre class="prettyprint language-{{type}}" data-type="{{type}}"><code>{{content}}</code></pre>
+        <pre class="prettyprint language-{{type}}" data-type="{{type}}"><code>{{{reformat content type}}}</code></pre>
         </div>
       {{/each}}
       </div>
@@ -249,7 +250,7 @@
                 <div class="controls">
                   <div class="input-append">>
                     <input type="text" placeholder="{{field}}" class="input-xxlarge sample-request-header" data-sample-request-header-name="{{field}}" data-sample-request-header-group="sample-request-header-{{@../index}}">
-                    <span class="add-on">{{type}}</span>
+                    <span class="add-on">{{{type}}}</span>
                   </div>
                 </div>
               </div>
@@ -271,7 +272,7 @@
                 <div class="controls">
                   <div class="input-append">>
                     <input type="text" placeholder="{{field}}" class="input-xxlarge sample-request-param" data-sample-request-param-name="{{field}}" data-sample-request-param-group="sample-request-param-{{@../index}}">
-                    <span class="add-on">{{type}}</span>
+                    <span class="add-on">{{{type}}}</span>
                   </div>
                 </div>
               </div>
@@ -456,9 +457,9 @@
         <table>
         <thead>
           <tr>
-            <th style="width: 30%">{{#if _col1}}{{__ _col1}}{{else}}{{__ "Field"}}{{/if}}</th>
+            <th style="width: 30%">{{#if ../../_col1}}{{__ ../../_col1}}{{else}}{{__ "Field"}}{{/if}}</th>
             {{#if ../../_hasType}}<th style="width: 10%">{{__ "Type"}}</th>{{/if}}
-            <th style="width: {{#if _hasType}}60%{{else}}70%{{/if}}">{{__ "Description"}}</th>
+            <th style="width: {{#if ../../_hasType}}60%{{else}}70%{{/if}}">{{__ "Description"}}</th>
           </tr>
         </thead>
         {{subTemplate "article-compare-param-block-body" source=source.value compare=compare.value _hasType=../../_hasType}}
@@ -470,9 +471,9 @@
         <table class="ins">
         <thead>
           <tr>
-            <th style="width: 30%">{{#if _col1}}{{__ _col1}}{{else}}{{__ "Field"}}{{/if}}</th>
+            <th style="width: 30%">{{#if ../../_col1}}{{__ ../../_col1}}{{else}}{{__ "Field"}}{{/if}}</th>
             {{#if ../../_hasType}}<th style="width: 10%">{{__ "Type"}}</th>{{/if}}
-            <th style="width: {{#if _hasType}}60%{{else}}70%{{/if}}">{{__ "Description"}}</th>
+            <th style="width: {{#if ../../_hasType}}60%{{else}}70%{{/if}}">{{__ "Description"}}</th>
           </tr>
         </thead>
         {{subTemplate "article-compare-param-block-body" source=source.value compare=source.value _hasType=../../_hasType}}
@@ -484,9 +485,9 @@
         <table class="del">
         <thead>
           <tr>
-            <th style="width: 30%">{{#if _col1}}{{__ _col1}}{{else}}{{__ "Field"}}{{/if}}</th>
+            <th style="width: 30%">{{#if ../../_col1}}{{__ ../../_col1}}{{else}}{{__ "Field"}}{{/if}}</th>
             {{#if ../../_hasType}}<th style="width: 10%">{{__ "Type"}}</th>{{/if}}
-            <th style="width: {{#if _hasType}}60%{{else}}70%{{/if}}">{{__ "Description"}}</th>
+            <th style="width: {{#if ../../_hasType}}60%{{else}}70%{{/if}}">{{__ "Description"}}</th>
           </tr>
         </thead>
         {{subTemplate "article-compare-param-block-body" source=compare.value compare=compare.value _hasType=../../_hasType}}
