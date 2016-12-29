@@ -1,6 +1,6 @@
 # lumen-api-demo
 
-这是一个比较完整用 lumen 5.3 写的的 REST API 例子，如果你正在做相同的事，那么这个例子或许能帮助你。这个例子使用了 `dingo/api` 写 rest 风格的 api，jwt 实现登录，功能上很简单，登录，注册，发帖，评论，还写了单元测试。
+这是一个比较完整用 lumen 5.3 写的的 REST API 例子，如果你正在做相同的事，那么这个例子或许能帮助你。使用了 `dingo/api` ，jwt 实现登录，功能上很简单，登录，注册，发帖，评论，还写了单元测试。
 
 [![StyleCI](https://styleci.io/repos/44219096/shield)](https://styleci.io/repos/44219096)
 [![License](https://img.shields.io/github/license/liyu001989/lumen-api-demo.svg)](LICENSE)
@@ -120,12 +120,12 @@ lumen 5.2 取消了session，没有了 auth 的实例，所以使用jwt的时候
 
   试着体会一下以下几个url的也许就明白了
 
-  - [https://lumen-new.lyyw.info/api/posts](https://lumen-new.lyyw.info/api/posts)  所有帖子列表
-  - [https://lumen-new.lyyw.info/api/posts?include=user](https://lumen-new.lyyw.info/api/posts?include=user) 所有帖子列表及发帖用户
-  - [https://lumen-new.lyyw.info/api/posts?include=user,comments](https://lumen-new.lyyw.info/api/posts?include=user,comments) 帖子列表及发帖的用户和发帖的评论
-  - [https://lumen-new.lyyw.info/api/posts?include=user,comments:limit(1)](https://lumen-new.lyyw.info/api/posts?include=user,comments:limit(1)) 帖子列表及发帖的用户和发帖的1条评论
-  - [https://lumen-new.lyyw.info/api/posts?include=user,comments.user](https://lumen-new.lyyw.info/api/posts?include=user,comments.user) 帖子列表及发帖的用户和发帖的评论，及评论的用户信息
-  - [https://lumen-new.lyyw.info/api/posts?include=user,comments:limit(1),comments.user](https://lumen-new.lyyw.info/api/posts?include=user,comments:limit(1),comments.user)  帖子列表及发帖的用户和发帖的1条评论，及评论的用户信息，及评论的用户信息
+  - [http://lumen.lyyw.info/api/posts](http://lumen.lyyw.info/api/posts)  所有帖子列表
+  - [http://lumen.lyyw.info/api/posts?include=user](http://lumen.lyyw.info/api/posts?include=user) 所有帖子列表及发帖用户
+  - [http://lumen.lyyw.info/api/posts?include=user,comments](http://lumen.lyyw.info/api/posts?include=user,comments) 帖子列表及发帖的用户和发帖的评论
+  - [http://lumen.lyyw.info/api/posts?include=user,comments:limit(1)](http://lumen.lyyw.info/api/posts?include=user,comments:limit(1)) 帖子列表及发帖的用户和发帖的1条评论
+  - [http://lumen.lyyw.info/api/posts?include=user,comments.user](http://lumen.lyyw.info/api/posts?include=user,comments.user) 帖子列表及发帖的用户和发帖的评论，及评论的用户信息
+  - [http://lumen.lyyw.info/api/posts?include=user,comments:limit(1),comments.user](http://lumen.lyyw.info/api/posts?include=user,comments:limit(1),comments.user)  帖子列表及发帖的用户和发帖的1条评论，及评论的用户信息，及评论的用户信息
 
   
   是不是很强大，我们只需要提供资源，及资源之间的引用关系，省了多少事
