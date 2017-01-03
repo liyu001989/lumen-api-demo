@@ -35,12 +35,11 @@ lumen5.2看[这里](https://github.com/liyu001989/lumen-api-demo/tree/5.2)
 
 
 ## USAGE
-```
-先了解一下基本的[安装流程](https://laravel-china.org/docs/5.3/installation)，大致一样。
 
+```
 $ git clone git@github.com:liyu001989/lumen-api-demo.git
 $ composer install
-设置 `storage` 目录必须让服务器有写入权限。
+$ 设置 `storage` 目录必须让服务器有写入权限。
 $ cp .env.example .env
 $ vim .env
         DB_*
@@ -53,8 +52,8 @@ $ vim .env
 
 $ php artisan migrate
 $ php artisan db:seed (默认添加了10个用户，50篇帖子, 100调评论)
-$ 生成文档我是这么写的 apidoc -i App/Http/Controller/Api/v1 -o public/apidoc
 $ api文档在public/apidoc里面, 也可以看上面的 `在线api文档`
+        我是这样生成的: apidoc -i App/Http/Controller/Api/v1 -o public/apidoc
 ```
 如果访问一直不对，可以进入public 目录执行 `php -S localhost:8000 -t public`，然后尝试调用几个接口，从而确定是否为web服务器的配置问题。
 
