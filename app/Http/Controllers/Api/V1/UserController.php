@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1;
 
 use Illuminate\Http\Request;
+use App\Jobs\SendRegisterEmail;
 use App\Transformers\UserTransformer;
 use App\Repositories\Contracts\UserRepositoryContract;
 
@@ -200,10 +201,33 @@ class UserController extends BaseController
         return $this->response->item($user, new UserTransformer());
     }
 
+    /**
+     * @api {post} /users 创建一个用户(create a user)
+     * @apiDescription 创建一个用户(create a user)
+     * @apiGroup user
+     * @apiPermission none
+     * @apiVersion 0.1.0
+     * @apiParam {Email}  email   email[unique]
+     * @apiParam {String} password   password
+     * @apiParam {String} name      name
+     * @apiSuccessExample {json} Success-Response:
+     *     HTTP/1.1 200 OK
+     *     {
+     *         token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6XC9cL21vYmlsZS5kZWZhcmEuY29tXC9hdXRoXC90b2tlbiIsImlhdCI6IjE0NDU0MjY0MTAiLCJleHAiOiIxNDQ1NjQyNDIxIiwibmJmIjoiMTQ0NTQyNjQyMSIsImp0aSI6Ijk3OTRjMTljYTk1NTdkNDQyYzBiMzk0ZjI2N2QzMTMxIn0.9UPMTxo3_PudxTWldsf4ag0PHq1rK8yO9e5vqdwRZLY
+     *     }
+     * @apiErrorExample {json} Error-Response:
+     *     HTTP/1.1 400 Bad Request
+     *     {
+     *         "email": [
+     *             "该邮箱已被他人注册"
+     *         ],
+     *     }
+     */
     public function store(Request $request)
     {
         $validator = \Validator::make($request->input(), [
             'email' => 'required|email|unique:users',
+            'name' => 'required|string',
             'password' => 'required',
         ]);
 
@@ -216,14 +240,22 @@ class UserController extends BaseController
 
         $attributes = [
             'email' => $email,
+            'name' => $request->get('name'),
             'password' => app('hash')->make($password),
         ];
-
         $user = $this->userRepository->create($attributes);
 
-        // 用户注册事件
-        $token = $this->auth->fromUser($user);
+        // 用户注册成功后发送邮件
+        // 或者 \Queue::push(new SendRegisterEmail($user));
+        dispatch(new SendRegisterEmail($user));
 
-        return $this->response->array(compact('token'));
+        // 201 with location
+        $location = dingo_route('v1', 'users.show', $user->id);
+
+        // 如果想注册完直接让用户登录，可能最好的方式是，为用户生成一个token，在 header 里面返回。
+        // $token = \Auth::from($user);
+        return $this->response->item($user, new UserTransformer())
+            ->header('Location', $location)
+            ->setStatusCode(201);
     }
 }

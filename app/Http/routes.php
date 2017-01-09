@@ -23,17 +23,16 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api\V1'], function ($a
 
     // Auth
     // login
-    $api->post('authorization', [
-        'as' => 'auth.login',
-        'uses' => 'AuthController@login',
-    ]);
-    // register
-    $api->post('users', [
-        'as' => 'users.store',
-        'uses' => 'AuthController@register',
+    $api->post('authorizations', [
+        'as' => 'authorizations.store',
+        'uses' => 'AuthController@store',
     ]);
 
     // User
+    $api->post('users', [
+        'as' => 'users.store',
+        'uses' => 'UserController@store',
+    ]);
     // user list
     $api->get('users', [
         'as' => 'users.index',
@@ -66,9 +65,9 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api\V1'], function ($a
 
     // AUTH
     // refresh jwt token
-    $api->post('auth/token/new', [
-        'as' => 'auth.token.new',
-        'uses' => 'AuthController@refreshToken',
+    $api->put('authorizations', [
+        'as' => 'authorizations.update',
+        'uses' => 'AuthController@update',
     ]);
 
     // need authentication

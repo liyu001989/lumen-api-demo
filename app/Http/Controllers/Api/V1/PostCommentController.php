@@ -24,7 +24,7 @@ class PostCommentController extends BaseController
     /**
      * @api {get} /posts/{postId}/comments 评论列表(post comment list)
      * @apiDescription 评论列表(post comment list)
-     * @apiGroup Post
+     * @apiGroup post_comment
      * @apiPermission none
      * @apiParam {String='user'} include  include
      * @apiVersion 0.1.0
@@ -141,7 +141,7 @@ class PostCommentController extends BaseController
     /**
      * @api {post} /posts/{postId}/comments 发布评论(create post comment)
      * @apiDescription 发布评论(create post comment)
-     * @apiGroup Post
+     * @apiGroup post_comment
      * @apiPermission jwt
      * @apiParam {String} content  post content
      * @apiVersion 0.1.0
@@ -178,7 +178,7 @@ class PostCommentController extends BaseController
     /**
      * @api {delete} /posts/{postId}/comments/{id} 删除评论(delete post comment)
      * @apiDescription 删除评论(delete post comment)
-     * @apiGroup Post
+     * @apiGroup post_comment
      * @apiPermission jwt
      * @apiVersion 0.1.0
      * @apiSuccessExample {json} Success-Response:
