@@ -30,7 +30,7 @@ lumen5.2看[这里](https://github.com/liyu001989/lumen-api-demo/tree/5.2)
 - rest api 参考规范 [jsonapi.org](http://jsonapi.org/format/)
 - api 调试工具 [postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en)
 - 参考文章 [http://oomusou.io/laravel/laravel-architecture](http://oomusou.io/laravel/laravel-architecture/)
-- 该项目api文档 [http://lumen.lyyw.info/apidoc](https://lumen.lyyw.info/apidoc)
+- 项目api文档 [http://lumen.lyyw.info/apidoc](https://lumen.lyyw.info/apidoc)
 - php lint [phplint](https://github.com/overtrue/phplint)
 
 
@@ -42,18 +42,18 @@ $ composer install
 $ 设置 `storage` 目录必须让服务器有写入权限。
 $ cp .env.example .env
 $ vim .env
-        DB_*
-            填写数据库相关配置 your database configuration
-	    JWT_SECRET
-            php artisan jwt:secret
-	    APP_KEY
-            lumen 取消了key:generate 所以随便找个地方生成一下吧
-            md5(uniqid())，str_random(32) 之类的，或者用jwt:secret生成两个copy一下
+    DB_*
+        填写数据库相关配置 your database configuration
+    JWT_SECRET
+        php artisan jwt:secret
+    APP_KEY
+        lumen 取消了key:generate 所以随便找个地方生成一下吧
+        md5(uniqid())，str_random(32) 之类的，或者用jwt:secret生成两个copy一下
 
 $ php artisan migrate
-$ php artisan db:seed (默认添加了10个用户，50篇帖子, 100调评论)
-$ api文档在public/apidoc里面, 也可以看上面的 `在线api文档`
-        我是这样生成的: apidoc -i App/Http/Controllers/Api/V1/ -o public/apidoc/
+$ php artisan db:seed (默认添加了10个用户，50篇帖子, 100条评论)
+$ api文档在public/apidoc里面, 也可以看上面的 `项目api文档`
+    我是这样生成的: apidoc -i App/Http/Controllers/Api/V1/ -o public/apidoc/
 ```
 如果访问一直不对，可以进入public 目录执行 `php -S localhost:8000 -t public`，然后尝试调用几个接口，从而确定是否为web服务器的配置问题。
 
