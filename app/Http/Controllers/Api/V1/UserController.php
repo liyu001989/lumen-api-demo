@@ -5,11 +5,12 @@ namespace App\Http\Controllers\Api\V1;
 use Illuminate\Http\Request;
 use App\Jobs\SendRegisterEmail;
 use App\Transformers\UserTransformer;
-use App\Repositories\Contracts\UserRepositoryContract;
+use App\Repositories\Contracts\UserRepository;
+use Carbon\Carbon;
 
 class UserController extends BaseController
 {
-    public function __construct(UserRepositoryContract $userRepository)
+    public function __construct(UserRepository $userRepository)
     {
         $this->userRepository = $userRepository;
     }
@@ -45,11 +46,11 @@ class UserController extends BaseController
      *       }
      *     }
      */
-    public function index(UserTransformer $userTransformer)
+    public function index()
     {
         $users = $this->userRepository->paginate();
 
-        return $this->response->paginator($users, $userTransformer);
+        return $this->response->paginator($users, new UserTransformer());
     }
 
     /**
@@ -246,16 +247,20 @@ class UserController extends BaseController
         $user = $this->userRepository->create($attributes);
 
         // 用户注册成功后发送邮件
-        // 或者 \Queue::push(new SendRegisterEmail($user));
         dispatch(new SendRegisterEmail($user));
 
         // 201 with location
         $location = dingo_route('v1', 'users.show', $user->id);
 
-        // 如果想注册完直接让用户登录，可能最好的方式是，为用户生成一个token，在 header 里面返回。
-        // $token = \Auth::from($user);
+        $result = [
+            'token' => \Auth::fromUser($user),
+            'expired_at' => Carbon::now()->addMinutes(config('jwt.ttl'))->toDateTimeString(),
+            'refresh_expired_at' => Carbon::now()->addMinutes(config('jwt.refresh_ttl'    ))->toDateTimeString(),
+        ];
+
         return $this->response->item($user, new UserTransformer())
             ->header('Location', $location)
+            ->setMeta($result)
             ->setStatusCode(201);
     }
 }

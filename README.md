@@ -1,6 +1,6 @@
 # lumen-api-demo
 
-这是一个比较完整用 lumen 5.3 写的的 REST API 例子，如果你正在做相同的事，那么这个例子或许能帮助你。使用了 `dingo/api` ，jwt 实现登录，功能上很简单，登录，注册，发帖，评论，还写了单元测试。
+这是一个比较完整用 lumen 5.3 写的的 REST API 例子。使用了 `dingo/api` ，jwt 实现登录，功能上很简单，登录，注册，发帖，评论，还写了单元测试。
 
 [![StyleCI](https://styleci.io/repos/44219096/shield)](https://styleci.io/repos/44219096)
 [![License](https://img.shields.io/github/license/liyu001989/lumen-api-demo.svg)](LICENSE)
@@ -52,7 +52,9 @@ $ vim .env
 
 $ php artisan migrate
 $ php artisan db:seed (默认添加了10个用户，50篇帖子, 100条评论)
-$ api文档在public/apidoc里面, 也可以看上面的 `项目api文档`
+
+头信息中增加 Accept:application/vnd.lumen.v1+json 切换v1和v2版本
+api文档在public/apidoc里面, 也可以看上面的 `项目api文档`
     我是这样生成的: apidoc -i App/Http/Controllers/Api/V1/ -o public/apidoc/
 ```
 如果访问一直不对，可以进入public 目录执行 `php -S localhost:8000 -t public`，然后尝试调用几个接口，从而确定是否为web服务器的配置问题。
@@ -164,7 +166,7 @@ dingo/api 使用了 [Fractal](http://fractal.thephpleague.com/) 做数据转换�
 
   所以一般的项目就直接使用 Eloquent 吧, 不要过度设计，这里只是个例子。使用 ORM 是一件很方面的事情， dingo 的 transform 这一层就是通过 Eloquent 去预加载的。
 
-  例子中我是随便写的，`rinvex/repository` 和 `prettus/l5-repository` 这两个库都不错，大家可以试试
+  例子中使用的是 `rinvex/repository` 这个库。
 </details>
 
 ## TODO

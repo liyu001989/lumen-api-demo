@@ -4,18 +4,9 @@ namespace App\Http\Controllers\Api\V1;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Auth\AuthManager;
-use App\Repositories\Contracts\UserRepositoryContract;
 
 class AuthController extends BaseController
 {
-    protected $userRepository;
-
-    public function __construct(UserRepositoryContract $userRepository)
-    {
-        $this->userRepository = $userRepository;
-    }
-
     /**
      * @api {post} /authorizations 创建一个token (create a token)
      * @apiDescription 创建一个token (create a token)

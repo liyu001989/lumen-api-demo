@@ -14,7 +14,8 @@
         "tymon/jwt-auth": "1.0.0-alpha.3",
         "guzzlehttp/guzzle": "~6.0",
         "predis/predis": "^1.0",
-        "palanik/lumen-cors": "dev-master"
+        "palanik/lumen-cors": "dev-master",
+        "rinvex/repository": "dev-develop"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

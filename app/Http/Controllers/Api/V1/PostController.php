@@ -5,13 +5,13 @@ namespace App\Http\Controllers\Api\V1;
 use Illuminate\Http\Request;
 use App\Transformers\PostTransformer;
 use League\Fractal\Pagination\cursor;
-use App\Repositories\Contracts\PostRepositoryContract;
+use App\Repositories\Contracts\PostRepository;
 
 class PostController extends BaseController
 {
     private $postRepository;
 
-    public function __construct(PostRepositoryContract $postRepository)
+    public function __construct(PostRepository $postRepository)
     {
         $this->postRepository = $postRepository;
     }

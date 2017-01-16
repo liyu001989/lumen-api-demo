@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Api\V1;
 use Illuminate\Http\Request;
 use League\Fractal\Pagination\Cursor;
 use App\Transformers\PostCommentTransformer;
-use App\Repositories\Contracts\PostRepositoryContract;
-use App\Repositories\Contracts\PostCommentRepositoryContract;
+use App\Repositories\Contracts\PostRepository;
+use App\Repositories\Contracts\PostCommentRepository;
 
 class PostCommentController extends BaseController
 {
@@ -14,7 +14,7 @@ class PostCommentController extends BaseController
 
     protected $postCommentRepository;
 
-    public function __construct(PostCommentRepositoryContract $postCommentRepository, PostRepositoryContract $postRepository)
+    public function __construct(PostCommentRepository $postCommentRepository, PostRepository $postRepository)
     {
         $this->postCommentRepository = $postCommentRepository;
 
