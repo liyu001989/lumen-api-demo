@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Jobs\SendRegisterEmail;
 use App\Transformers\UserTransformer;
 use App\Repositories\Contracts\UserRepository;
-use Carbon\Carbon;
 
 class UserController extends BaseController
 {
@@ -255,7 +255,7 @@ class UserController extends BaseController
         $result = [
             'token' => \Auth::fromUser($user),
             'expired_at' => Carbon::now()->addMinutes(config('jwt.ttl'))->toDateTimeString(),
-            'refresh_expired_at' => Carbon::now()->addMinutes(config('jwt.refresh_ttl'    ))->toDateTimeString(),
+            'refresh_expired_at' => Carbon::now()->addMinutes(config('jwt.refresh_ttl'))->toDateTimeString(),
         ];
 
         return $this->response->item($user, new UserTransformer())

@@ -2,7 +2,7 @@
 
 namespace App\Repositories\Contracts;
 
-use \Rinvex\Repository\Contracts\RepositoryContract;
+use Rinvex\Repository\Contracts\RepositoryContract;
 
 interface BaseRepository extends RepositoryContract
 {
