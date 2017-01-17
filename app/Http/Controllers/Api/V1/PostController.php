@@ -203,7 +203,7 @@ class PostController extends BaseController
         ]);
 
         if ($validator->fails()) {
-            return $this->errorBadRequest($validator->messages());
+            return $this->errorBadRequest($validator);
         }
 
         $attributes = $request->only('title', 'content');
@@ -250,7 +250,7 @@ class PostController extends BaseController
         ]);
 
         if ($validator->fails()) {
-            return $this->errorBadRequest($validator->messages());
+            return $this->errorBadRequest($validator);
         }
 
         $this->postRepository->update($id, $request->only('title', 'content'));
@@ -288,7 +288,7 @@ class PostController extends BaseController
         ]);
 
         if ($validator->fails()) {
-            return $this->errorBadRequest($validator->messages());
+            return $this->errorBadRequest($validator);
         }
 
         $this->postRepository->update(

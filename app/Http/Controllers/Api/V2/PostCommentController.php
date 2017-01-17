@@ -155,7 +155,7 @@ class PostCommentController extends BaseController
         ]);
 
         if ($validator->fails()) {
-            return $this->errorBadRequest($validator->messages());
+            return $this->errorBadRequest($validator);
         }
 
         $post = $this->post->find($postId);

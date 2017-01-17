@@ -88,7 +88,7 @@ class UserController extends BaseController
         ]);
 
         if ($validator->fails()) {
-            return $this->errorBadRequest($validator->messages());
+            return $this->errorBadRequest($validator);
         }
 
         $user = $this->user();
@@ -189,7 +189,7 @@ class UserController extends BaseController
         ]);
 
         if ($validator->fails()) {
-            return $this->errorBadRequest($validator->messages());
+            return $this->errorBadRequest($validator);
         }
 
         $user = $this->user();
@@ -233,7 +233,7 @@ class UserController extends BaseController
         ]);
 
         if ($validator->fails()) {
-            return $this->errorBadRequest($validator->messages());
+            return $this->errorBadRequest($validator);
         }
 
         $email = $request->get('email');

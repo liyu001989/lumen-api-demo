@@ -169,6 +169,15 @@ dingo/api 使用了 [Fractal](http://fractal.thephpleague.com/) 做数据转换�
   例子中使用的是 `rinvex/repository` 这个库。
 </details>
 
+<details>
+  <summary>422 错误提示</summary>
+
+  参考了 github 的错误提示，这样可能更方便 app 对接，格式固定有field 和code，field为字段名，code为错误提示。
+
+  如果想用默认的，在 BaseController 中使用下面的代码即可
+  `throw new ValidationHttpException($validator->errors());`
+</details>
+
 ## TODO
 - [ ] 单元测试
 

@@ -36,7 +36,7 @@ class AuthController extends BaseController
         ]);
 
         if ($validator->fails()) {
-            return $this->errorBadRequest($validator->messages());
+            return $this->errorBadRequest($validator);
         }
 
         $credentials = $request->only('email', 'password');
