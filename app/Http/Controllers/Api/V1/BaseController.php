@@ -18,7 +18,7 @@ class BaseController extends Controller
         // if you don't like this you can use code bellow
         //
         //throw new ValidationHttpException($validator->errors());
-        
+
         $result = [];
         $messages = $validator->errors()->toArray();
 
@@ -27,7 +27,7 @@ class BaseController extends Controller
                 foreach ($errors as $error) {
                     $result[] = [
                         'field' => $field,
-                        'code' => $error
+                        'code' => $error,
                     ];
                 }
             }
