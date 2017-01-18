@@ -170,9 +170,14 @@ class PostCommentController extends BaseController
         $attributes['user_id'] = $user->id;
         $attributes['post_id'] = $postId;
 
-        $this->postCommentRepository->create($attributes);
+        $comment = $this->postCommentRepository->create($attributes);
 
-        return $this->response->created();
+        // return $this->response->created($location);
+
+        // 返回数据
+        return $this->response
+            ->item($comment, new PostCommentTransformer())
+            ->setStatusCode(201);
     }
 
     /**

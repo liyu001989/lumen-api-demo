@@ -10,11 +10,6 @@ use App\Transformers\UserTransformer;
 
 class UserController extends BaseController
 {
-    public function __construct(User $user)
-    {
-        $this->user = $user;
-    }
-
     /**
      * @api {get} /users 用户列表(user list)
      * @apiDescription 用户列表(user list)
@@ -46,9 +41,9 @@ class UserController extends BaseController
      *       }
      *     }
      */
-    public function index()
+    public function index(User $user)
     {
-        $users = $this->user->paginate();
+        $users = User::paginate();
 
         return $this->response->paginator($users, new UserTransformer());
     }
@@ -103,7 +98,7 @@ class UserController extends BaseController
         }
 
         $password = app('hash')->make($request->get('password'));
-        $this->user->update($user->id, ['password' => $password]);
+        User::update($user->id, ['password' => $password]);
 
         return $this->response->noContent();
     }
@@ -129,7 +124,7 @@ class UserController extends BaseController
      */
     public function show($id)
     {
-        $user = $this->user->find($id);
+        $user = User::find($id);
 
         if (! $user) {
             return $this->response->errorNotFound();
@@ -196,7 +191,7 @@ class UserController extends BaseController
         $attributes = array_filter($request->only('name', 'avatar'));
 
         if ($attributes) {
-            $user = $this->user->update($user->id, $attributes);
+            $user = User::update($user->id, $attributes);
         }
 
         return $this->response->item($user, new UserTransformer());
@@ -244,7 +239,7 @@ class UserController extends BaseController
             'name' => $request->get('name'),
             'password' => app('hash')->make($password),
         ];
-        $user = $this->user->create($attributes);
+        $user = User::create($attributes);
 
         // 用户注册成功后发送邮件
         dispatch(new SendRegisterEmail($user));
