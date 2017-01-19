@@ -193,7 +193,16 @@ class PostController extends BaseController
      * @apiParam {String} content  post content
      * @apiVersion 0.1.0
      * @apiSuccessExample {json} Success-Response:
-     *   HTTP/1.1 201 Created
+     * HTTP/1.1 201 Created
+     * {
+     *     "data": {
+     *         "title": "foo",
+     *         "content": "bar",
+     *         "user_id": 33,
+     *         "created_at": "2017-01-19 15:37:25",
+     *         "id": 212
+     *     }
+     * }
      */
     public function store(Request $request)
     {

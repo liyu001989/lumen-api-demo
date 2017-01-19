@@ -146,7 +146,16 @@ class PostCommentController extends BaseController
      * @apiParam {String} content  post content
      * @apiVersion 0.1.0
      * @apiSuccessExample {json} Success-Response:
-     *   HTTP/1.1 201 Created
+     * HTTP/1.1 201 Created
+     * {
+     *     "data": {
+     *         "content": "bar",
+     *         "user_id": 33,
+     *         "post_id": "211",
+     *         "created_at": "2017-01-18 15:44:08",
+     *         "id": 1102
+     *     }
+     * }
      */
     public function store($postId, Request $request)
     {
