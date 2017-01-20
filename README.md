@@ -1,6 +1,6 @@
 # lumen-api-demo
 
-这是一个比较完整用 lumen 5.3 写的的 REST API 例子。使用了 `dingo/api` ，jwt 实现登录，功能上很简单，登录，注册，发帖，评论，还写了单元测试。
+这是一个比较完整用 lumen 5.3 写的的 REST API 例子。使用了 `dingo/api` ，jwt 实现登录，功能上很简单，登录，注册，发帖，评论，单元测试(正在补充)。
 
 [![StyleCI](https://styleci.io/repos/44219096/shield)](https://styleci.io/repos/44219096)
 [![License](https://img.shields.io/github/license/liyu001989/lumen-api-demo.svg)](LICENSE)
@@ -9,8 +9,6 @@ lumen5.1看[这里](https://github.com/liyu001989/lumen-api-demo/tree/5.1)
 
 lumen5.2看[这里](https://github.com/liyu001989/lumen-api-demo/tree/5.2)
 
-升级到 5.3 后单元测试错误，应该是容器的问题，可能是 bug，慢慢解决
-
 有需要随时联系我 
 
 - QQ: 490554191
@@ -18,21 +16,22 @@ lumen5.2看[这里](https://github.com/liyu001989/lumen-api-demo/tree/5.2)
 
 [ENGLISH README](./EN_README.md)
 
+
 ## USEFUL LINK
 
-读文档很重要，请先仔细读读 dingo/api，jwt，fractal 的文档。
+读文档很重要，请先仔细读读文档 laravel, dingo/api，jwt，fractal 的文档。
 
 - dingo/api [https://github.com/dingo/api](https://github.com/dingo/api)
 - dingo api 中文文档 [dingo-api-wiki-zh](https://github.com/liyu001989/dingo-api-wiki-zh)
-- json-web-token(jwt) [https://github.com/tymondesigns/jwt-auth](https://github.com/tymondesigns/jwt-auth)
+- jwt(json-web-token) [https://github.com/tymondesigns/jwt-auth](https://github.com/tymondesigns/jwt-auth)
 - transformer [fractal](http://fractal.thephpleague.com/)
 - apidoc 生成在线文档 [apidocjs](http://apidocjs.com/)
 - rest api 参考规范 [jsonapi.org](http://jsonapi.org/format/)
-- api 调试工具 [postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en)
-- 参考文章 [http://oomusou.io/laravel/laravel-architecture](http://oomusou.io/laravel/laravel-architecture/)
-- 项目api文档 [http://lumen.lyyw.info/apidoc](https://lumen.lyyw.info/apidoc)
+- api 调试工具 [postman](https://www.getpostman.com/)
+- 有用的文章 [http://oomusou.io/laravel/laravel-architecture](http://oomusou.io/laravel/laravel-architecture/)
 - php lint [phplint](https://github.com/overtrue/phplint)
-
+- Laravel 理念 [From Apprentice To Artisan](https://my.oschina.net/zgldh/blog/389246)
+- 项目api文档 [http://lumen.lyyw.info/apidoc](https://lumen.lyyw.info/apidoc)
 
 ## USAGE
 
@@ -58,7 +57,6 @@ api文档在public/apidoc里面, 也可以看上面的 `项目api文档`
     我是这样生成的: apidoc -i App/Http/Controllers/Api/V1/ -o public/apidoc/
 ```
 如果访问一直不对，可以进入public 目录执行 `php -S localhost:8000 -t public`，然后尝试调用几个接口，从而确定是否为web服务器的配置问题。
-
 
 ## REST API DESIGN
 

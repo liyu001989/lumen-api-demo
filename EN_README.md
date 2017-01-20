@@ -17,10 +17,10 @@ lumen5.2 look [here](https://github.com/liyu001989/lumen-api-demo/tree/5.2)
 - transformer [fractal](http://fractal.thephpleague.com/)
 - apidoc [apidocjs](http://apidocjs.com/)
 - rest api guidance [jsonapi.org](http://jsonapi.org/format/)
-- debug rest api [postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en)
+- debug rest api [postman](https://www.getpostman.com/)
 - a good article [http://oomusou.io/laravel/laravel-architecture](http://oomusou.io/laravel/laravel-architecture/)
-- my api doc [http://lumen.lyyw.info/apidoc](http://lumen.lyyw.info/apidoc)
 - php lint [phplint](https://github.com/overtrue/phplint)
+- my api doc [http://lumen.lyyw.info/apidoc](http://lumen.lyyw.info/apidoc)
 
 ## USAGE
 
@@ -41,8 +41,6 @@ $ php artisan migrate
 $ php artisan db:seed
 $ generate api doc like this "apidoc -i App/Http/Controller/Api/v1 -o public/apidoc"
 ```
-
-
 
 ## REST API DESIGN
 
@@ -65,8 +63,6 @@ just a demo for rest api design
     get    /api/users/4/posts        post list of a user
     get    /api/user/posts           post list of current user
 ```
-
-##
 
 ## FAQ
 
