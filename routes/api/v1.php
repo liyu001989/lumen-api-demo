@@ -73,7 +73,7 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api\V1'], function ($a
     // need authentication
     $api->group(['middleware' => 'api.auth'], function ($api) {
 
-        /**
+        /*
          * 对于authorizations 并没有保存在数据库，所以并没有id，那么对于
          * 刷新（put) 和 删除（delete) 我没有想到更好的命名方式
          * 所以暂时就是 authorizations/current 表示当前header中的这个token。
