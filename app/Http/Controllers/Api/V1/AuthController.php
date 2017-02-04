@@ -100,7 +100,8 @@ class AuthController extends BaseController
      */
     public function destroy()
     {
-        \Auth::logout(); 
+        \Auth::logout();
+
         return $this->response->noContent();
     }
 }
