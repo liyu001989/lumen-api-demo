@@ -2,13 +2,11 @@
 
 Forgive my poor English.
 
-This is a demo for lumen5.3. if you are using lumen to write REST api it will help you.
+This is a demo for lumen5.4. if you are using lumen to write REST api it will help you.
 
 This demo use `dingo/api`  `tymon/jwt-auth` and write some easy APIs and PHPUNIT
 
-lumen5.1 look [here](https://github.com/liyu001989/lumen-api-demo/tree/5.1)
-
-lumen5.2 look [here](https://github.com/liyu001989/lumen-api-demo/tree/5.2)
+lumen5.x please look appropriate branch
 
 ## USEFUL LINK
 
@@ -65,25 +63,6 @@ just a demo for rest api design
 ```
 
 ## FAQ
-
-<details>
-  <summary>lumen 5.1 upgrade to  5.2</summary>
-
-- fix compose.json
-
-  ```
-    "laravel/lumen-framework": "5.2.*",
-    "vlucas/phpdotenv": "~2.2" // important
-
-    just compare composer.json in 5.2
-  ```
-
-- fix `bootstrap/app.php`
-
-- `Illuminate\Contracts\Foundation\Application` changed to `Laravel\Lumen\Application`，so fix `app\providers\EventServiceProvider.php`
-
-- cp Middleware to `app/Http/Middleware`
-</details>
 
 <details>
   <summary>about jwt</summary>

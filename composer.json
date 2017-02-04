@@ -6,14 +6,14 @@
     "type": "project",
     "require": {
         "php": ">=5.6.4",
-        "laravel/lumen-framework": "5.3.*",
-        "illuminate/mail": "^5.3",
-        "illuminate/redis": "^5.3",
+        "laravel/lumen-framework": "5.4.*",
+        "illuminate/mail": "^5.4",
+        "illuminate/redis": "^5.4",
         "vlucas/phpdotenv": "~2.2",
         "dingo/api": "1.0.x@dev",
-        "tymon/jwt-auth": "1.0.0-alpha.3",
+        "tymon/jwt-auth": "1.0.0-beta.2",
         "guzzlehttp/guzzle": "~6.0",
-        "predis/predis": "^1.0",
+        "predis/predis": "^1.1",
         "palanik/lumen-cors": "dev-master",
         "rinvex/repository": "dev-develop"
     },
@@ -35,5 +35,12 @@
             "tests/",
             "database/"
         ]
-    }
+    },
+    "scripts": {
+        "post-root-package-install": [
+            "php -r \"copy('.env.example', '.env');\""
+        ]
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

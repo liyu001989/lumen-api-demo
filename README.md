@@ -1,13 +1,11 @@
 # lumen-api-demo
 
-这是一个比较完整用 lumen 5.3 写的的 REST API 例子。使用了 `dingo/api` ，jwt 实现登录，功能上很简单，登录，注册，发帖，评论，单元测试(正在补充)。
+这是一个比较完整用 lumen 5.4 写的的 REST API 例子。使用了 `dingo/api` ，jwt 实现登录，功能上很简单，登录，注册，发帖，评论，单元测试(正在补充)。
 
 [![StyleCI](https://styleci.io/repos/44219096/shield)](https://styleci.io/repos/44219096)
 [![License](https://img.shields.io/github/license/liyu001989/lumen-api-demo.svg)](LICENSE)
 
-lumen5.1看[这里](https://github.com/liyu001989/lumen-api-demo/tree/5.1)
-
-lumen5.2看[这里](https://github.com/liyu001989/lumen-api-demo/tree/5.2)
+lumen5.x 请看对应的分支
 
 有需要随时联系我 
 
@@ -80,23 +78,13 @@ github 的 api 真的很有参考价值 [github-rest-api](https://developer.gith
         get    /api/users/4/posts        id为4的用户的帖子列表
         get    /api/user/posts           当前用户的帖子列表
 
+        // 登录，刷新，登出
+        // 或许可以有更好的命名
+        post    /api/authorizations  创建一个token
+        put     /api/authorizations/current  刷新当前 token
+        delete  /api/authorizations/current  删除当前 token
+
 ## 问题总结
-
-<details>
-  <summary>lumen 5.1 升级到 5.2</summary>
-
-- fix compose.json
-
-        "laravel/lumen-framework": "5.2.*",
-        "vlucas/phpdotenv": "~2.2" // 这是个坑啊
-      
-        将5.2的composer.json拿过来对比一下吧
-
-- fix bootstrap/app.php
-- Illuminate\Contracts\Foundation\Application 改为了Laravel\Lumen\Application，所以修改一下app\providers\EventServiceProvider.php
-- 可以从 5.2 的项目中，把 Middleware cp 过来
-</details>
-
 
 <details>
   <summary>jwt 使用</summary>
@@ -160,9 +148,9 @@ dingo/api 使用了 [Fractal](http://fractal.thephpleague.com/) 做数据转换�
 
   我对 repository 的理解是，它是一层对 orm 的封装，让 model 和 controller 层解耦，controller 只是关心增删该查什么数据，并不关心数据的操作是通过什么完成的，orm也好，DB也好，只要实现接口就好。而且封装了一层，我就可以对一些查询数据方便的进行缓存，而不需要调整 controller，非常方面，清晰。
 
-  上面这些是它的好处，那么当然也有不好的地方，就是对于普通的项目来说，切换 orm，或者抛弃 orm 转为全部使用 DB，这样的场景还是很少的，或者也是很后期优化的时候才会用到。还有就是，当一开始大家对 repository 的概念不清楚的时候，尝尝把大段的业务逻辑放在里面，而原本这些个业务逻辑应该出现在 controller 和 services 中。
+  仓库不方便的地方就是对于普通的项目来说，切换 orm，或者抛弃 orm 转为全部使用 DB，基本上是不可能的，或者也是很后期优化的时候才会用到。还有就是，当一开始大家对 repository 的概念不清楚的时候，尝尝把大段的业务逻辑放在里面，而原本这些个业务逻辑应该出现在 controller 和 services 中。对我来说仓库的主要作用就是解耦和缓存。
 
-  所以一般的项目就直接使用 Eloquent 吧, 不要过度设计，这里只是个例子。使用 ORM 是一件很方面的事情， dingo 的 transform 这一层就是通过 Eloquent 去预加载的。
+  所以一般的项目就直接使用 Eloquent 吧, 不要过度设计，这里只是个例子。使用 ORM 是一件很方面的事情，dingo 的 transform 这一层就是通过 Eloquent 去预加载的。
 
   例子中使用的是 `rinvex/repository` 这个库。
 </details>
