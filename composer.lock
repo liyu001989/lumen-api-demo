@@ -1755,16 +1755,16 @@
         },
         {
             "name": "laravel/lumen-framework",
-            "version": "v5.4.1",
+            "version": "v5.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/lumen-framework.git",
-                "reference": "3b44ab2c3e778516b0fd53a6e7333ab7801ce1e2"
+                "reference": "3f51ecf642e908e8a26c32e102f636c111e1e53a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/lumen-framework/zipball/3b44ab2c3e778516b0fd53a6e7333ab7801ce1e2",
-                "reference": "3b44ab2c3e778516b0fd53a6e7333ab7801ce1e2",
+                "url": "https://api.github.com/repos/laravel/lumen-framework/zipball/3f51ecf642e908e8a26c32e102f636c111e1e53a",
+                "reference": "3f51ecf642e908e8a26c32e102f636c111e1e53a",
                 "shasum": ""
             },
             "require": {
@@ -1798,7 +1798,7 @@
             },
             "require-dev": {
                 "mockery/mockery": "~0.9",
-                "phpunit/phpunit": "~5.0"
+                "phpunit/phpunit": "~5.7"
             },
             "suggest": {
                 "vlucas/phpdotenv": "Required to use .env files (~2.2)."
@@ -1834,7 +1834,7 @@
                 "laravel",
                 "lumen"
             ],
-            "time": "2017-01-24T17:08:00+00:00"
+            "time": "2017-02-04T20:28:26+00:00"
         },
         {
             "name": "league/fractal",
@@ -2139,16 +2139,16 @@
         },
         {
             "name": "nikic/fast-route",
-            "version": "v1.1.0",
+            "version": "v1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/FastRoute.git",
-                "reference": "f3dcf5130e634b6123d40727d612ec6aa4f61fb3"
+                "reference": "b5f95749071c82a8e0f58586987627054400cdf6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/FastRoute/zipball/f3dcf5130e634b6123d40727d612ec6aa4f61fb3",
-                "reference": "f3dcf5130e634b6123d40727d612ec6aa4f61fb3",
+                "url": "https://api.github.com/repos/nikic/FastRoute/zipball/b5f95749071c82a8e0f58586987627054400cdf6",
+                "reference": "b5f95749071c82a8e0f58586987627054400cdf6",
                 "shasum": ""
             },
             "require": {
@@ -2178,7 +2178,7 @@
                 "router",
                 "routing"
             ],
-            "time": "2016-10-20T17:36:47+00:00"
+            "time": "2017-01-19T11:35:12+00:00"
         },
         {
             "name": "palanik/lumen-cors",
@@ -2472,25 +2472,25 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/rinvex/repository.git",
-                "reference": "ee817e89250c647466a271de571bf66e68052390"
+                "reference": "e2226399eb315f84f5ef3398c1ccdfec8540b56c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rinvex/repository/zipball/ee817e89250c647466a271de571bf66e68052390",
-                "reference": "ee817e89250c647466a271de571bf66e68052390",
+                "url": "https://api.github.com/repos/rinvex/repository/zipball/e2226399eb315f84f5ef3398c1ccdfec8540b56c",
+                "reference": "e2226399eb315f84f5ef3398c1ccdfec8540b56c",
                 "shasum": ""
             },
             "require": {
-                "illuminate/container": "~5.1.0|~5.2.0|~5.3.0|~5.4.0",
-                "illuminate/contracts": "~5.1.0|~5.2.0|~5.3.0|~5.4.0",
-                "illuminate/database": "~5.1.0|~5.2.0|~5.3.0|~5.4.0",
-                "illuminate/events": "~5.1.0|~5.2.0|~5.3.0|~5.4.0",
-                "illuminate/support": "~5.1.0|~5.2.0|~5.3.0|~5.4.0",
+                "illuminate/container": "~5.4.0",
+                "illuminate/contracts": "~5.4.0",
+                "illuminate/database": "~5.4.0",
+                "illuminate/events": "~5.4.0",
+                "illuminate/support": "~5.4.0",
                 "php": "^7.0.0"
             },
             "require-dev": {
-                "illuminate/config": "~5.1.0|~5.2.0|~5.3.0|~5.4.0",
-                "phpunit/phpunit": "^5.4.0"
+                "illuminate/config": "~5.4.0",
+                "phpunit/phpunit": "^5.7.0"
             },
             "suggest": {
                 "illuminate/pagination": "Required to paginate the result set."
@@ -2541,7 +2541,7 @@
                 "repository",
                 "rinvex"
             ],
-            "time": "2017-01-27 05:08:13"
+            "time": "2017-02-04 18:50:14"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -4097,16 +4097,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "5.7.9",
+            "version": "5.7.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "69f832b87c731d5cacad7f91948778fe98335fdd"
+                "reference": "a6ad2472daba76b0689042b7709f86d4f06bcaab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/69f832b87c731d5cacad7f91948778fe98335fdd",
-                "reference": "69f832b87c731d5cacad7f91948778fe98335fdd",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/a6ad2472daba76b0689042b7709f86d4f06bcaab",
+                "reference": "a6ad2472daba76b0689042b7709f86d4f06bcaab",
                 "shasum": ""
             },
             "require": {
@@ -4123,11 +4123,11 @@
                 "phpunit/php-text-template": "~1.2",
                 "phpunit/php-timer": "^1.0.6",
                 "phpunit/phpunit-mock-objects": "^3.2",
-                "sebastian/comparator": "~1.2.2",
+                "sebastian/comparator": "^1.2.4",
                 "sebastian/diff": "~1.2",
                 "sebastian/environment": "^1.3.4 || ^2.0",
                 "sebastian/exporter": "~2.0",
-                "sebastian/global-state": "^1.0 || ^2.0",
+                "sebastian/global-state": "^1.1",
                 "sebastian/object-enumerator": "~2.0",
                 "sebastian/resource-operations": "~1.0",
                 "sebastian/version": "~1.0|~2.0",
@@ -4175,7 +4175,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2017-01-28T06:14:33+00:00"
+            "time": "2017-02-05T15:31:31+00:00"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
