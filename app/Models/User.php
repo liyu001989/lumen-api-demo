@@ -13,7 +13,7 @@ class User extends BaseModel implements AuthenticatableContract, JWTSubject
     use SoftDeletes, Authenticatable;
 
     // 查询用户的时候，不暴露密码
-    protected $hidden = ['password'];
+    protected $hidden = ['password', 'deleted_at'];
 
     public function posts()
     {
