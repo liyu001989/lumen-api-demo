@@ -196,7 +196,7 @@ class PostCommentController extends BaseController
             return $this->response->errorNotFound();
         }
 
-        $this->postComment->destroy($id);
+        $comment->delete();
 
         return $this->response->noContent();
     }

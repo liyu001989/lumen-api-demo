@@ -253,7 +253,7 @@ class PostController extends BaseController
             return $this->errorBadRequest($validator);
         }
 
-        $this->post->update($id, $request->only('title', 'content'));
+        $post->update($request->only('title', 'content'));
 
         return $this->response->noContent();
     }
@@ -280,7 +280,7 @@ class PostController extends BaseController
             return $this->response->errorForbidden();
         }
 
-        $this->post->destroy($id);
+        $post->delete();
 
         return $this->response->noContent();
     }

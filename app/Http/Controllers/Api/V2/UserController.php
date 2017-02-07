@@ -98,7 +98,7 @@ class UserController extends BaseController
         }
 
         $password = app('hash')->make($request->get('password'));
-        User::update($user->id, ['password' => $password]);
+        $user->update(['password' => $password]);
 
         return $this->response->noContent();
     }
@@ -191,7 +191,7 @@ class UserController extends BaseController
         $attributes = array_filter($request->only('name', 'avatar'));
 
         if ($attributes) {
-            $user = User::update($user->id, $attributes);
+            $user->update($attributes);
         }
 
         return $this->response->item($user, new UserTransformer());
