@@ -15,7 +15,7 @@
         "guzzlehttp/guzzle": "~6.0",
         "predis/predis": "^1.0",
         "palanik/lumen-cors": "dev-master",
-        "rinvex/repository": "dev-develop"
+        "rinvex/repository": "dev-master"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
