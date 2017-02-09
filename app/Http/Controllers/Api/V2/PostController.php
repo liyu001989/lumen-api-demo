@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api\V2;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use App\Transformers\PostTransformer;
-use League\Fractal\Pagination\cursor;
 
 class PostController extends BaseController
 {

@@ -40,7 +40,7 @@ class AuthControllerTest extends TestCase
         $this->json('POST', 'api/authorization', $params)
             ->seeJsonEquals([
                 'status_code' => 403,
-                'message' =>  'email or password is incorrect',
+                'message' => 'email or password is incorrect',
             ])
             ->assertResponseStatus(403);
 
@@ -79,7 +79,7 @@ class AuthControllerTest extends TestCase
         $this->json('POST', 'api/users')
             ->seeJsonEquals([
                 'email' => ['The Email field is required.'],
-                'password'  => ['The password field is required.'],
+                'password' => ['The password field is required.'],
             ])
             ->assertResponseStatus(400);
 
@@ -133,7 +133,7 @@ class AuthControllerTest extends TestCase
 
         $this->post('api/users', $params)
             ->seeJsonEquals([
-                'token'  => 'register-token',
+                'token' => 'register-token',
             ])
             ->assertResponseStatus(200);
 

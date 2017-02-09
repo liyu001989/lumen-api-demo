@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api\V1;
 
 use Illuminate\Http\Request;
 use App\Transformers\PostTransformer;
-use League\Fractal\Pagination\cursor;
 use App\Repositories\Contracts\PostRepository;
 
 class PostController extends BaseController
