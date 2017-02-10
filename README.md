@@ -31,6 +31,7 @@ lumen5.x 请看对应的分支
 - 有用的文章 [http://oomusou.io/laravel/laravel-architecture](http://oomusou.io/laravel/laravel-architecture/)
 - php lint [phplint](https://github.com/overtrue/phplint)
 - Laravel 理念 [From Apprentice To Artisan](https://my.oschina.net/zgldh/blog/389246)
+- 我对 REST 的理解 [http://blog.lyyw.info/2017/02/09/2017-02-09%20%E5%AF%B9rest%E7%9A%84%E7%90%86%E8%A7%A3/](http://blog.lyyw.info/2017/02/09/2017-02-09%20%E5%AF%B9rest%E7%9A%84%E7%90%86%E8%A7%A3/)
 - 项目api文档 [http://lumen.lyyw.info/apidoc](https://lumen.lyyw.info/apidoc)
 
 ## USAGE
@@ -92,6 +93,20 @@ github 的 api 真的很有参考价值 [github-rest-api](https://developer.gith
   <summary>jwt 使用</summary>
 
 lumen 5.2 取消了session，没有了 auth 的实例，所以使用jwt的时候需要配置一下，注意 config/auth.php 中的配置，而且 user 的 model 需要实现 `Tymon\JWTAuth\Contracts\JWTSubject`;
+
+基本用法, jwt 会 encode 对应模型的 id，生成token，客户端拿到 token，放在 Authorization header中
+
+```
+Authorization: Bearer token
+```
+
+验证的逻辑就是 decode token 拿到id，然后找到对应的用户。当然了，你可能需要 encode 额外的字段，那么可以使用 CustomClaims。
+
+token 有两个时间，一个是过期时间(ttl)，一个是可刷新时间(refresh_ttl)。怎么理解，比如 ttl 是 1 天，refresh_ttl 是1周，那么 token 一天后过期，但是1周之内你仍然可以用这个 token 换取一个新的 token，而这个新 token 又会在 1 天后过期，1周内可刷新。
+
+举个例子，用户登录了你的应用，并且每天都会打开你的应用，你的应用如果发现这个 token 过期了，会主动刷新一次，如果成功那么用户依然是登录的。当用户1周都没有登录过你的应用，那么他就需要重新登录了。
+
+客户端的逻辑应该是，首先判断这个 token 是否过期了，1是通过两个 ttl 判断，因为客户端是知道这两个时间的，2是调用需要授权的接口返回的状态码（401），判断过期了则主动尝试刷新，刷新成功了，重置token和时间，失败了，则跳转到登录页面。
 </details>
 
 <details>
