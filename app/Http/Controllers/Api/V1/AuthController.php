@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\V1;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Transformers\AuthorizationTransformer;
 
 class AuthController extends BaseController
 {
@@ -18,9 +19,11 @@ class AuthController extends BaseController
      * @apiSuccessExample {json} Success-Response:
      *     HTTP/1.1 201 Created
      *     {
-     *       "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbHVtZW4tYXBpLWRlbW8uZGV2L2FwaS9hdXRob3JpemF0aW9ucyIsImlhdCI6MTQ4Mzk3NTY5MywiZXhwIjoxNDg5MTU5NjkzLCJuYmYiOjE0ODM5NzU2OTMsImp0aSI6ImViNzAwZDM1MGIxNzM5Y2E5ZjhhNDk4NGMzODcxMWZjIiwic3ViIjo1M30.hdny6T031vVmyWlmnd2aUr4IVM9rm2Wchxg5RX_SDpM",
-     *       "expired_at": "2017-03-10 15:28:13",
-     *       "refresh_expired_at": "2017-01-23 15:28:13"
+     *         "data": {
+     *             "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbHVtZW4tYXBpLWRlbW8uZGV2L2FwaS9hdXRob3JpemF0aW9ucyIsImlhdCI6MTQ4Mzk3NTY5MywiZXhwIjoxNDg5MTU5NjkzLCJuYmYiOjE0ODM5NzU2OTMsImp0aSI6ImViNzAwZDM1MGIxNzM5Y2E5ZjhhNDk4NGMzODcxMWZjIiwic3ViIjo1M30.hdny6T031vVmyWlmnd2aUr4IVM9rm2Wchxg5RX_SDpM",
+     *             "expired_at": "2017-03-10 15:28:13",
+     *             "refresh_expired_at": "2017-01-23 15:28:13"
+     *         }
      *     }
      * @apiErrorExample {json} Error-Response:
      *     HTTP/1.1 404 Not Found
@@ -46,7 +49,7 @@ class AuthController extends BaseController
             $this->response->errorForbidden(trans('auth.incorrect'));
         }
 
-        $result = [
+        $result['data'] = [
             'token' => $token,
             'expired_at' => Carbon::now()->addMinutes(config('jwt.ttl'))->toDateTimeString(),
             'refresh_expired_at' => Carbon::now()->addMinutes(config('jwt.refresh_ttl'))->toDateTimeString(),
@@ -69,9 +72,11 @@ class AuthController extends BaseController
      * @apiSuccessExample {json} Success-Response:
      *     HTTP/1.1 200 OK
      *     {
-     *       "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbHVtZW4tYXBpLWRlbW8uZGV2L2FwaS9hdXRob3JpemF0aW9ucyIsImlhdCI6MTQ4Mzk3NTY5MywiZXhwIjoxNDg5MTU5NjkzLCJuYmYiOjE0ODM5NzU2OTMsImp0aSI6ImViNzAwZDM1MGIxNzM5Y2E5ZjhhNDk4NGMzODcxMWZjIiwic3ViIjo1M30.hdny6T031vVmyWlmnd2aUr4IVM9rm2Wchxg5RX_SDpM",
-     *       "expired_at": "2017-03-10 15:28:13",
-     *       "refresh_expired_at": "2017-01-23 15:28:13"
+     *         "data": {
+     *             "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbHVtZW4tYXBpLWRlbW8uZGV2L2FwaS9hdXRob3JpemF0aW9ucyIsImlhdCI6MTQ4Mzk3NTY5MywiZXhwIjoxNDg5MTU5NjkzLCJuYmYiOjE0ODM5NzU2OTMsImp0aSI6ImViNzAwZDM1MGIxNzM5Y2E5ZjhhNDk4NGMzODcxMWZjIiwic3ViIjo1M30.hdny6T031vVmyWlmnd2aUr4IVM9rm2Wchxg5RX_SDpM",
+     *             "expired_at": "2017-03-10 15:28:13",
+     *             "refresh_expired_at": "2017-01-23 15:28:13"
+     *         }
      *     }
      */
     public function update()
@@ -80,7 +85,7 @@ class AuthController extends BaseController
         // same with \Auth::requireToken()->checkOrFail();
         \Auth::getPayload();
 
-        $result = [
+        $result['data'] = [
             'token' => \Auth::refresh(),
             'expired_at' => Carbon::now()->addMinutes(config('jwt.ttl'))->toDateTimeString(),
             'refresh_expired_at' => Carbon::now()->addMinutes(config('jwt.refresh_ttl'))->toDateTimeString(),

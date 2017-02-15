@@ -66,6 +66,8 @@ $app->singleton(
 
 $app->middleware([
     'cors' => palanik\lumen\Middleware\LumenCors::class,
+    // 根据 accept-language 设置语言
+    'locale' => App\Http\Middleware\ChangeLocale::class,
 ]);
 
 $app->routeMiddleware([
@@ -128,6 +130,7 @@ $app->singleton(Illuminate\Auth\AuthManager::class, function ($app) {
 $app->group(['namespace' => 'App\Http\Controllers'], function ($app) {
     require __DIR__.'/../routes/api/v1.php';
     require __DIR__.'/../routes/api/v2.php';
+    require __DIR__.'/../routes/web.php';
 });
 
 return $app;

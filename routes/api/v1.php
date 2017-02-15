@@ -11,10 +11,6 @@
 |
  */
 
-$app->get('/', function () use ($app) {
-    return $app->version();
-});
-
 $api = app('Dingo\Api\Routing\Router');
 
 // v1 version API
