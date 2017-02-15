@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api\V1;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use App\Transformers\AuthorizationTransformer;
 
 class AuthController extends BaseController
 {
