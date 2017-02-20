@@ -7,7 +7,7 @@
 
 lumen5.x 请看对应的分支
 
-当前 master 已经升级到了 5.4，但是由于部分包比如 rinvex/repository 还未更新, 以及有一些小bug, 所以可以先使用稳定的 5.3 分支。
+当前 master 已经升级到了 5.4，但是由于部分包比如 rinvex/repository 还未更新, 所以可以先使用稳定的 5.3 分支。php > 7.0 的同学可以正常使用 master 分支，但是需要注意 [request 对象在5.4中的变化](http://blog.lyyw.info/2017/02/18/2017-02-18-%E7%BF%BB%E8%AF%91-lumen-5-4-%E4%B8%AD-request-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%8F%98%E5%8C%96/)
 
 有需要随时联系我 
 
