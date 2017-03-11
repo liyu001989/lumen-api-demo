@@ -159,13 +159,13 @@ dingo/api 使用了 [Fractal](http://fractal.thephpleague.com/) 做数据转换�
 </details>
 
 <details>
-  <summary>repository 的使用</summary>
+  <summary>关于使用 repository </summary>
 
-  为了不造成误解，v1 版本的 api 使用了仓库, v2 版本直接使用的 Eloquent。
+  首先不推荐大家使用 repository，为了不造成误解，v1 版本的 api 使用了仓库, v2 版本直接使用的 Eloquent。
 
   我对 repository 的理解是，它是一层对 orm 的封装，让 model 和 controller 层解耦，controller 只是关心增删该查什么数据，并不关心数据的操作是通过什么完成的，orm也好，DB也好，只要实现接口就好。而且封装了一层，我就可以对一些查询数据方便的进行缓存，而不需要调整 controller，非常方面，清晰。
 
-  仓库不方便的地方就是对于普通的项目来说，切换 orm，或者抛弃 orm 转为全部使用 DB，基本上是不可能的，或者也是很后期优化的时候才会用到。还有就是，当一开始大家对 repository 的概念不清楚的时候，尝尝把大段的业务逻辑放在里面，而原本这些个业务逻辑应该出现在 controller 和 services 中。对我来说仓库的主要作用就是解耦和缓存。
+  仓库不方便的地方就是对于普通的项目来说，切换 orm，或者抛弃 orm 转为全部使用 DB，基本上是不可能的，或者也是很后期优化的时候才会用到。还有就是，当一开始大家对 repository 的概念不清楚的时候，尝尝把大段的业务逻辑放在里面，而原本这些个业务逻辑应该出现在 controller 和 services 中。对我来说仓库的主要作用就是解耦和缓存, 而这些在项目初期是不需要的。
 
   所以一般的项目就直接使用 Eloquent 吧, 不要过度设计，这里只是个例子。使用 ORM 是一件很方面的事情，dingo 的 transform 这一层就是通过 Eloquent 去预加载的。
 
