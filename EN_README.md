@@ -114,7 +114,7 @@ I think default DataArray is good enough.
 </details>
 
 <details>
-  <summary>repository</summary>
+  <summary>about repository</summary>
 
 I achieved myself, there are two good repository packages you can try
 
