@@ -80,12 +80,32 @@ class AuthController extends BaseController
      */
     public function update()
     {
-        $result = [
+        // check token
+        // same with \Auth::requireToken()->checkOrFail();
+        \Auth::getPayload();
+
+        $result['data'] = [
             'token' => \Auth::refresh(),
             'expired_at' => Carbon::now()->addMinutes(config('jwt.ttl'))->toDateTimeString(),
             'refresh_expired_at' => Carbon::now()->addMinutes(config('jwt.refresh_ttl'))->toDateTimeString(),
         ];
 
         return $this->response->array($result);
+    }
+
+    /**
+     * @api {delete} /authorizations/current 删除当前token (delete current token)
+     * @apiDescription 删除当前token (delete current token)
+     * @apiGroup Auth
+     * @apiPermission jwt
+     * @apiVersion 0.1.0
+     * @apiSuccessExample {json} Success-Response:
+     *     HTTP/1.1 204 No Content
+     */
+    public function destroy()
+    {
+        \Auth::logout();
+
+        return $this->response->noContent();
     }
 }
