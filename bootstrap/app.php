@@ -89,9 +89,7 @@ $app->register(App\Providers\AppServiceProvider::class);
 $app->register(App\Providers\AuthServiceProvider::class);
 $app->register(Illuminate\Redis\RedisServiceProvider::class);
 //$app->register(App\Providers\EventServiceProvider::class);
-//
-// 注入repository
-$app->register(App\Providers\RepositoryServiceProvider::class);
+
 // dingo/api
 $app->register(Dingo\Api\Provider\LumenServiceProvider::class);
 //jwt
@@ -129,7 +127,6 @@ $app->singleton(Illuminate\Auth\AuthManager::class, function ($app) {
 
 $app->group(['namespace' => 'App\Http\Controllers'], function ($app) {
     require __DIR__.'/../routes/api/v1.php';
-    require __DIR__.'/../routes/api/v2.php';
     require __DIR__.'/../routes/web.php';
 });
 

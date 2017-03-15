@@ -14,7 +14,6 @@
         "guzzlehttp/guzzle": "~6.0",
         "predis/predis": "^1.1",
         "palanik/lumen-cors": "dev-master",
-        "rinvex/repository": "dev-develop",
         "dingo/api": "1.0.0-beta8"
     },
     "require-dev": {

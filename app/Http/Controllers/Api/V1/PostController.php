@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
 use App\Transformers\PostTransformer;
-use App\Repositories\Contracts\PostRepository;
 
 class PostController extends BaseController
 {
-    private $postRepository;
+    private $post;
 
-    public function __construct(PostRepository $postRepository)
+    public function __construct(Post $post)
     {
-        $this->postRepository = $postRepository;
+        $this->post = $post;
     }
 
     /**
@@ -65,7 +65,7 @@ class PostController extends BaseController
      */
     public function index()
     {
-        $posts = $this->postRepository->paginate();
+        $posts = $this->post->paginate();
 
         return $this->response->paginator($posts, new PostTransformer());
     }
@@ -120,7 +120,7 @@ class PostController extends BaseController
      */
     public function userIndex()
     {
-        $posts = $this->postRepository
+        $posts = $this->post
             ->where(['user_id' => $this->user()->id])
             ->paginate();
 
@@ -174,7 +174,7 @@ class PostController extends BaseController
      */
     public function show($id)
     {
-        $post = $this->postRepository->find($id);
+        $post = $this->post->find($id);
 
         if (! $post) {
             return $this->response->errorNotFound();
@@ -192,16 +192,7 @@ class PostController extends BaseController
      * @apiParam {String} content  post content
      * @apiVersion 0.1.0
      * @apiSuccessExample {json} Success-Response:
-     * HTTP/1.1 201 Created
-     * {
-     *     "data": {
-     *         "title": "foo",
-     *         "content": "bar",
-     *         "user_id": 33,
-     *         "created_at": "2017-01-19 15:37:25",
-     *         "id": 212
-     *     }
-     * }
+     *   HTTP/1.1 201 Created
      */
     public function store(Request $request)
     {
@@ -216,33 +207,32 @@ class PostController extends BaseController
 
         $attributes = $request->only('title', 'content');
         $attributes['user_id'] = $this->user()->id;
-        $post = $this->postRepository->create($attributes);
+        $post = $this->post->create($attributes);
 
-        $location = dingo_route('v1', 'posts.show', $post->id);
-        // 不返回数据
-        // return $this->response->created($location);
-
-        // 返回数据
-        return $this->response
-            ->item($post, new PostTransformer())
-            ->withHeader('Location', $location)
-            ->setStatusCode(201);
+        $location = dingo_route('v2', 'posts.show', $post->id);
+        // 协议里是这么返回，把资源位置放在header里面
+        return $this->response->created($location);
+        // 也可以返回 201 加数据
+        //return $this->response
+            //->item($post, new PostTransformer())
+            //->withHeader('Location', $location)
+            //->setStatusCode(201);
     }
 
     /**
-     * @api {put} /posts/{id} 替换帖子(update post)
-     * @apiDescription 替换帖子(update post)
+     * @api {put} /posts/{id} 修改帖子(update post)
+     * @apiDescription 修改帖子(update post)
      * @apiGroup Post
      * @apiPermission jwt
      * @apiParam {String} title  post title
      * @apiParam {String} content  post content
      * @apiVersion 0.1.0
      * @apiSuccessExample {json} Success-Response:
-     *   HTTP/1.1 204 No Content
+     *   HTTP/1.1 204 NO CONTENT
      */
     public function update($id, Request $request)
     {
-        $post = $this->postRepository->find($id);
+        $post = $this->post->find($id);
 
         if (! $post) {
             return $this->response->errorNotFound();
@@ -262,48 +252,7 @@ class PostController extends BaseController
             return $this->errorBadRequest($validator);
         }
 
-        $this->postRepository->update($id, $request->only('title', 'content'));
-
-        return $this->response->noContent();
-    }
-
-    /**
-     * @api {patch} /posts/{id} 修改帖子(update part of post)
-     * @apiDescription 修改帖子(update part of post)
-     * @apiGroup Post
-     * @apiPermission jwt
-     * @apiParam {String} [title]  post title
-     * @apiParam {String} [content]  post content
-     * @apiVersion 0.1.0
-     * @apiSuccessExample {json} Success-Response:
-     *   HTTP/1.1 204 No Content
-     */
-    public function patch($id, Request $request)
-    {
-        $post = $this->postRepository->find($id);
-
-        if (! $post) {
-            return $this->response->errorNotFound();
-        }
-
-        // 不属于我的forbidden
-        if ($post->user_id != $this->user()->id) {
-            return $this->response->errorForbidden();
-        }
-
-        $validator = \Validator::make($request->input(), [
-            'title' => 'string|max:50',
-            'content' => 'string',
-        ]);
-
-        if ($validator->fails()) {
-            return $this->errorBadRequest($validator);
-        }
-
-        $this->postRepository->update(
-            $id,
-            array_filter($request->only('title', 'content'))
-        );
+        $post->update($request->only('title', 'content'));
 
         return $this->response->noContent();
     }
@@ -319,7 +268,7 @@ class PostController extends BaseController
      */
     public function destroy($id)
     {
-        $post = $this->postRepository->find($id);
+        $post = $this->post->find($id);
 
         if (! $post) {
             return $this->response->errorNotFound();
@@ -330,7 +279,7 @@ class PostController extends BaseController
             return $this->response->errorForbidden();
         }
 
-        $this->postRepository->destroy($id);
+        $post->delete();
 
         return $this->response->noContent();
     }

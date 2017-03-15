@@ -3,18 +3,13 @@
 namespace App\Http\Controllers\Api\V1;
 
 use Carbon\Carbon;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Jobs\SendRegisterEmail;
 use App\Transformers\UserTransformer;
-use App\Repositories\Contracts\UserRepository;
 
 class UserController extends BaseController
 {
-    public function __construct(UserRepository $userRepository)
-    {
-        $this->userRepository = $userRepository;
-    }
-
     /**
      * @api {get} /users 用户列表(user list)
      * @apiDescription 用户列表(user list)
@@ -46,9 +41,9 @@ class UserController extends BaseController
      *       }
      *     }
      */
-    public function index()
+    public function index(User $user)
     {
-        $users = $this->userRepository->paginate();
+        $users = User::paginate();
 
         return $this->response->paginator($users, new UserTransformer());
     }
@@ -103,7 +98,7 @@ class UserController extends BaseController
         }
 
         $password = app('hash')->make($request->get('password'));
-        $this->userRepository->update($user->id, ['password' => $password]);
+        $user->update(['password' => $password]);
 
         return $this->response->noContent();
     }
@@ -129,7 +124,7 @@ class UserController extends BaseController
      */
     public function show($id)
     {
-        $user = $this->userRepository->find($id);
+        $user = User::find($id);
 
         if (! $user) {
             return $this->response->errorNotFound();
@@ -196,7 +191,7 @@ class UserController extends BaseController
         $attributes = array_filter($request->only('name', 'avatar'));
 
         if ($attributes) {
-            $user = $this->userRepository->update($user->id, $attributes);
+            $user->update($attributes);
         }
 
         return $this->response->item($user, new UserTransformer());
@@ -244,7 +239,7 @@ class UserController extends BaseController
             'name' => $request->get('name'),
             'password' => app('hash')->make($password),
         ];
-        $user = $this->userRepository->create($attributes);
+        $user = User::create($attributes);
 
         // 用户注册成功后发送邮件
         dispatch(new SendRegisterEmail($user));

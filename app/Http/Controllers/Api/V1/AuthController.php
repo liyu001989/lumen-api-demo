@@ -14,12 +14,12 @@ class AuthController extends BaseController
      * @apiPermission none
      * @apiParam {Email} email     邮箱
      * @apiParam {String} password  密码
-     * @apiVersion 0.1.0
+     * @apiVersion 0.2.0
      * @apiSuccessExample {json} Success-Response:
      *     HTTP/1.1 201 Created
      *     {
      *         "data": {
-     *             "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbHVtZW4tYXBpLWRlbW8uZGV2L2FwaS9hdXRob3JpemF0aW9ucyIsImlhdCI6MTQ4Mzk3NTY5MywiZXhwIjoxNDg5MTU5NjkzLCJuYmYiOjE0ODM5NzU2OTMsImp0aSI6ImViNzAwZDM1MGIxNzM5Y2E5ZjhhNDk4NGMzODcxMWZjIiwic3ViIjo1M30.hdny6T031vVmyWlmnd2aUr4IVM9rm2Wchxg5RX_SDpM",
+     *             "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbHVtZW4tYXBpLWRlbW8uZGV1L2FwaS9hdXRob3JpemF0aW9ucyIsImlhdCI6MTQ4Mzk3NTY5MywiZXhwIjoxNDg5MTU5NjkzLCJuYmYiOjE0ODM5NzU2OTMsImp0aSI6ImViNzAwZDM1MGIxNzM5Y2E5ZjhhNDk4NGMzODcxMWZjIiwic3ViIjo1M30.hdny6T031vVmyWlmnd2aUr4IVM9rm2Wchxg5RX_SDpM",
      *             "expired_at": "2017-03-10 15:28:13",
      *             "refresh_expired_at": "2017-01-23 15:28:13"
      *         }
@@ -58,11 +58,11 @@ class AuthController extends BaseController
     }
 
     /**
-     * @api {put} /authorizations/current 刷新token(refresh token)
+     * @api {put} /authorizations 刷新token(refresh token)
      * @apiDescription 刷新token(refresh token)
      * @apiGroup Auth
      * @apiPermission JWT
-     * @apiVersion 0.1.0
+     * @apiVersion 0.2.0
      * @apiHeader {String} Authorization 用户旧的jwt-token, value已Bearer开头
      * @apiHeaderExample {json} Header-Example:
      *     {
@@ -72,7 +72,7 @@ class AuthController extends BaseController
      *     HTTP/1.1 200 OK
      *     {
      *         "data": {
-     *             "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbHVtZW4tYXBpLWRlbW8uZGV2L2FwaS9hdXRob3JpemF0aW9ucyIsImlhdCI6MTQ4Mzk3NTY5MywiZXhwIjoxNDg5MTU5NjkzLCJuYmYiOjE0ODM5NzU2OTMsImp0aSI6ImViNzAwZDM1MGIxNzM5Y2E5ZjhhNDk4NGMzODcxMWZjIiwic3ViIjo1M30.hdny6T031vVmyWlmnd2aUr4IVM9rm2Wchxg5RX_SDpM",
+     *             "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbHVtZW4tYXBpLWRlbW8uZGV1L2FwaS9hdXRob3JpemF0aW9ucyIsImlhdCI6MTQ4Mzk3NTY5MywiZXhwIjoxNDg5MTU5NjkzLCJuYmYiOjE0ODM5NzU2OTMsImp0aSI6ImViNzAwZDM1MGIxNzM5Y2E5ZjhhNDk4NGMzODcxMWZjIiwic3ViIjo1M30.hdny6T031vVmyWlmnd2aUr4IVM9rm2Wchxg5RX_SDpM",
      *             "expired_at": "2017-03-10 15:28:13",
      *             "refresh_expired_at": "2017-01-23 15:28:13"
      *         }
@@ -80,32 +80,12 @@ class AuthController extends BaseController
      */
     public function update()
     {
-        // check token
-        // same with \Auth::requireToken()->checkOrFail();
-        \Auth::getPayload();
-
-        $result['data'] = [
+        $result = [
             'token' => \Auth::refresh(),
             'expired_at' => Carbon::now()->addMinutes(config('jwt.ttl'))->toDateTimeString(),
             'refresh_expired_at' => Carbon::now()->addMinutes(config('jwt.refresh_ttl'))->toDateTimeString(),
         ];
 
         return $this->response->array($result);
-    }
-
-    /**
-     * @api {delete} /authorizations/current 删除当前token (delete current token)
-     * @apiDescription 删除当前token (delete current token)
-     * @apiGroup Auth
-     * @apiPermission jwt
-     * @apiVersion 0.1.0
-     * @apiSuccessExample {json} Success-Response:
-     *     HTTP/1.1 204 No Content
-     */
-    public function destroy()
-    {
-        \Auth::logout();
-
-        return $this->response->noContent();
     }
 }
