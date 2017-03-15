@@ -45,7 +45,7 @@ class AuthController extends BaseController
 
         // 验证失败返回403
         if (! $token = \Auth::attempt($credentials)) {
-            $this->response->errorForbidden(trans('auth.incorrect'));
+            $this->response->errorUnauthorized(trans('auth.incorrect'));
         }
 
         $result['data'] = [

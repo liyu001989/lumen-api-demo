@@ -7,7 +7,9 @@
 
 lumen5.x 请看对应的分支
 
-当前 master 已经升级到了 5.4，但是由于部分包比如 rinvex/repository 还未更新, 所以可以先使用稳定的 5.3 分支。php > 7.0 的同学可以正常使用 master 分支，但是需要注意 [request 对象在5.4中的变化](http://blog.lyyw.info/2017/02/18/2017-02-18-%E7%BF%BB%E8%AF%91-lumen-5-4-%E4%B8%AD-request-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%8F%98%E5%8C%96/)
+喜欢 repository 的可以去 [这里](https://github.com/liyu001989/lumen-api-demo/tree/repository)。不推荐使用。
+
+当前 master 已经升级到了 5.4，需要注意 [request 对象在5.4中的变化](http://blog.lyyw.info/2017/02/18/2017-02-18-%E7%BF%BB%E8%AF%91-lumen-5-4-%E4%B8%AD-request-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%8F%98%E5%8C%96/)
 
 有需要随时联系我 
 
@@ -94,7 +96,7 @@ github 的 api 真的很有参考价值 [github-rest-api](https://developer.gith
 
 lumen 5.2 取消了session，没有了 auth 的实例，所以使用jwt的时候需要配置一下，注意 config/auth.php 中的配置，而且 user 的 model 需要实现 `Tymon\JWTAuth\Contracts\JWTSubject`;
 
-基本用法, jwt 会 encode 对应模型的 id，生成token，客户端拿到 token，放在 Authorization header中
+基本用法, jwt 会 encode 对应模型的 id，生成token，客户端拿到 token，放在 Authorization header 中
 
 ```
 Authorization: Bearer token
@@ -161,7 +163,7 @@ dingo/api 使用了 [Fractal](http://fractal.thephpleague.com/) 做数据转换�
 <details>
   <summary>关于使用 repository </summary>
 
-  首先不推荐大家使用 repository，为了不造成误解，v1 版本的 api 使用了仓库, v2 版本直接使用的 Eloquent。
+  首先不推荐大家使用 repository，已经将实现移动至 repository 分支。
 
   我对 repository 的理解是，它是一层对 orm 的封装，让 model 和 controller 层解耦，controller 只是关心增删该查什么数据，并不关心数据的操作是通过什么完成的，orm也好，DB也好，只要实现接口就好。而且封装了一层，我就可以对一些查询数据方便的进行缓存，而不需要调整 controller，非常方面，清晰。
 
