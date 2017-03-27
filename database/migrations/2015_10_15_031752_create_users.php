@@ -15,7 +15,7 @@ class CreateUsers extends Migration
             $table->increments('id');
             $table->string('email')->unique()->index();
             $table->string('name', 50)->index();
-            $table->string('password');
+            $table->string('password')->nullable();
             $table->string('avatar', 255)->nullable();
             $table->timestamps();
             $table->softDeletes();

@@ -57,15 +57,29 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api\V1'], function ($a
         'uses' => 'PostCommentController@index',
     ]);
 
-    // AUTH
-    // refresh jwt token
-    $api->put('authorizations', [
+    /*
+     * 对于authorizations 并没有保存在数据库，所以并没有id，那么对于
+     * 刷新（put) 和 删除（delete) 我没有想到更好的命名方式
+     * 所以暂时就是 authorizations/current 表示当前header中的这个token。
+     * 如果 tokekn 保存保存在数据库，那么就是 authorizations/{id}，像 github 那样。
+     */
+    $api->put('authorizations/current', [
         'as' => 'authorizations.update',
         'uses' => 'AuthController@update',
     ]);
 
     // need authentication
     $api->group(['middleware' => 'api.auth'], function ($api) {
+        /*
+         * 对于authorizations 并没有保存在数据库，所以并没有id，那么对于
+         * 刷新（put) 和 删除（delete) 我没有想到更好的命名方式
+         * 所以暂时就是 authorizations/current 表示当前header中的这个token。
+         * 如果 tokekn 保存保存在数据库，那么就是 authorizations/{id}，像 github 那样。
+         */
+        $api->delete('authorizations/current', [
+            'as' => 'authorizations.destroy',
+            'uses' => 'AuthController@destroy',
+        ]);
 
         // USER
         // my detail
