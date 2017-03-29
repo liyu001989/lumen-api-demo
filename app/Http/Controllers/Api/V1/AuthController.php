@@ -80,10 +80,6 @@ class AuthController extends BaseController
      */
     public function update()
     {
-        // check token
-        // same with \Auth::requireToken()->checkOrFail();
-        \Auth::getPayload();
-
         $result['data'] = [
             'token' => \Auth::refresh(),
             'expired_at' => Carbon::now()->addMinutes(config('jwt.ttl'))->toDateTimeString(),
