@@ -124,7 +124,6 @@ class PostCommentController extends BaseController
 
             $nextCursor = $comments->last()->id;
             $prevCursor = $currentCursor;
-            $cursor = new Cursor($currentCursor, $nextCursor, $prevCursor, $comments->count());
 
             $cursorPatination = new Cursor($currentCursor, $prevCursor, $nextCursor, $comments->count());
 
