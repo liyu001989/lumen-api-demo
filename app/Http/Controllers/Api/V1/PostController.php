@@ -209,7 +209,7 @@ class PostController extends BaseController
         $attributes['user_id'] = $this->user()->id;
         $post = $this->post->create($attributes);
 
-        $location = dingo_route('v2', 'posts.show', $post->id);
+        $location = dingo_route('v1', 'posts.show', $post->id);
         // 协议里是这么返回，把资源位置放在header里面
         return $this->response->created($location);
         // 也可以返回 201 加数据
