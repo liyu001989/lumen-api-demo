@@ -124,11 +124,7 @@ class UserController extends BaseController
      */
     public function show($id)
     {
-        $user = User::find($id);
-
-        if (! $user) {
-            return $this->response->errorNotFound();
-        }
+        $user = User::findOrFail($id);
 
         return $this->response->item($user, new UserTransformer());
     }

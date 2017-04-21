@@ -104,11 +104,7 @@ class PostCommentController extends BaseController
      */
     public function index($postId, Request $request)
     {
-        $post = $this->post->find($postId);
-
-        if (! $post) {
-            return $this->response->errorNotFound();
-        }
+        $post = $this->post->findOrFail($postId);
 
         $comments = $this->postComment->where(['post_id' => $postId]);
 
@@ -157,11 +153,7 @@ class PostCommentController extends BaseController
             return $this->errorBadRequest($validator);
         }
 
-        $post = $this->post->find($postId);
-
-        if (! $post) {
-            return $this->response->errorNotFound();
-        }
+        $post = $this->post->findOrFail($postId);
 
         $user = $this->user();
 
@@ -189,11 +181,7 @@ class PostCommentController extends BaseController
 
         $comment = $this->postComment
             ->where(['post_id' => $postId, 'user_id' => $user->id])
-            ->find($id);
-
-        if (! $comment) {
-            return $this->response->errorNotFound();
-        }
+            ->findOrFail($id);
 
         $comment->delete();
 

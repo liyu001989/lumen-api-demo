@@ -13,8 +13,12 @@
 $api = app('Dingo\Api\Routing\Router');
 
 // v2 version API
-// add in header    Accept:application/vnd.lumen.v2+json
-$api->version('v1', ['namespace' => 'App\Http\Controllers\Api\V1'], function ($api) {
+// add in header    Accept:application/vnd.lumen.v1+json
+$api->version('v1', [
+    'namespace' => 'App\Http\Controllers\Api\V1',
+    // each route have a limit of 100 of 1 minutes
+    //'middleware' => 'api.throttle', 'limit' => 100, 'expires' => 1
+], function ($api) {
     // Auth
     // login
     $api->post('authorizations', [

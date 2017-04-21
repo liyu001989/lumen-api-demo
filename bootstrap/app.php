@@ -85,15 +85,15 @@ $app->routeMiddleware([
 |
 */
 
-$app->register(App\Providers\AppServiceProvider::class);
-$app->register(App\Providers\AuthServiceProvider::class);
-$app->register(Illuminate\Redis\RedisServiceProvider::class);
-//$app->register(App\Providers\EventServiceProvider::class);
-
 // dingo/api
 $app->register(Dingo\Api\Provider\LumenServiceProvider::class);
 //jwt
 $app->register(Tymon\JWTAuth\Providers\LumenServiceProvider::class);
+
+$app->register(App\Providers\AppServiceProvider::class);
+$app->register(App\Providers\AuthServiceProvider::class);
+$app->register(Illuminate\Redis\RedisServiceProvider::class);
+//$app->register(App\Providers\EventServiceProvider::class);
 
 app('Dingo\Api\Auth\Auth')->extend('jwt', function ($app) {
     return new Dingo\Api\Auth\Provider\JWT($app['Tymon\JWTAuth\JWTAuth']);

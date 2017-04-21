@@ -174,11 +174,7 @@ class PostController extends BaseController
      */
     public function show($id)
     {
-        $post = $this->post->find($id);
-
-        if (! $post) {
-            return $this->response->errorNotFound();
-        }
+        $post = $this->post->findOrFail($id);
 
         return $this->response->item($post, new PostTransformer());
     }
@@ -232,11 +228,7 @@ class PostController extends BaseController
      */
     public function update($id, Request $request)
     {
-        $post = $this->post->find($id);
-
-        if (! $post) {
-            return $this->response->errorNotFound();
-        }
+        $post = $this->post->findOrFail($id);
 
         // 不属于我的forbidden
         if ($post->user_id != $this->user()->id) {
@@ -268,11 +260,7 @@ class PostController extends BaseController
      */
     public function destroy($id)
     {
-        $post = $this->post->find($id);
-
-        if (! $post) {
-            return $this->response->errorNotFound();
-        }
+        $post = $this->post->findOrFail($id);
 
         // 不属于我的forbidden
         if ($post->user_id != $this->user()->id) {
