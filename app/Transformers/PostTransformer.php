@@ -8,7 +8,7 @@ use League\Fractal\TransformerAbstract;
 
 class PostTransformer extends TransformerAbstract
 {
-    protected $availableIncludes = ['user', 'comments'];
+    protected $availableIncludes = ['user', 'comments', 'recentComments'];
 
     public function transform(Post $post)
     {
@@ -32,5 +32,19 @@ class PostTransformer extends TransformerAbstract
         $total = $post->comments()->count();
 
         return $this->collection($comments, new PostCommentTransformer())->setMeta(['total' => $total]);
+    }
+
+    public function includeRecentComments(Post $post, ParamBag $params = null)
+    {
+        if ($limit = $params->get('limit')) {
+            $limit = (int) current($limit);
+        } else {
+            $limit = 15;
+        }
+
+        $comments = $post->recentComments($limit)->get();
+
+        return $this->collection($comments, new PostCommentTransformer())
+            ->setMeta(['limit' => $limit]);
     }
 }
