@@ -22,7 +22,7 @@ class Post extends BaseModel
 
     public function recentComments($limit = 15)
     {
-        /**
+        /*
          * 对于分页和列表，dingo 默认会预加载include, 除非关闭
          * 当然预加载是有用的，我不希望关闭它，然后手动处理
          * 这样就会有个问题，当一个列表 include, 另一个列表
@@ -31,6 +31,5 @@ class Post extends BaseModel
          * 所以在关系中增加limit
          */
         return $this->comments()->limit($limit);
-
     }
 }
