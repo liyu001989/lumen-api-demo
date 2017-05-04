@@ -5,6 +5,7 @@
 [![StyleCI](https://styleci.io/repos/44219096/shield)](https://styleci.io/repos/44219096)
 [![License](https://img.shields.io/github/license/liyu001989/lumen-api-demo.svg)](LICENSE)
 [![donate](https://img.shields.io/badge/paypal-donate-red.svg)](https://paypal.me/liyu001989)
+[![donate](https://img.shields.io/badge/%E7%BA%A2%E5%8C%85-donate-red.svg)](https://cloud.githubusercontent.com/assets/2981799/25706351/cfba493c-3112-11e7-9985-aec05ff9734c.png)
 
 lumen5.x 请看对应的分支
 
