@@ -33,6 +33,6 @@ class CreateJobsTable extends Migration
      */
     public function down()
     {
-        Scheam::drop('jobs');
+        Schema::drop('jobs');
     }
 }
