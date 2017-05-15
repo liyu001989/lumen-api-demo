@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-class PostComment extends BaseModel
+class Comment extends BaseModel
 {
     public function user()
     {

@@ -17,7 +17,7 @@ class Post extends BaseModel
 
     public function comments()
     {
-        return $this->hasMany(PostComment::class);
+        return $this->hasMany(Comment::class);
     }
 
     public function recentComments($limit = 15)

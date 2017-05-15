@@ -31,9 +31,21 @@ class PostTransformer extends TransformerAbstract
         $comments = $post->comments()->limit($limit)->get();
         $total = $post->comments()->count();
 
-        return $this->collection($comments, new PostCommentTransformer())->setMeta(['total' => $total]);
+        return $this->collection($comments, new CommentTransformer())
+            ->setMeta([
+                'limit' => $limit,
+                'count' => $comments->count(),
+                'total' => $post->comments()->count(),
+            ]);
     }
 
+    /**
+     *
+     * 列表加载列表不是一件很好的事情，因为dingo的预加载机制
+     * 自动预加载include的参数, 所以会读取所有帖子的所有评论
+     * 所以可以增加一个recentComments, 增加一个limit条件
+     * 但是依然不够完美
+     */
     public function includeRecentComments(Post $post, ParamBag $params = null)
     {
         if ($limit = $params->get('limit')) {
@@ -44,7 +56,11 @@ class PostTransformer extends TransformerAbstract
 
         $comments = $post->recentComments($limit)->get();
 
-        return $this->collection($comments, new PostCommentTransformer())
-            ->setMeta(['limit' => $limit]);
+        return $this->collection($comments, new CommentTransformer())
+            ->setMeta([
+                'limit' => $limit,
+                'count' => $comments->count(),
+                'total' => $post->comments()->count(),
+            ]);
     }
 }

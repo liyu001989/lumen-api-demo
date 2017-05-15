@@ -2,19 +2,19 @@
 
 namespace App\Transformers;
 
-use App\Models\PostComment;
+use App\Models\Comment;
 use League\Fractal\TransformerAbstract;
 
-class PostCommentTransformer extends TransformerAbstract
+class CommentTransformer extends TransformerAbstract
 {
     protected $availableIncludes = ['user'];
 
-    public function transform(PostComment $comment)
+    public function transform(Comment $comment)
     {
         return $comment->attributesToArray();
     }
 
-    public function includeUser(PostComment $comment)
+    public function includeUser(Comment $comment)
     {
         return $this->item($comment->user, new UserTransformer());
     }

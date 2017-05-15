@@ -44,14 +44,13 @@ $factory->define(App\Models\Post::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Models\PostComment::class, function (Faker\Generator $faker) {
+$factory->define(App\Models\Comment::class, function (Faker\Generator $faker) {
     $userIds = App\Models\User::pluck('id')->toArray();
     $postIds = App\Models\Post::pluck('id')->toArray();
     $createdAt = randDate();
 
     return [
         'user_id' => $faker->randomElement($userIds),
-        'reply_user_id' => $faker->randomElement($userIds),
         'post_id' => $faker->randomElement($postIds),
         'content' => $faker->text,
         'created_at' => $createdAt,

@@ -58,7 +58,7 @@ $api->version('v1', [
     // post comment list
     $api->get('posts/{postId}/comments', [
         'as' => 'posts.comments.index',
-        'uses' => 'PostCommentController@index',
+        'uses' => 'CommentController@index',
     ]);
 
     /*
@@ -134,16 +134,16 @@ $api->version('v1', [
         // create a comment
         $api->post('posts/{postId}/comments', [
             'as' => 'posts.comments.store',
-            'uses' => 'PostCommentController@store',
+            'uses' => 'CommentController@store',
         ]);
         $api->put('posts/{postId}/comments/{id}', [
             'as' => 'posts.comments.update',
-            'uses' => 'PostCommentController@update',
+            'uses' => 'CommentController@update',
         ]);
         // delete a comment
         $api->delete('posts/{postId}/comments/{id}', [
             'as' => 'posts.comments.destroy',
-            'uses' => 'PostCommentController@destroy',
+            'uses' => 'CommentController@destroy',
         ]);
     });
 });

@@ -3,20 +3,20 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Models\Post;
-use App\Models\PostComment;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use League\Fractal\Pagination\Cursor;
-use App\Transformers\PostCommentTransformer;
+use App\Transformers\CommentTransformer;
 
-class PostCommentController extends BaseController
+class CommentController extends BaseController
 {
     protected $post;
 
-    protected $postComment;
+    protected $comment;
 
-    public function __construct(PostComment $postComment, Post $post)
+    public function __construct(Comment $comment, Post $post)
     {
-        $this->postComment = $postComment;
+        $this->comment = $comment;
 
         $this->post = $post;
     }
@@ -106,7 +106,7 @@ class PostCommentController extends BaseController
     {
         $post = $this->post->findOrFail($postId);
 
-        $comments = $this->postComment->where(['post_id' => $postId]);
+        $comments = $this->comment->where(['post_id' => $postId]);
 
         $currentCursor = $request->get('cursor');
 
@@ -123,13 +123,13 @@ class PostCommentController extends BaseController
 
             $cursorPatination = new Cursor($currentCursor, $prevCursor, $nextCursor, $comments->count());
 
-            return $this->response->collection($comments, new PostCommentTransformer(), [], function ($resource) use ($cursorPatination) {
+            return $this->response->collection($comments, new CommentTransformer(), [], function ($resource) use ($cursorPatination) {
                 $resource->setCursor($cursorPatination);
             });
         } else {
             $comments = $comments->paginate();
 
-            return $this->response->paginator($comments, new PostCommentTransformer());
+            return $this->response->paginator($comments, new CommentTransformer());
         }
     }
 
@@ -161,7 +161,7 @@ class PostCommentController extends BaseController
         $attributes['user_id'] = $user->id;
         $attributes['post_id'] = $postId;
 
-        $this->postComment->create($attributes);
+        $this->comment->create($attributes);
 
         return $this->response->created();
     }
@@ -179,7 +179,7 @@ class PostCommentController extends BaseController
     {
         $user = $this->user();
 
-        $comment = $this->postComment
+        $comment = $this->comment
             ->where(['post_id' => $postId, 'user_id' => $user->id])
             ->findOrFail($id);
 
