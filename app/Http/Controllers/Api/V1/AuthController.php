@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Models\Authorization;
 use Illuminate\Http\Request;
+use App\Models\Authorization;
 use App\Transformers\AuthorizationTransformer;
 
 class AuthController extends BaseController
