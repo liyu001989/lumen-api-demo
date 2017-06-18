@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use Carbon\Carbon;
 use App\Models\Authorization;
 use Illuminate\Http\Request;
 use App\Transformers\AuthorizationTransformer;
@@ -52,7 +51,8 @@ class AuthController extends BaseController
 
         $authorization = new Authorization($token);
 
-        return $this->response->item($authorization, new AuthorizationTransformer());
+        return $this->response->item($authorization, new AuthorizationTransformer())
+            ->setStatusCode(201);
     }
 
     /**
