@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Api\V1;
 
 use Carbon\Carbon;
+use App\Models\Authorization;
 use Illuminate\Http\Request;
+use App\Transformers\AuthorizationTransformer;
 
 class AuthController extends BaseController
 {
@@ -48,13 +50,9 @@ class AuthController extends BaseController
             $this->response->errorUnauthorized(trans('auth.incorrect'));
         }
 
-        $result['data'] = [
-            'token' => $token,
-            'expired_at' => Carbon::now()->addMinutes(config('jwt.ttl'))->toDateTimeString(),
-            'refresh_expired_at' => Carbon::now()->addMinutes(config('jwt.refresh_ttl'))->toDateTimeString(),
-        ];
+        $authorization = new Authorization($token);
 
-        return $this->response->array($result)->setStatusCode(201);
+        return $this->response->item($authorization, new AuthorizationTransformer());
     }
 
     /**
@@ -80,13 +78,9 @@ class AuthController extends BaseController
      */
     public function update()
     {
-        $result['data'] = [
-            'token' => \Auth::refresh(),
-            'expired_at' => Carbon::now()->addMinutes(config('jwt.ttl'))->toDateTimeString(),
-            'refresh_expired_at' => Carbon::now()->addMinutes(config('jwt.refresh_ttl'))->toDateTimeString(),
-        ];
+        $authorization = new Authorization(\Auth::refresh());
 
-        return $this->response->array($result);
+        return $this->response->item($authorization, new AuthorizationTransformer());
     }
 
     /**
