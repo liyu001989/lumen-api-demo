@@ -3,7 +3,7 @@
 use App\Models\Comment;
 use Illuminate\Database\Seeder;
 
-class CommentTableSeeder extends Seeder
+class CommentsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,7 +12,6 @@ class CommentTableSeeder extends Seeder
      */
     public function run()
     {
-        $comments = factory(Comment::class)->times(100)->make();
-        Comment::insert($comments->toArray());
+        factory(Comment::class, 100)->create();
     }
 }
