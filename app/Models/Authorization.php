@@ -29,8 +29,8 @@ class Authorization
     {
         $payload = $this->getPayload();
         // get expired time
-        $expiredAt = Carbon::create($payload->get('exp'))->toDatetimeString();
-        $refreshExpiredAt = Carbon::create($payload->get('exp'))->addMinutes(config('jwt.refresh_ttl'))->toDatetimeString();
+        $expiredAt = Carbon::createFromTimestamp($payload->get('exp'))->toDateTimeString();
+        $refreshExpiredAt = Carbon::createFromTimestamp($payload->get('iat'))->addMinutes(config('jwt.refresh_ttl'))->toDateTimeString();
 
         return [
             'id' => hash('md5', $this->token),
