@@ -16,6 +16,10 @@ class CommentTransformer extends TransformerAbstract
 
     public function includeUser(Comment $comment)
     {
+        if (! ($comment->user)) {
+            return $this->null();
+        }
+
         return $this->item($comment->user, new UserTransformer());
     }
 }

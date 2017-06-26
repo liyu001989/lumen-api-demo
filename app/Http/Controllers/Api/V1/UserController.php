@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use Carbon\Carbon;
 use App\Models\User;
+use App\Models\Authorization;
 use Illuminate\Http\Request;
 use App\Jobs\SendRegisterEmail;
 use App\Transformers\UserTransformer;
@@ -243,15 +243,14 @@ class UserController extends BaseController
         // 201 with location
         $location = dingo_route('v1', 'users.show', $user->id);
 
-        $result = [
-            'token' => \Auth::fromUser($user),
-            'expired_at' => Carbon::now()->addMinutes(config('jwt.ttl'))->toDateTimeString(),
-            'refresh_expired_at' => Carbon::now()->addMinutes(config('jwt.refresh_ttl'))->toDateTimeString(),
-        ];
+        // 让user默认返回token数据
+        $authorization = new Authorization(\Auth::fromUser($user));
+        $transformer = new UserTransformer();
+        $transformer->setAuthorization($authorization)
+            ->setDefaultIncludes(['authorization']);
 
-        return $this->response->item($user, new UserTransformer())
+        return $this->response->item($user, $transformer)
             ->header('Location', $location)
-            ->setMeta($result)
             ->setStatusCode(201);
     }
 }
