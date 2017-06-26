@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Models\User;
-use App\Models\Authorization;
 use Illuminate\Http\Request;
+use App\Models\Authorization;
 use App\Jobs\SendRegisterEmail;
 use App\Transformers\UserTransformer;
 
