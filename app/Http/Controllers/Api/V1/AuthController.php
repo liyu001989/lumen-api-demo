@@ -51,7 +51,7 @@ class AuthController extends BaseController
 
         $authorization = new Authorization($token);
 
-        return $this->response->item($authorization, new AuthorizationTransformer())
+        return $this->response->item($authorization, new AuthorizationTransformer(), ['key' => 'authorizations'])
             ->setStatusCode(201);
     }
 
@@ -80,7 +80,7 @@ class AuthController extends BaseController
     {
         $authorization = new Authorization(\Auth::refresh());
 
-        return $this->response->item($authorization, new AuthorizationTransformer());
+        return $this->response->item($authorization, new AuthorizationTransformer(), ['key' => 'authorizations']);
     }
 
     /**

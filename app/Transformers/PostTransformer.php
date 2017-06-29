@@ -21,7 +21,7 @@ class PostTransformer extends TransformerAbstract
             return $this->null();
         }
 
-        return $this->item($post->user, new UserTransformer());
+        return $this->item($post->user, new UserTransformer(), 'users');
     }
 
     public function includeComments(Post $post, ParamBag $params = null)
@@ -35,7 +35,7 @@ class PostTransformer extends TransformerAbstract
         $comments = $post->comments()->limit($limit)->get();
         $total = $post->comments()->count();
 
-        return $this->collection($comments, new CommentTransformer())
+        return $this->collection($comments, new CommentTransformer(), 'comments')
             ->setMeta([
                 'limit' => $limit,
                 'count' => $comments->count(),

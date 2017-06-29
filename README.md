@@ -97,6 +97,12 @@ github 的 api 真的很有参考价值 [github-rest-api](https://developer.gith
 ## 问题总结
 
 <details>
+  <summary>使用 laravel 还是 lumen</summary>
+
+  lumen 是一个只为了 api 而生的框架, 如果你只是用来写 api, 那么可以是个不错的选择。不过我还是更推荐 laravel， 
+
+</details>
+<details>
   <summary>jwt 使用</summary>
 
 lumen 5.2 取消了session，没有了 auth 的实例，所以使用jwt的时候需要配置一下，注意 config/auth.php 中的配置，而且 user 的 model 需要实现 `Tymon\JWTAuth\Contracts\JWTSubject`;

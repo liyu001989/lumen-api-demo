@@ -105,14 +105,15 @@ $app->singleton(Illuminate\Auth\AuthManager::class, function ($app) {
 });
 
 // 设置 transformer 的 serializer
-//$app['Dingo\Api\Transformer\Factory']->setAdapter(function ($app) {
-    //$fractal = new League\Fractal\Manager;
+$app['Dingo\Api\Transformer\Factory']->setAdapter(function ($app) {
+    $fractal = new League\Fractal\Manager;
     //$serializer = new League\Fractal\Serializer\ArraySerializer();
-    ////$serializer = new League\Fractal\Serializer\JsonApiSerializer();
-    ////$serializer = new App\Serializers\NoDataArraySerializer();
-    //$fractal->setSerializer($serializer);
-    //return new Dingo\Api\Transformer\Adapter\Fractal($fractal);
-//});
+    $serializer = new League\Fractal\Serializer\JsonApiSerializer();
+    //$serializer = new App\Serializers\NoDataArraySerializer();
+
+    $fractal->setSerializer($serializer);
+    return new Dingo\Api\Transformer\Adapter\Fractal($fractal);
+});
 
 /*
 |--------------------------------------------------------------------------

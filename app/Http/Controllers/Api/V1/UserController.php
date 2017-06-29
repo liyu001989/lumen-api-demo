@@ -45,7 +45,7 @@ class UserController extends BaseController
     {
         $users = User::paginate();
 
-        return $this->response->paginator($users, new UserTransformer());
+        return $this->response->paginator($users, new UserTransformer(), ['key' => 'users']);
     }
 
     /**
@@ -126,7 +126,7 @@ class UserController extends BaseController
     {
         $user = User::findOrFail($id);
 
-        return $this->response->item($user, new UserTransformer());
+        return $this->response->item($user, new UserTransformer(), ['key' => 'users']);
     }
 
     /**
@@ -150,7 +150,7 @@ class UserController extends BaseController
      */
     public function userShow()
     {
-        return $this->response->item($this->user(), new UserTransformer());
+        return $this->response->item($this->user(), new UserTransformer(), ['key' => 'users']);
     }
 
     /**
@@ -190,7 +190,7 @@ class UserController extends BaseController
             $user->update($attributes);
         }
 
-        return $this->response->item($user, new UserTransformer());
+        return $this->response->item($user, new UserTransformer(), ['key' => 'users']);
     }
 
     /**
@@ -249,7 +249,7 @@ class UserController extends BaseController
         $transformer->setAuthorization($authorization)
             ->setDefaultIncludes(['authorization']);
 
-        return $this->response->item($user, $transformer)
+        return $this->response->item($user, $transformer, ['key' => 'users'])
             ->header('Location', $location)
             ->setStatusCode(201);
     }

@@ -20,6 +20,6 @@ class CommentTransformer extends TransformerAbstract
             return $this->null();
         }
 
-        return $this->item($comment->user, new UserTransformer());
+        return $this->item($comment->user, new UserTransformer(), 'users');
     }
 }

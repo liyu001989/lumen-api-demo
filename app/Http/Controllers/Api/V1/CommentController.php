@@ -123,13 +123,13 @@ class CommentController extends BaseController
 
             $cursorPatination = new Cursor($currentCursor, $prevCursor, $nextCursor, $comments->count());
 
-            return $this->response->collection($comments, new CommentTransformer(), [], function ($resource) use ($cursorPatination) {
+            return $this->response->collection($comments, new CommentTransformer(), ['key' => 'comments'], function ($resource) use ($cursorPatination) {
                 $resource->setCursor($cursorPatination);
             });
         } else {
             $comments = $comments->paginate();
 
-            return $this->response->paginator($comments, new CommentTransformer());
+            return $this->response->paginator($comments, new CommentTransformer(), ['key' => 'comments']);
         }
     }
 

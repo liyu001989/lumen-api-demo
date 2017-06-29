@@ -27,6 +27,6 @@ class UserTransformer extends TransformerAbstract
             return $this->null();
         }
 
-        return $this->item($this->authorization, new AuthorizationTransformer());
+        return $this->item($this->authorization, new AuthorizationTransformer(), 'authorizations');
     }
 }

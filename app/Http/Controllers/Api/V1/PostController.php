@@ -67,7 +67,7 @@ class PostController extends BaseController
     {
         $posts = $this->post->paginate();
 
-        return $this->response->paginator($posts, new PostTransformer());
+        return $this->response->paginator($posts, new PostTransformer(), ['key' => 'posts']);
     }
 
     /**
@@ -124,7 +124,7 @@ class PostController extends BaseController
             ->where(['user_id' => $this->user()->id])
             ->paginate();
 
-        return $this->response->paginator($posts, new PostTransformer());
+        return $this->response->paginator($posts, new PostTransformer(), ['key' => 'posts']);
     }
 
     /**
@@ -176,7 +176,7 @@ class PostController extends BaseController
     {
         $post = $this->post->findOrFail($id);
 
-        return $this->response->item($post, new PostTransformer());
+        return $this->response->item($post, new PostTransformer(), ['users' => 'posts']);
     }
 
     /**
@@ -207,12 +207,12 @@ class PostController extends BaseController
 
         $location = dingo_route('v1', 'posts.show', $post->id);
         // 协议里是这么返回，把资源位置放在header里面
-        return $this->response->created($location);
+        //return $this->response->created($location);
         // 也可以返回 201 加数据
-        //return $this->response
-            //->item($post, new PostTransformer())
-            //->withHeader('Location', $location)
-            //->setStatusCode(201);
+        return $this->response
+            ->item($post, new PostTransformer(), ['key' => 'users'])
+            ->withHeader('Location', $location)
+            ->setStatusCode(201);
     }
 
     /**
@@ -246,7 +246,8 @@ class PostController extends BaseController
 
         $post->update($request->only('title', 'content'));
 
-        return $this->response->noContent();
+        //return $this->response->noContent();
+        return $this->response->item($post, new PostTransformer(), ['key' => 'posts']);
     }
 
     /**
