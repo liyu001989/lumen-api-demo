@@ -112,6 +112,7 @@ $app['Dingo\Api\Transformer\Factory']->setAdapter(function ($app) {
     //$serializer = new App\Serializers\NoDataArraySerializer();
 
     $fractal->setSerializer($serializer);
+
     return new Dingo\Api\Transformer\Adapter\Fractal($fractal);
 });
 
