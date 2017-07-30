@@ -97,6 +97,13 @@ github 的 api 真的很有参考价值 [github-rest-api](https://developer.gith
 ## 问题总结
 
 <details>
+  <summary>Lumne 和 Laravel 选哪个</summary>
+
+  首先建议大家使用 Laravel，参考超哥的答案 [https://laravel-china.org/articles/5079/laravel-or-lumen](https://laravel-china.org/articles/5079/laravel-or-lumen)。Laravel 提供了更全的功能，更容易使用，非常方便。Lumen 只是为了Api 而生，而我们通常的业务场景会是一套 Api 和一套后台管理系统，使用 Laravel 会让你更快更好的完成需求。非常非常不建议新手直接使用 Lumen。
+
+</details>
+
+<details>
   <summary>jwt 使用</summary>
 
 lumen 5.2 取消了session，没有了 auth 的实例，所以使用jwt的时候需要配置一下，注意 config/auth.php 中的配置，而且 user 的 model 需要实现 `Tymon\JWTAuth\Contracts\JWTSubject`;
