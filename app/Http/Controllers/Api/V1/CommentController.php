@@ -163,7 +163,8 @@ class CommentController extends BaseController
 
         $this->comment->create($attributes);
 
-        return $this->response->created();
+        return $this->response->item($comment, new CommentTransformer())
+            ->setStatusCode(201);
     }
 
     /**
