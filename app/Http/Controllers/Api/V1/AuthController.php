@@ -26,9 +26,9 @@ class AuthController extends BaseController
      *         }
      *     }
      * @apiErrorExample {json} Error-Response:
-     *     HTTP/1.1 404 Not Found
+     *     HTTP/1.1 401
      *     {
-     *       "error": "UserNotFound"
+     *       "error": "用户面密码错误"
      *     }
      */
     public function store(Request $request)
@@ -44,7 +44,7 @@ class AuthController extends BaseController
 
         $credentials = $request->only('email', 'password');
 
-        // 验证失败返回403
+        // 验证失败返回401
         if (! $token = \Auth::attempt($credentials)) {
             $this->response->errorUnauthorized(trans('auth.incorrect'));
         }
