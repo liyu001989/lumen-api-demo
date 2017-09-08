@@ -128,8 +128,10 @@ class PostController extends BaseController
     }
 
     /**
-     * @api {get} /posts/{id} 帖子详情(post detail)
-     * @apiDescription 帖子详情(post detail)
+     * @api {get} /posts/{id} 帖子详�
+     * (post detail)
+     * @apiDescription 帖子详�
+     * (post detail)
      * @apiGroup Post
      * @apiPermission none
      * @apiParam {String='comments','user'} [include]  include

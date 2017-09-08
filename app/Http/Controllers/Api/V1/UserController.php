@@ -63,11 +63,13 @@ class UserController extends BaseController
      *     HTTP/1.1 400 Bad Request
      *     {
      *         "password": [
-     *             "两次输入的密码不一致",
+     *             "两次输�
+     * �的密码不一致",
      *             "新旧密码不能相同"
      *         ],
      *         "password_confirmation": [
-     *             "两次输入的密码不一致"
+     *             "两次输�
+     * �的密码不一致"
      *         ],
      *         "old_password": [
      *             "密码错误"
