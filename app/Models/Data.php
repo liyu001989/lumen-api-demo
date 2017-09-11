@@ -3,13 +3,12 @@
 namespace App\Models;
 
 /**
- * Data
+ * Data.
  *
  * you can use this model like this instead of response->array()
  *
  * $data = new Data(['foo' => 'bar']);
  * return $this->response->item($data, new DataTransformer());
- *
  */
 class Data
 {
