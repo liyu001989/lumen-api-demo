@@ -10,7 +10,7 @@
         "illuminate/mail": "^5.4",
         "illuminate/redis": "^5.4",
         "vlucas/phpdotenv": "~2.2",
-        "tymon/jwt-auth": "1.0.0-beta.3",
+        "tymon/jwt-auth": "1.0.0-rc.1",
         "guzzlehttp/guzzle": "~6.0",
         "predis/predis": "^1.1",
         "palanik/lumen-cors": "dev-master",
