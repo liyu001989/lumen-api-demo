@@ -5,20 +5,20 @@
     "license": "MIT",
     "type": "project",
     "require": {
-        "php": ">=5.6.4",
-        "laravel/lumen-framework": "5.4.*",
-        "illuminate/mail": "^5.4",
-        "illuminate/redis": "^5.4",
+        "php": ">=7.0",
+        "laravel/lumen-framework": "5.5.*",
+        "illuminate/mail": "^5.5",
+        "illuminate/redis": "^5.5",
         "vlucas/phpdotenv": "~2.2",
         "tymon/jwt-auth": "1.0.0-rc.1",
         "guzzlehttp/guzzle": "~6.0",
         "predis/predis": "^1.1",
         "palanik/lumen-cors": "dev-master",
-        "dingo/api": "1.0.0-beta8"
+        "dingo/api": "2.0.0-alpha1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
-        "phpunit/phpunit": "~5.0",
+        "phpunit/phpunit": "~6.0",
         "mockery/mockery": "~0.9"
     },
     "autoload": {

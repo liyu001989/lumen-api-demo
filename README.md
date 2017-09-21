@@ -1,6 +1,6 @@
 # lumen-api-demo
 
-这是一个比较完整用 lumen 5.4 写的的 REST API 例子。使用了 `dingo/api` ，jwt 实现登录，功能上很简单，登录，注册，发帖，评论，单元测试(正在补充)。
+这是一个比较完整用 lumen 5.5 写的的 REST API 例子。使用了 `dingo/api` ，jwt 实现登录，功能上很简单，登录，注册，发帖，评论，单元测试(正在补充)。
 
 [![StyleCI](https://styleci.io/repos/44219096/shield)](https://styleci.io/repos/44219096)
 [![License](https://img.shields.io/github/license/liyu001989/lumen-api-demo.svg)](LICENSE)
@@ -8,10 +8,6 @@
 [![donate](https://img.shields.io/badge/%E7%BA%A2%E5%8C%85-donate-red.svg)](https://cloud.githubusercontent.com/assets/2981799/25706351/cfba493c-3112-11e7-9985-aec05ff9734c.png)
 
 lumen5.x 请看对应的分支
-
-喜欢 repository 的可以去 [这里](https://github.com/liyu001989/lumen-api-demo/tree/repository)。不推荐使用。
-
-当前 master 已经升级到了 5.4，需要注意 [request 对象在5.4中的变化](http://blog.lyyw.info/2017/02/18/2017-02-18-%E7%BF%BB%E8%AF%91-lumen-5-4-%E4%B8%AD-request-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%8F%98%E5%8C%96/)
 
 有需要随时联系我 
 
@@ -87,7 +83,7 @@ github 的 api 真的很有参考价值 [github-rest-api](https://developer.gith
         delete /api/posts/5/comments/8   删除某个评论
         get    /api/users/4/posts        id为4的用户的帖子列表
         get    /api/user/posts           当前用户的帖子列表
-
+    
         // 登录，刷新，登出
         // 或许可以有更好的命名
         post    /api/authorizations  创建一个token
@@ -132,7 +128,7 @@ token 有两个时间，一个是过期时间(ttl)，一个是可刷新时间(re
 - 在 bootstrap/app.php 或者 provider 中注册 mail 服务
 - 增加配置 mail 和 services, 从 laravel 项目里面 cp 过来
 - 在 env 中增加 `MAIL_DRIVER`，账户，密码等配置
-</details>
+  </details>
 
 <details>
   <summary>transformer 的正确使用</summary>
@@ -148,9 +144,9 @@ token 有两个时间，一个是过期时间(ttl)，一个是可刷新时间(re
   - [http://lumen.lyyw.info/api/posts?include=user,comments.user](http://lumen.lyyw.info/api/posts?include=user,comments.user) 帖子列表及发帖的用户和发帖的评论，及评论的用户信息
   - [http://lumen.lyyw.info/api/posts?include=user,comments:limit(1),comments.user](http://lumen.lyyw.info/api/posts?include=user,comments:limit(1),comments.user)  帖子列表及发帖的用户和发帖的1条评论，及评论的用户信息，及评论的用户信息
 
-  
+
   是不是很强大，我们只需要提供资源，及资源之间的引用关系，省了多少事
- 
+
 </details>
 
 <details>
