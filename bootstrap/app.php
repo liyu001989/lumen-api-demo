@@ -126,7 +126,7 @@ $app->singleton(Illuminate\Auth\AuthManager::class, function ($app) {
 */
 
 $app->router->group([
-    'namespace' => 'App\Http\Controllers'
+    'namespace' => 'App\Http\Controllers',
 ], function ($router) {
     require __DIR__.'/../routes/api/v1.php';
     require __DIR__.'/../routes/web.php';
