@@ -209,7 +209,7 @@ class PostController extends BaseController
         // 返回 201 加数据
         return $this->response
             ->item($post, new PostTransformer())
-            //->withHeader('Location', $location) // 可加可不加，参考 Http协议，但是大家一般不适用
+            //->withHeader('Location', $location) // 可加可不加，参考 Http协议，但是大家一般不使用
             ->setStatusCode(201);
     }
 
