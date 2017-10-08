@@ -34,7 +34,7 @@ class Authorization
     public function getPayload()
     {
         if (! $this->payload) {
-            $this->payload = \JWTAuth::setToken($this->getToken())->getPayload();
+            $this->payload = \Auth::setToken($this->getToken())->getPayload();
         }
 
         return $this->payload;
@@ -55,7 +55,7 @@ class Authorization
 
     public function user()
     {
-        return \JWTAuth::authenticate($this->getToken());
+        return \Auth::authenticate($this->getToken());
     }
 
     public function toArray()
