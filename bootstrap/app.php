@@ -72,6 +72,7 @@ $app->middleware([
 $app->routeMiddleware([
     'cors' => palanik\lumen\Middleware\LumenCors::class,
     'auth' => App\Http\Middleware\Authenticate::class,
+    'serializer' => \Liyu\Dingo\SerializerSwitch::class
 ]);
 
 /*

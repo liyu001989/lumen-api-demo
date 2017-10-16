@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Database\Events\QueryExecuted;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,5 +25,16 @@ class AppServiceProvider extends ServiceProvider
         app('api.exception')->register(function (\Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
             abort(404);
         });
+
+
+        // 开启日志
+        if (app()->environment('local')) {
+            \DB::listen(function (QueryExecuted $query) {
+                $sqlWithPlaceholders = str_replace(['%', '?'], ['%%', '%s'], $query->sql);
+                $bindings = $query->connection->prepareBindings($query->bindings);
+                $pdo = $query->connection->getPdo();
+                \Log::info(vsprintf($sqlWithPlaceholders, array_map([$pdo, 'quote'], $bindings)));
+            });
+        }
     }
 }
