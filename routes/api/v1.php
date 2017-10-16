@@ -18,7 +18,7 @@ $api->version('v1', [
     'namespace' => 'App\Http\Controllers\Api\V1',
     'middleware' => [
         'cors',
-        'serializer'
+        'serializer',
         // 'serializer:array' // if you want to remove data wrap
         //'api.throttle'
     ],
