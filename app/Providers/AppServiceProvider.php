@@ -26,7 +26,6 @@ class AppServiceProvider extends ServiceProvider
             abort(404);
         });
 
-
         // 开启日志
         if (app()->environment('local')) {
             \DB::listen(function (QueryExecuted $query) {
