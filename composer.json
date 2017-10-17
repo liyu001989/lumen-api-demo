@@ -15,7 +15,7 @@
         "predis/predis": "^1.1",
         "palanik/lumen-cors": "dev-master",
         "dingo/api": "2.0.0-alpha1",
-        "liyu/dingo-serializer-switch": "^0.2.2"
+        "liyu/dingo-serializer-switch": "~0.2"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
