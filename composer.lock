@@ -2196,16 +2196,16 @@
         },
         {
             "name": "liyu/dingo-serializer-switch",
-            "version": "v0.2.2",
+            "version": "v0.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/liyu001989/dingo-serializer-switch.git",
-                "reference": "dc16b72febaef6a91435b620e58a05e2acf2e7ad"
+                "reference": "41c309ed97c60a3ff32c48c2a979ad65194275bc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/liyu001989/dingo-serializer-switch/zipball/dc16b72febaef6a91435b620e58a05e2acf2e7ad",
-                "reference": "dc16b72febaef6a91435b620e58a05e2acf2e7ad",
+                "url": "https://api.github.com/repos/liyu001989/dingo-serializer-switch/zipball/41c309ed97c60a3ff32c48c2a979ad65194275bc",
+                "reference": "41c309ed97c60a3ff32c48c2a979ad65194275bc",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -2234,7 +2234,7 @@
                 }
             ],
             "description": "A middleware to switch dingo serializer",
-            "time": "2017-09-21T14:44:23+00:00"
+            "time": "2017-10-17T14:07:55+00:00"
         },
         {
             "name": "monolog/monolog",
