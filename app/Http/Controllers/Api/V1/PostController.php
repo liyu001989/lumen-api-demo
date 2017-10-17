@@ -8,13 +8,6 @@ use App\Transformers\PostTransformer;
 
 class PostController extends BaseController
 {
-    private $post;
-
-    public function __construct(Post $post)
-    {
-        $this->post = $post;
-    }
-
     /**
      * @api {get} /posts 帖子列表(post list)
      * @apiDescription 帖子列表(post list)
@@ -65,7 +58,7 @@ class PostController extends BaseController
      */
     public function index()
     {
-        $posts = $this->post->paginate();
+        $posts = Post::orderBy('created_at', 'desc')->paginate();
 
         return $this->response->paginator($posts, new PostTransformer());
     }
@@ -120,8 +113,7 @@ class PostController extends BaseController
      */
     public function userIndex()
     {
-        $posts = $this->post
-            ->where(['user_id' => $this->user()->id])
+        $posts = Post::where(['user_id' => $this->user()->id])
             ->paginate();
 
         return $this->response->paginator($posts, new PostTransformer());
@@ -203,7 +195,7 @@ class PostController extends BaseController
 
         $attributes = $request->only('title', 'content');
         $attributes['user_id'] = $this->user()->id;
-        $post = $this->post->create($attributes);
+        $post = Post::create($attributes);
 
         $location = dingo_route('v1', 'posts.show', $post->id);
         // 返回 201 加数据
@@ -226,7 +218,7 @@ class PostController extends BaseController
      */
     public function update($id, Request $request)
     {
-        $post = $this->post->findOrFail($id);
+        $post = Post::findOrFail($id);
 
         // 不属于我的forbidden
         if ($post->user_id != $this->user()->id) {
@@ -258,7 +250,7 @@ class PostController extends BaseController
      */
     public function destroy($id)
     {
-        $post = $this->post->findOrFail($id);
+        $post = Post::findOrFail($id);
 
         // 不属于我的forbidden
         if ($post->user_id != $this->user()->id) {

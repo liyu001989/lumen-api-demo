@@ -10,17 +10,6 @@ use App\Transformers\CommentTransformer;
 
 class CommentController extends BaseController
 {
-    protected $post;
-
-    protected $comment;
-
-    public function __construct(Comment $comment, Post $post)
-    {
-        $this->comment = $comment;
-
-        $this->post = $post;
-    }
-
     /**
      * @api {get} /posts/{postId}/comments 评论列表(post comment list)
      * @apiDescription 评论列表(post comment list)
@@ -104,9 +93,9 @@ class CommentController extends BaseController
      */
     public function index($postId, Request $request)
     {
-        $post = $this->post->findOrFail($postId);
+        $post = Post::findOrFail($postId);
 
-        $comments = $this->comment->where(['post_id' => $postId]);
+        $comments = $post->comments();
 
         $currentCursor = $request->get('cursor');
 
@@ -127,7 +116,7 @@ class CommentController extends BaseController
                 $resource->setCursor($cursorPatination);
             });
         } else {
-            $comments = $comments->paginate();
+            $comments = $comments->orderBy('created_at', 'desc')->paginate();
 
             return $this->response->paginator($comments, new CommentTransformer());
         }
@@ -153,15 +142,15 @@ class CommentController extends BaseController
             return $this->errorBadRequest($validator);
         }
 
-        $post = $this->post->findOrFail($postId);
+        $post = Post::findOrFail($postId);
 
         $user = $this->user();
 
-        $attributes = $request->only('content');
-        $attributes['user_id'] = $user->id;
-        $attributes['post_id'] = $postId;
-
-        $this->comment->create($attributes);
+        $comment = new Comment;
+        $comment->content = $request->get('content');
+        $comment->user_id = $user->id;
+        $comment->post_id = $post->id;
+        $comment->save();
 
         return $this->response->item($comment, new CommentTransformer())
             ->setStatusCode(201);
@@ -178,11 +167,13 @@ class CommentController extends BaseController
      */
     public function destroy($postId, $id)
     {
-        $user = $this->user();
+        $comment = Comment::where('post_id', $postId)
+            ->where('id', $id)
+            ->firstOrFail();
 
-        $comment = $this->comment
-            ->where(['post_id' => $postId, 'user_id' => $user->id])
-            ->findOrFail($id);
+        if ($comment->user_id != $this->user()->id) {
+            abort(403);
+        }
 
         $comment->delete();
 
