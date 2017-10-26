@@ -20,40 +20,44 @@ function randDate()
 }
 
 $factory->define(App\Models\User::class, function (Faker\Generator $faker) {
-    $createdAt = randDate();
+    static $createdAt;
+    static $password;
 
     return [
         'name' => $faker->name,
         'email' => $faker->safeEmail,
-        'password' => app('hash')->make(123456),
-        'created_at' => $createdAt,
-        'updated_at' => $createdAt,
+        'password' => $password ?: $password = app('hash')->make(123456),
+        'created_at' => $createdAt ?: $createAt = randDate(),
+        'updated_at' => $createdAt ?: $createdAt = randDate(),
     ];
 });
 
 $factory->define(App\Models\Post::class, function (Faker\Generator $faker) {
-    $userIds = App\Models\User::pluck('id')->toArray();
-    $createdAt = randDate();
+    static $createdAt;
+    static $userIds;
+    $userIds = $userIds ?: App\Models\User::pluck('id')->toArray();
 
     return [
         'user_id' => $faker->randomElement($userIds),
         'title' => $faker->sentence(),
-        'content' => $faker->text,
-        'created_at' => $createdAt,
-        'updated_at' => $createdAt,
+        'created_at' => $createdAt ?: $createAt = randDate(),
+        'updated_at' => $createdAt ?: $createdAt = randDate(),
     ];
 });
 
 $factory->define(App\Models\Comment::class, function (Faker\Generator $faker) {
-    $userIds = App\Models\User::pluck('id')->toArray();
-    $postIds = App\Models\Post::pluck('id')->toArray();
-    $createdAt = randDate();
+    static $createdAt;
+    static $userIds;
+    static $postIds;
+
+    $userIds = $userIds ?: App\Models\User::pluck('id')->toArray();
+    $postIds = $postIds ?: App\Models\Post::pluck('id')->toArray();
 
     return [
         'user_id' => $faker->randomElement($userIds),
         'post_id' => $faker->randomElement($postIds),
         'content' => $faker->text,
-        'created_at' => $createdAt,
-        'updated_at' => $createdAt,
+        'created_at' => $createdAt ?: $createAt = randDate(),
+        'updated_at' => $createdAt ?: $createdAt = randDate(),
     ];
 });

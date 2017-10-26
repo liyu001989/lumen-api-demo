@@ -13,4 +13,17 @@ class Comment extends BaseModel
     {
         return $this->belongsTo(Post::class);
     }
+
+    public static function boot()
+    {
+        static::created(function ($comment) {
+            $comment->post->increment('comment_count');
+        });
+
+        static::deleted(function ($comment) {
+            $comment->post->decrement('comment_count');
+        });
+
+        parent::boot();
+    }
 }

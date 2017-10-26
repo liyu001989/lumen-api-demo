@@ -16,7 +16,7 @@ class CreatePostsTable extends Migration
             $table->integer('user_id')->unsigned()->index();
             $table->string('title', 50)->index();
             $table->string('content', 255);
-            $table->text('extra');
+            $table->unsignedInteger('comment_count');
             $table->timestamps();
             $table->softDeletes();
         });

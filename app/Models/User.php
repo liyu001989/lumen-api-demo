@@ -31,7 +31,7 @@ class User extends BaseModel implements AuthenticatableContract, JWTSubject
         return $this->getKey();
     }
 
-    // jwt 需要实现的方法
+    // jwt 需要实现的方法, 一些自定义的参数
     public function getJWTCustomClaims()
     {
         return [];
