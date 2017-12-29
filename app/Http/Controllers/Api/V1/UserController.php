@@ -243,13 +243,7 @@ class UserController extends BaseController
         // 201 with location
         $location = dingo_route('v1', 'users.show', $user->id);
 
-        // 让user默认返回token数据
-        $authorization = new Authorization(\Auth::fromUser($user));
-        $transformer = new UserTransformer();
-        $transformer->setAuthorization($authorization)
-            ->setDefaultIncludes(['authorization']);
-
-        return $this->response->item($user, $transformer)
+        return $this->response->item($user, new UserTransformer())
             ->header('Location', $location)
             ->setStatusCode(201);
     }

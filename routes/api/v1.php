@@ -12,18 +12,18 @@
  */
 $api = app('Dingo\Api\Routing\Router');
 
-// v2 version API
+// v1 version API
 // add in header    Accept:application/vnd.lumen.v1+json
 $api->version('v1', [
     'namespace' => 'App\Http\Controllers\Api\V1',
     'middleware' => [
         'cors',
         'serializer',
-        // 'serializer:array' // if you want to remove data wrap
-        //'api.throttle'
+         //'serializer:array', // if you want to remove data wrap
+        'api.throttle'
     ],
-    // each route have a limit of 100 of 1 minutes
-    //'limit' => 100, 'expires' => 1
+    // each route have a limit of 20 of 1 minutes
+    'limit' => 20, 'expires' => 1
 ], function ($api) {
     // Auth
     // login
