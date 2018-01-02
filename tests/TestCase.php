@@ -7,7 +7,8 @@ use Laravel\Lumen\Testing\DatabaseTransactions;
 
 class TestCase extends Basic
 {
-    use DatabaseTransactions;//回滚数据库数据 如果增删改操作测试不想对原数据产生影响可以引入这个
+    //回滚数据库数据 如果增删改操作测试不想对原数据产生影响可以引入这个
+    use DatabaseTransactions;
     protected $header;
 
     public function __construct($name = null, array $data = [], $dataName = '')
