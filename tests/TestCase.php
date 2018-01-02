@@ -3,11 +3,12 @@
 namespace Tests;
 
 use Laravel\Lumen\Testing\TestCase as Basic;
-use \Laravel\Lumen\Testing\DatabaseTransactions;
+use Laravel\Lumen\Testing\DatabaseTransactions;
 
 class TestCase extends Basic
 {
-    use DatabaseTransactions;//回滚数据库数据 如果增删改操作测试不想对原数据产生影响可以引入这个
+    //回滚数据库数据 如果增删改操作测试不想对原数据产生影响可以引入这个
+    use DatabaseTransactions;
     protected $header;
 
     public function __construct($name = null, array $data = [], $dataName = '')
@@ -25,7 +26,7 @@ class TestCase extends Basic
     public function createApplication()
     {
         $app = require __DIR__.'/../bootstrap/app.php';
+
         return $app;
     }
-
 }
