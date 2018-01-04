@@ -18,6 +18,7 @@ $api->version('v1', [
     'namespace' => 'App\Http\Controllers\Api\V1',
     'middleware' => [
         'cors',
+        'logs',
         //'api.throttle'
     ],
     // each route have a limit of 100 of 1 minutes
