@@ -67,13 +67,11 @@ $app->singleton(
 $app->middleware([
     // 根据 accept-language 设置语言
     'locale' => App\Http\Middleware\ChangeLocale::class,
-    'termi' =>\App\Http\Middleware\TerminateTest::class,
 ]);
 
 $app->routeMiddleware([
     'cors' => palanik\lumen\Middleware\LumenCors::class,
     'auth' => App\Http\Middleware\Authenticate::class,
-    'logs' => \App\Http\Middleware\Log::class,
 ]);
 
 /*
