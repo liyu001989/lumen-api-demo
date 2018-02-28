@@ -107,14 +107,18 @@ class CommentController extends BaseController
 
             $comments = $comments->where([['id', '>', $currentCursor]])->limit($limit)->get();
 
-            $nextCursor = $comments->last()->id;
-            $prevCursor = $currentCursor;
+            if ($comments->count()) {
+                $nextCursor = $comments->last()->id;
+                $prevCursor = $currentCursor;
 
-            $cursorPatination = new Cursor($currentCursor, $prevCursor, $nextCursor, $comments->count());
+                $cursorPatination = new Cursor($currentCursor, $prevCursor, $nextCursor, $comments->count());
 
-            return $this->response->collection($comments, new CommentTransformer(), [], function ($resource) use ($cursorPatination) {
-                $resource->setCursor($cursorPatination);
-            });
+                return $this->response->collection($comments, new CommentTransformer(), [], function ($resource) use ($cursorPatination) {
+                    $resource->setCursor($cursorPatination);
+                });
+            }
+
+            return $this->response->collection($comments, new CommentTransformer());
         } else {
             $comments = $comments->orderBy('created_at', 'desc')->paginate();
 
