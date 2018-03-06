@@ -30,5 +30,4 @@ class TestCase extends Basic
 
         return $app;
     }
-
 }
