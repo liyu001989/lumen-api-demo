@@ -16,4 +16,8 @@ class UserTest extends TestCase
         $this->get('/api/user', $this->header)->assertResponseOk();
     }
 
+    public function testUserShowWithoutToken()
+    {
+        $this->get('/api/user')->assertResponseStatus(401);
+    }
 }
