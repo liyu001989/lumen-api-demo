@@ -16,7 +16,7 @@ class TestCase extends Basic
         parent::__construct($name, $data, $dataName);
         $user = factory('App\Models\User')->create();
         $token = \Auth::fromUser($user);
-        $this->header = $header = ['Authorization' => 'bearer ' . $token];
+        $this->header = ['Authorization' => 'bearer '.$token];
     }
 
     /**
@@ -26,7 +26,7 @@ class TestCase extends Basic
      */
     public function createApplication()
     {
-        $app = require __DIR__ . '/../bootstrap/app.php';
+        $app = require __DIR__ .'/../bootstrap/app.php';
 
         return $app;
     }
