@@ -11,17 +11,12 @@
 |
 */
 
-function randDate()
-{
-    return \Carbon\Carbon::now()
-        ->subDays(rand(1, 100))
-        ->subHours(rand(1, 23))
-        ->subMinutes(rand(1, 60));
-}
+$createdAt = \Carbon\Carbon::now()
+    ->subDays(rand(1, 100))
+    ->subHours(rand(1, 23))
+    ->subMinutes(rand(1, 60));
 
-$factory->define(App\Models\User::class, function (Faker\Generator $faker) {
-    $createdAt = randDate();
-
+$factory->define(App\Models\User::class, function (Faker\Generator $faker) use ($createdAt) {
     return [
         'name' => $faker->name,
         'email' => $faker->safeEmail,
@@ -31,9 +26,8 @@ $factory->define(App\Models\User::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Models\Post::class, function (Faker\Generator $faker) {
+$factory->define(App\Models\Post::class, function (Faker\Generator $faker) use ($createdAt) {
     $userIds = App\Models\User::pluck('id')->toArray();
-    $createdAt = randDate();
 
     return [
         'user_id' => $faker->randomElement($userIds),
@@ -44,11 +38,9 @@ $factory->define(App\Models\Post::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Models\Comment::class, function (Faker\Generator $faker) {
+$factory->define(App\Models\Comment::class, function (Faker\Generator $faker) use ($createdAt) {
     $userIds = App\Models\User::pluck('id')->toArray();
     $postIds = App\Models\Post::pluck('id')->toArray();
-    $createdAt = randDate();
-
     return [
         'user_id' => $faker->randomElement($userIds),
         'post_id' => $faker->randomElement($postIds),

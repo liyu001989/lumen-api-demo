@@ -2,13 +2,18 @@
 
 namespace Tests;
 
+use App\Models\User;
+use Faker\Factory;
+
 class UserTest extends TestCase
 {
     public function testRegister()
     {
-        $this->withoutEvents();
         $this->withoutJobs();
-        $this->post('/api/users', ['email' => '1234@gmail.com', 'name' => 'test', 'password' => '123456'])->assertResponseStatus(201);
+        $faker = Factory::create();
+        $email = $faker->unique()->safeEmail;
+        $this->post('/api/users', ['email' => $email, 'name' => $faker->name, 'password' => $faker->password])->assertResponseStatus(201);
+        User::where('email', '=', $email)->forceDelete();
     }
 
     public function testUserShow()
