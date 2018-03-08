@@ -2,8 +2,8 @@
 
 namespace Tests;
 
-use App\Models\User;
 use Faker\Factory;
+use App\Models\User;
 
 class UserTest extends TestCase
 {

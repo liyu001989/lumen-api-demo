@@ -20,12 +20,12 @@ class EndResponse
     public function handle($request, Closure $next)
     {
         Log::info("I am terminator handler");
+
         return $next($request);
     }
 
     public function terminate($request, $response)
     {
         Log::info("terminate handle and whoole!  i am success!".$request->url());
-        exit();
     }
 }

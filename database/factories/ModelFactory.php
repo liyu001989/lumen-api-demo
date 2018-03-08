@@ -41,6 +41,7 @@ $factory->define(App\Models\Post::class, function (Faker\Generator $faker) use (
 $factory->define(App\Models\Comment::class, function (Faker\Generator $faker) use ($createdAt) {
     $userIds = App\Models\User::pluck('id')->toArray();
     $postIds = App\Models\Post::pluck('id')->toArray();
+
     return [
         'user_id' => $faker->randomElement($userIds),
         'post_id' => $faker->randomElement($postIds),
