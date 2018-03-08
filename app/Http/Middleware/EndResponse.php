@@ -26,6 +26,6 @@ class EndResponse
 
     public function terminate($request, $response)
     {
-        Log::info('terminate handle and whoole!  i am success!' . $request->url());
+        Log::info('terminate handle and whoole!  i am success!'.$request->url());
     }
 }
