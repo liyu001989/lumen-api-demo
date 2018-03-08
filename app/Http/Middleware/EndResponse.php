@@ -12,20 +12,20 @@ class EndResponse
      * Handle an incoming request.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \Closure                 $next
-     * @param string|null              $guard
+     * @param \Closure $next
+     * @param string|null $guard
      *
      * @return mixed
      */
     public function handle($request, Closure $next)
     {
-        Log::info("I am terminator handler");
+        Log::info('I am terminator handler');
 
         return $next($request);
     }
 
     public function terminate($request, $response)
     {
-        Log::info("terminate handle and whoole!  i am success!".$request->url());
+        Log::info('terminate handle and whoole!  i am success!' . $request->url());
     }
 }
