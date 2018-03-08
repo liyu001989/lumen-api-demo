@@ -14,8 +14,9 @@ class TestCase extends Basic
     public function __construct($name = null, array $data = [], $dataName = '')
     {
         parent::__construct($name, $data, $dataName);
-        //如果token过期则运行一次AuthorizationTest即可 平常测试可相应运行需要测试的单元
-        $this->header = ['Authorization'=>'bearer '.@file_get_contents(__DIR__.DIRECTORY_SEPARATOR.'token.txt')];
+        $user = factory('App\Models\User')->create();
+        $token = \Auth::fromUser($user);
+        $this->header = ['Authorization' => 'bearer '.$token];
     }
 
     /**
