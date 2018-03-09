@@ -13,7 +13,6 @@ class UserTest extends TestCase
         $faker = Factory::create();
         $email = $faker->unique()->safeEmail;
         $this->post('/api/users', ['email' => $email, 'name' => $faker->name, 'password' => $faker->password])->assertResponseStatus(201);
-        User::where('email', '=', $email)->forceDelete();
     }
 
     public function testUserShow()

@@ -2,10 +2,12 @@
 
 namespace Tests;
 
+use Laravel\Lumen\Testing\DatabaseTransactions;
 use Laravel\Lumen\Testing\TestCase as Basic;
 
 class TestCase extends Basic
 {
+    use DatabaseTransactions;
     protected $header;
     protected $user;
 
@@ -32,6 +34,5 @@ class TestCase extends Basic
     public function tearDown()
     {
         parent::tearDown();
-        $this->user->forceDelete();
     }
 }
