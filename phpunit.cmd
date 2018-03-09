@@ -1,1 +1,1 @@
-@php D:\phpStudy\tools\phpunit\phpunit.phar %*
+@php "C:\ProgramData\phpunit\bin\phpunit.phar " %*

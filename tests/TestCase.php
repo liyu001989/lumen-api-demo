@@ -2,8 +2,8 @@
 
 namespace Tests;
 
-use Laravel\Lumen\Testing\DatabaseTransactions;
 use Laravel\Lumen\Testing\TestCase as Basic;
+use Laravel\Lumen\Testing\DatabaseTransactions;
 
 class TestCase extends Basic
 {
