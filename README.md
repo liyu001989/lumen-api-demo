@@ -16,6 +16,9 @@ lumen5.x 请看对应的分支
 
 [ENGLISH README](./EN_README.md)
 
+## 教程
+
+[Laravel 教程 - 实战构架 API 服务器](https://laravel-china.org/courses/laravel-advance-training-5.5)
 
 ## USEFUL LINK
 
