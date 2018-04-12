@@ -166,7 +166,7 @@ class PostController extends BaseController
      */
     public function show($id)
     {
-        $post = $this->post->findOrFail($id);
+        $post = Post::findOrFail($id);
 
         return $this->response->item($post, new PostTransformer());
     }
