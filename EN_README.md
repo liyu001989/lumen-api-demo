@@ -2,7 +2,7 @@
 
 Forgive my poor English.
 
-This is a demo for lumen5.4. if you are using lumen to write REST api it will help you.
+This is a demo for lumen 5.7. if you are using lumen to write REST api it will help you.
 
 This demo use `dingo/api`  `tymon/jwt-auth` and write some easy APIs and PHPUNIT
 
@@ -18,7 +18,6 @@ lumen5.x please look appropriate branch
 - debug rest api [postman](https://www.getpostman.com/)
 - a good article [http://oomusou.io/laravel/laravel-architecture](http://oomusou.io/laravel/laravel-architecture/)
 - php lint [phplint](https://github.com/overtrue/phplint)
-- my api doc [http://lumen.lyyw.info/apidoc](http://lumen.lyyw.info/apidoc)
 
 ## USAGE
 
@@ -83,11 +82,11 @@ There is no session and auth guard in lumen 5.2, so attention `config/auth.php`.
   <summary>how to user transformer </summary>
 
   transformer is a layer help you format you resource and their relationship.
-  
+
   maybe you can knowstand with this links:
 
   - [https://lumen-new.lyyw.info/api/posts](https://lumen-new.lyyw.info/api/posts)
-  - [https://lumen-new.lyyw.info/api/posts?include=user](https://lumen-new.lyyw.info/api/posts?include=user) 
+  - [https://lumen-new.lyyw.info/api/posts?include=user](https://lumen-new.lyyw.info/api/posts?include=user)
   - [https://lumen-new.lyyw.info/api/posts?include=user,comments](https://lumen-new.lyyw.info/api/posts?include=user,comments)
   - [https://lumen-new.lyyw.info/api/posts?include=user,comments:limit(1)](https://lumen-new.lyyw.info/api/posts?include=user,comments:limit(1))
   - [https://lumen-new.lyyw.info/api/posts?include=user,comments.user](https://lumen-new.lyyw.info/api/posts?include=user,comments.user)
@@ -113,19 +112,12 @@ dingo/api use [Fractal](http://fractal.thephpleague.com/) to transformer resouse
 I think default DataArray is good enough.
 </details>
 
-<details>
-  <summary>repository</summary>
-
-I achieved myself, there are two good repository packages you can try
-
-`rinvex/repository`  and  `prettus/l5-repository`
-</details>
 
 ## TODO
 
 - [ ] phpunit
 
-## carefully
+## Tips
 
 - [https://github.com/dingo/api/issues/672](https://github.com/dingo/api/issues/672)  `transformer include`
 - if there is a space in env file, it will throw `log not found ` error

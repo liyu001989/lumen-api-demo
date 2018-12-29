@@ -14,9 +14,9 @@ class CreatePostsTable extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned()->index();
-            $table->string('title', 50)->index();
-            $table->string('content', 255);
-            $table->unsignedInteger('comment_count');
+            $table->string('title')->index();
+            $table->text('content');
+            $table->unsignedInteger('comment_count')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

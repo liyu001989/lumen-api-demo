@@ -40,6 +40,7 @@ $factory->define(App\Models\Post::class, function (Faker\Generator $faker) {
     return [
         'user_id' => $faker->randomElement($userIds),
         'title' => $faker->sentence(),
+        'content' => $faker->text(),
         'created_at' => $createdAt ?: $createAt = randDate(),
         'updated_at' => $createdAt ?: $createdAt = randDate(),
     ];

@@ -31,6 +31,8 @@ $app->withEloquent();
 //config
 // jwt
 $app->configure('jwt');
+// api
+$app->configure('api');
 
 /*
 |--------------------------------------------------------------------------
@@ -65,7 +67,7 @@ $app->singleton(
 */
 
 $app->middleware([
-    // 根据 accept-language 设置语言
+    //set language accept-language
     'locale' => App\Http\Middleware\ChangeLocale::class,
 ]);
 
@@ -96,24 +98,14 @@ $app->register(App\Providers\AuthServiceProvider::class);
 $app->register(Illuminate\Redis\RedisServiceProvider::class);
 //$app->register(App\Providers\EventServiceProvider::class);
 
-app('Dingo\Api\Auth\Auth')->extend('jwt', function ($app) {
-    return new Dingo\Api\Auth\Provider\JWT($app['Tymon\JWTAuth\JWTAuth']);
-});
+//app('Dingo\Api\Auth\Auth')->extend('jwt', function ($app) {
+    //return new Dingo\Api\Auth\Provider\JWT($app['Tymon\JWTAuth\JWTAuth']);
+//});
 
 // Injecting auth
 $app->singleton(Illuminate\Auth\AuthManager::class, function ($app) {
     return $app->make('auth');
 });
-
-// 设置 transformer 的 serializer
-//$app['Dingo\Api\Transformer\Factory']->setAdapter(function ($app) {
-    //$fractal = new League\Fractal\Manager;
-    //$serializer = new League\Fractal\Serializer\ArraySerializer();
-    ////$serializer = new League\Fractal\Serializer\JsonApiSerializer();
-    ////$serializer = new App\Serializers\NoDataArraySerializer();
-    //$fractal->setSerializer($serializer);
-    //return new Dingo\Api\Transformer\Adapter\Fractal($fractal);
-//});
 
 /*
 |--------------------------------------------------------------------------

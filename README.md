@@ -1,6 +1,6 @@
 # lumen-api-demo
 
-这是一个比较完整用 lumen 5.5 写的的 REST API 例子。使用了 `dingo/api` ，jwt 实现登录，功能上很简单，登录，注册，发帖，评论，单元测试(正在补充)。
+这是一个比较完整用 lumen 5.7 写的的 REST API 例子。使用了 `dingo/api` ，jwt 实现登录，功能上很简单，登录，注册，发帖，评论，单元测试(正在补充)。
 
 [![StyleCI](https://styleci.io/repos/44219096/shield)](https://styleci.io/repos/44219096)
 [![License](https://img.shields.io/github/license/liyu001989/lumen-api-demo.svg)](LICENSE)
@@ -9,7 +9,7 @@
 
 lumen5.x 请看对应的分支
 
-有需要随时联系我 
+有需要随时联系我
 
 - lumen/laravel/restful 交流群: 216721539
 - email: liyu001989@gmail.com
@@ -35,7 +35,6 @@ lumen5.x 请看对应的分支
 - php lint [phplint](https://github.com/overtrue/phplint)
 - Laravel 理念 [From Apprentice To Artisan](https://my.oschina.net/zgldh/blog/389246)
 - 我对 REST 的理解 [http://blog.lyyw.info/2017/02/09/2017-02-09%20%E5%AF%B9rest%E7%9A%84%E7%90%86%E8%A7%A3/](http://blog.lyyw.info/2017/02/09/2017-02-09%20%E5%AF%B9rest%E7%9A%84%E7%90%86%E8%A7%A3/)
-- 项目api在线文档 [http://lumen.lyyw.info/apidoc](https://lumen.lyyw.info/apidoc)
 
 ## USAGE
 
@@ -86,7 +85,7 @@ github 的 api 真的很有参考价值 [github-rest-api](https://developer.gith
         delete /api/posts/5/comments/8   删除某个评论
         get    /api/users/4/posts        id为4的用户的帖子列表
         get    /api/user/posts           当前用户的帖子列表
-    
+
         // 登录，刷新，登出
         // 或许可以有更好的命名
         post    /api/authorizations  创建一个token

@@ -18,7 +18,7 @@ class CreateCommentsTable extends Migration
             // $table->integer('commentable_id')->unsigned()->index();
             // $table->string('commentable_type')->index();
             $table->integer('user_id')->unsigned()->index();
-            $table->string('content', 255);
+            $table->string('content');
             $table->timestamps();
             $table->softDeletes();
         });

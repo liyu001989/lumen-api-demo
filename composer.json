@@ -6,20 +6,20 @@
     "type": "project",
     "require": {
         "php": ">=7.0",
-        "laravel/lumen-framework": "5.5.*",
-        "illuminate/mail": "^5.5",
-        "illuminate/redis": "^5.5",
+        "laravel/lumen-framework": "5.7.*",
+        "illuminate/mail": "^5.7",
+        "illuminate/redis": "^5.7",
         "vlucas/phpdotenv": "~2.2",
-        "tymon/jwt-auth": "1.0.0-rc.1",
+        "tymon/jwt-auth": "1.0.0-rc.3",
         "guzzlehttp/guzzle": "~6.0",
         "predis/predis": "^1.1",
         "palanik/lumen-cors": "dev-master",
-        "dingo/api": "2.0.0-alpha1",
-        "liyu/dingo-serializer-switch": "~0.2"
+        "dingo/api": "2.0.0-alpha2",
+        "liyu/dingo-serializer-switch": "~0.3"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
-        "phpunit/phpunit": "~6.0",
+        "phpunit/phpunit": "~7.0",
         "mockery/mockery": "~0.9"
     },
     "autoload": {
@@ -42,5 +42,11 @@
         ]
     },
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "repositories": {
+        "liyu": {
+            "type": "path",
+            "url": "/Users/liyu/Code/dingo-serializer-switch"
+        }
+    }
 }

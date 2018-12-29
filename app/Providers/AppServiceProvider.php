@@ -12,7 +12,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        // 注册mail
+        // register mail
         $this->app->singleton('mailer', function ($app) {
             $app->configure('services');
             $app->configure('mail');
@@ -20,13 +20,12 @@ class AppServiceProvider extends ServiceProvider
             return $app->loadComponent('mail', 'Illuminate\Mail\MailServiceProvider', 'mailer');
         });
 
-        // 处理dingo的findOrFail 问题
-        // 或许可以放在  ApiExceptionServiceProvider 这样的地方
+        // dingo findOrFail
         app('api.exception')->register(function (\Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
             abort(404);
         });
 
-        // 开启日志
+        // sql log
         if (app()->environment('local')) {
             \DB::listen(function (QueryExecuted $query) {
                 $sqlWithPlaceholders = str_replace(['%', '?'], ['%%', '%s'], $query->sql);
