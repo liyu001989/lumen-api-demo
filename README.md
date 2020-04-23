@@ -11,7 +11,7 @@ lumen5.x 请看对应的分支
 
 有需要随时联系我
 
-- lumen/laravel/restful 交流群: 216721539
+- lumen/laravel/restful 交流群: 216721539 (备注 laravel 或 lumen)
 - email: liyu001989@gmail.com
 
 [ENGLISH README](./EN_README.md)
